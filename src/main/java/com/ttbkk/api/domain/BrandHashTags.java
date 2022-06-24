@@ -1,0 +1,31 @@
+package com.ttbkk.api.domain;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
+@Getter
+@NoArgsConstructor
+@Entity
+@Table(name = "brand_hashtags",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "brand_hashtags_brand_id_hashtag_id_696de634_uniq",
+                        columnNames = {"brand_id", "hashTag"}
+                )
+        })
+public class BrandHashTags {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
+
+    @ManyToOne
+    @JoinColumn(name = "hashTag")
+    private HashTag hashTag;
+
+}
