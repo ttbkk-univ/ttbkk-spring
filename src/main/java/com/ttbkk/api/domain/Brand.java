@@ -22,11 +22,11 @@ public class Brand extends BaseTimeEntity {
     @Column(columnDefinition = "LONGTEXT")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by_id")
     private User createdByUser;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "updated_by_id")
     private User updatedByUser;
 }

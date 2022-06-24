@@ -21,11 +21,11 @@ public class PlaceHashTags {
     @Column(name = "place_hashtags_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "place_id")
     private Place place;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hashTag")
     private HashTag hashTag;
 }
