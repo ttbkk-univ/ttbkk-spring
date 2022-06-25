@@ -1,9 +1,10 @@
 package com.ttbkk.api.user;
 
-public class User {
-    public User(String id) {
-        this.id = id;
-    }
+import lombok.Builder;
 
-    public String id;
+@Builder
+public class User {
+    public String email;
+    public String name;
+    public String picture;
 }
