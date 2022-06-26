@@ -31,5 +31,7 @@ public class Brand extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "updated_by_id")
     private User updatedByUser;
-    
+
+    @OneToMany(mappedBy = "brand")
+    private List<Place> placeList = new ArrayList<>();
 }
