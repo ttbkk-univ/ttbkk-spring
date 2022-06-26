@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -31,6 +33,12 @@ public class User extends BaseTimeEntity {
     @NotNull
     @Column(name = "social_type")
     private String socialType;
+
+//    @OneToMany(mappedBy = "createdByUser", cascade = CascadeType.ALL)
+//    private List<Brand> createBrandList = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "updatedByUser", cascade = CascadeType.ALL)
+//    private List<Brand> updateBrandList = new ArrayList<>();
 
     @Builder
     public User(Long id, String nickname, String socialId, String socialType) {
