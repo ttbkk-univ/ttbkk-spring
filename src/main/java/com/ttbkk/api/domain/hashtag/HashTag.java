@@ -1,4 +1,4 @@
-package com.ttbkk.api.domain;
+package com.ttbkk.api.domain.hashtag;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,4 +23,5 @@ public class HashTag {
         this.name = name;
         this.createdAt = LocalDateTime.now();
     }
+
 }

@@ -1,4 +1,4 @@
-package com.ttbkk.api.domain;
+package com.ttbkk.api.domain.user;
 
 import com.ttbkk.api.BaseTimeEntity;
 import lombok.Builder;
