@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
@@ -17,8 +18,8 @@ import java.util.List;
 public class User extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(columnDefinition = "CHAR(32)")
+    private UUID id;
 
     @NotNull
     @Column(columnDefinition = "VARCHAR(50)")
@@ -40,8 +41,8 @@ public class User extends BaseTimeEntity {
 //    private List<Brand> updateBrandList = new ArrayList<>();
 
     @Builder
-    public User(Long id, String nickname, String socialId, String socialType) {
-        this.id = id;
+    public User(String nickname, String socialId, String socialType) {
+        this.id = UUID.randomUUID();
         this.nickname = nickname;
         this.socialId = socialId;
         this.socialType = socialType;

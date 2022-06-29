@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
@@ -17,8 +18,8 @@ import java.util.List;
 @Table(name = "brand")
 public class Brand extends BaseTimeEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(columnDefinition = "CHAR(32)")
+    private UUID id;
 
     @NotNull
     @Column(columnDefinition = "VARCHAR(150)")
@@ -28,11 +29,11 @@ public class Brand extends BaseTimeEntity {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by_id")
+    @JoinColumn(name = "created_by_id", columnDefinition = "CHAR(32)")
     private User createdByUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "updated_by_id")
+    @JoinColumn(name = "updated_by_id", columnDefinition = "CHAR(32)")
     private User updatedByUser;
 
     @OneToMany(mappedBy = "brand")

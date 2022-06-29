@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
@@ -17,8 +18,8 @@ import java.math.BigDecimal;
 public class Place extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(columnDefinition = "CHAR(32)")
+    private UUID id;
 
     @NotNull
     @Column(columnDefinition = "VARCHAR(100)")
@@ -48,14 +49,14 @@ public class Place extends BaseTimeEntity {
 
     //user, brand 연관관계
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by_id")
+    @JoinColumn(name = "created_by_id", columnDefinition = "CHAR(32)")
     private User createdByUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "updated_by_id")
+    @JoinColumn(name = "updated_by_id", columnDefinition = "CHAR(32)")
     private User updatedByUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "brand_id")
+    @JoinColumn(name = "brand_id", columnDefinition = "CHAR(32)")
     private Brand brand;
 }

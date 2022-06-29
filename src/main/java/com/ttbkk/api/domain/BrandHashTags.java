@@ -23,11 +23,11 @@ public class BrandHashTags {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "brand_id")
+    @JoinColumn(name = "brand_id", columnDefinition = "CHAR(32)")
     private Brand brand;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hashTag")
+    @JoinColumn(name = "hashTag", columnDefinition = "VARCHAR(150)")
     private HashTag hashTag;
 
 }
