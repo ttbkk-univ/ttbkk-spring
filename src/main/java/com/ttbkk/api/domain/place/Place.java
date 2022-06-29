@@ -31,7 +31,7 @@ public class Place extends BaseTimeEntity {
 
     @NotNull
     @Column(name = "is_deleted")
-    private Byte isDeleted;
+    private boolean isDeleted;
 
     @Column(columnDefinition = "LONGTEXT")
     private String description;
