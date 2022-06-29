@@ -27,7 +27,7 @@ public class BrandHashTags {
     private Brand brand;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hashTag", columnDefinition = "VARCHAR(150)")
+    @JoinColumn(name = "hashTag_id", columnDefinition = "VARCHAR(150)")
     private HashTag hashTag;
 
 }

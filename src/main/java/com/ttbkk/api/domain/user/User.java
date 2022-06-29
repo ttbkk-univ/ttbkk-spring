@@ -1,6 +1,8 @@
 package com.ttbkk.api.domain.user;
 
 import com.ttbkk.api.BaseTimeEntity;
+import com.ttbkk.api.domain.brand.Brand;
+import com.ttbkk.api.domain.place.Place;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,11 +36,17 @@ public class User extends BaseTimeEntity {
     private String socialType;
 
 
-//    @OneToMany(mappedBy = "createdByUser", cascade = CascadeType.ALL)
-//    private List<Brand> createBrandList = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "updatedByUser", cascade = CascadeType.ALL)
-//    private List<Brand> updateBrandList = new ArrayList<>();
+    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
+    private List<Brand> createBrands = new ArrayList<>();
+
+    @OneToMany(mappedBy = "updatedBy", cascade = CascadeType.ALL)
+    private List<Brand> updateBrands = new ArrayList<>();
+
+    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
+    private List<Place> createPlaces = new ArrayList<>();
+
+    @OneToMany(mappedBy = "updatedBy", cascade = CascadeType.ALL)
+    private List<Place> updatePlaces = new ArrayList<>();
 
     @Builder
     public User(String nickname, String socialId, String socialType) {

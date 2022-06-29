@@ -27,6 +27,6 @@ public class PlaceHashTags {
     private Place place;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hashTag", columnDefinition = "VARCHAR(150)")
+    @JoinColumn(name = "hashTag_id", columnDefinition = "VARCHAR(150)")
     private HashTag hashTag;
 }

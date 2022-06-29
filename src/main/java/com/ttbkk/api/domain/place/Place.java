@@ -50,11 +50,11 @@ public class Place extends BaseTimeEntity {
     //user, brand 연관관계
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by_id", columnDefinition = "CHAR(32)")
-    private User createdByUser;
+    private User createdBy;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "updated_by_id", columnDefinition = "CHAR(32)")
-    private User updatedByUser;
+    private User updatedBy;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id", columnDefinition = "CHAR(32)")
