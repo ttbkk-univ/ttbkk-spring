@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "hashtag")
-public class HashTag {
+public class Hashtag {
 
     @Id
     @Column(columnDefinition = "VARCHAR(150)")
@@ -21,7 +21,7 @@ public class HashTag {
     @Column(name = "created_at", columnDefinition = "DATETIME(6)")
     private LocalDateTime createdAt;
 
-    public HashTag(String name) {
+    public Hashtag(String name) {
         this.name = name;
         this.createdAt = LocalDateTime.now();
     }

@@ -1,7 +1,7 @@
 package com.ttbkk.api.domain;
 
 import com.ttbkk.api.domain.brand.Brand;
-import com.ttbkk.api.domain.hashtag.HashTag;
+import com.ttbkk.api.domain.hashtag.Hashtag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +14,7 @@ import javax.persistence.*;
         uniqueConstraints = {
                 @UniqueConstraint(
                         name = "brand_hashtags_brand_id_hashtag_id_696de634_uniq",
-                        columnNames = {"brand_id", "hashTag_id"}
+                        columnNames = {"brand_id", "hashtag_id"}
                 )
         })
 public class BrandHashTags {
@@ -27,7 +27,7 @@ public class BrandHashTags {
     private Brand brand;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hashTag_id", columnDefinition = "VARCHAR(150)")
-    private HashTag hashTag;
+    @JoinColumn(name = "hashtag_id", columnDefinition = "VARCHAR(150)")
+    private Hashtag hashtag;
 
 }
