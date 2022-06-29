@@ -14,7 +14,7 @@ import javax.persistence.*;
         uniqueConstraints = {
                 @UniqueConstraint(
                         name = "brand_hashtags_brand_id_hashtag_id_696de634_uniq",
-                        columnNames = {"brand_id", "hashTag"}
+                        columnNames = {"brand_id", "hashTag_id"}
                 )
         })
 public class BrandHashTags {
