@@ -21,16 +21,19 @@ public class Place extends BaseTimeEntity {
     private Long id;
 
     @NotNull
+    @Column(columnDefinition = "VARCHAR(100)")
     private String name;
 
 //  DECIMAL(20, 5)라고 정의하면 정수부를 15자리, 소수부를 5
     @NotNull
+    @Column(columnDefinition = "DECIMAL(15,13)")
     private BigDecimal latitude;
     @NotNull
+    @Column(columnDefinition = "DECIMAL(15,12)")
     private BigDecimal longitude;
 
     @NotNull
-    @Column(name = "is_deleted")
+    @Column(name = "is_deleted", columnDefinition = "TINYINT(1)")
     private boolean isDeleted;
 
     @Column(columnDefinition = "LONGTEXT")

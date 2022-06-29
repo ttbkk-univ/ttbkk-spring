@@ -14,9 +14,11 @@ import java.time.LocalDateTime;
 public class HashTag {
 
     @Id
+    @Column(columnDefinition = "VARCHAR(150)")
     private String name;
 
-    @Column(name = "created_at")
+    @NotNull
+    @Column(name = "created_at", columnDefinition = "DATETIME(6)")
     private LocalDateTime createdAt;
 
     public HashTag(String name) {

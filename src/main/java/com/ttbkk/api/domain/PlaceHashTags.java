@@ -20,7 +20,6 @@ import javax.persistence.*;
 public class PlaceHashTags {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "place_hashtags_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

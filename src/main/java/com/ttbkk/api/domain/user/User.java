@@ -18,19 +18,20 @@ public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column()
     private Long id;
 
     @NotNull
+    @Column(columnDefinition = "VARCHAR(50)")
     private String nickname;
 
     @NotNull
-    @Column(name = "social_id")
+    @Column(name = "social_id", columnDefinition = "VARCHAR(50)")
     private String socialId;
 
     @NotNull
-    @Column(name = "social_type")
+    @Column(name = "social_type", columnDefinition = "VARCHAR(20)")
     private String socialType;
+
 
 //    @OneToMany(mappedBy = "createdByUser", cascade = CascadeType.ALL)
 //    private List<Brand> createBrandList = new ArrayList<>();

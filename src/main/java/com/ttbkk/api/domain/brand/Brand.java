@@ -21,6 +21,7 @@ public class Brand extends BaseTimeEntity {
     private Long id;
 
     @NotNull
+    @Column(columnDefinition = "VARCHAR(150)")
     private String name;
 
     @Column(columnDefinition = "LONGTEXT")
