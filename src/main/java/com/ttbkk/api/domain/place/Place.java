@@ -36,7 +36,7 @@ public class Place extends BaseTimeEntity {
     @Column(columnDefinition = "LONGTEXT")
     private String description;
 
-    @Column
+    @Column(columnDefinition = "VARCHAR(100)")
     private String telephone;
 
     //다 설정해 줘야 하나?? 라는 의문
