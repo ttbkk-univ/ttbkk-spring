@@ -18,9 +18,7 @@ public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    //int , char 형 을 써야하나? 왜 char 형으로 되어 있는지 ddl.
-    // auto_increment 로 하는게 낫지 않나?
+    @Column()
     private Long id;
 
     @NotNull

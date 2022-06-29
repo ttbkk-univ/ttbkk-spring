@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Getter
 @NoArgsConstructor
@@ -24,9 +25,9 @@ public class Place extends BaseTimeEntity {
 
 //  DECIMAL(20, 5)라고 정의하면 정수부를 15자리, 소수부를 5
     @NotNull
-    private Double latitude;
+    private BigDecimal latitude;
     @NotNull
-    private Double longitude;
+    private BigDecimal longitude;
 
     @NotNull
     @Column(name = "is_deleted")
