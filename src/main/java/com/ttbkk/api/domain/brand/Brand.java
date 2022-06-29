@@ -37,5 +37,5 @@ public class Brand extends BaseTimeEntity {
     private User updatedBy;
 
     @OneToMany(mappedBy = "brand")
-    private List<Place> placeList = new ArrayList<>();
+    private List<Place> places = new ArrayList<>();
 }
