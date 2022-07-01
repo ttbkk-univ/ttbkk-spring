@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+//Entity 클래스 . BaseTimeEntity 클래스를 상속 받아 자동 시간 생성.
+//User 클래스와 N:1 연관관계를 맺고 있어 해당 User 객체를 필드로 가지고 있음.
+//Place 클래스와 1:N 연관관계를 맺고 있고 해당 리스트 읽기 가능. - 해당 브랜드의 장소들 조회(검색) 할 수 있다.
 @Getter
 @NoArgsConstructor
 @Entity
@@ -19,7 +22,7 @@ import java.util.UUID;
 public class Brand extends BaseTimeEntity {
     @Id
     @Column(columnDefinition = "CHAR(32)")
-    private UUID id;
+    private UUID id;    //UUID 타입의 기본키 매핑. 크기는 CHAR(32)
 
     @NotNull
     @Column(columnDefinition = "VARCHAR(150)")

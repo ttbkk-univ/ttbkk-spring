@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+//Entity 클래스 . BaseTimeEntity 클래스를 상속 받아 자동 시간 생성.
+//생성한 Brand,Place & 업데이트한 Brand,Place 들을 조회(읽기) 할 수 있다.
 @Getter
 @NoArgsConstructor
 @Entity

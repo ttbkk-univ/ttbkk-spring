@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+//Entity 클래스
 @Getter
 @NoArgsConstructor
 @Entity

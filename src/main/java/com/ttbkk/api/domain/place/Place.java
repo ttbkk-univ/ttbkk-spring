@@ -11,6 +11,8 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+//Entity 클래스 . BaseTimeEntity 클래스를 상속 받아 자동 시간 생성.
+//User, Brand 클래스와 N:1 연관관계를 맺고 있어 해당 User, Brand 객체 필드로 가지고 있음.
 @Getter
 @NoArgsConstructor
 @Entity
@@ -25,7 +27,7 @@ public class Place extends BaseTimeEntity {
     @Column(columnDefinition = "VARCHAR(100)")
     private String name;
 
-//  DECIMAL(20, 5)라고 정의하면 정수부를 15자리, 소수부를 5
+//  위치의 경우 정확한 값을 요구하기 때문에 BigDecimal 타입 사용
     @NotNull
     @Column(columnDefinition = "DECIMAL(15,13)")
     private BigDecimal latitude;
@@ -43,7 +45,6 @@ public class Place extends BaseTimeEntity {
     @Column(columnDefinition = "VARCHAR(100)")
     private String telephone;
 
-    //다 설정해 줘야 하나?? 라는 의문
     @Column(columnDefinition = "VARCHAR(100)")
     private String address;
 
