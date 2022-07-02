@@ -1,7 +1,5 @@
 package com.ttbkk.api.user;
 
-import com.ttbkk.api.domain.hashtag.Hashtag;
-import com.ttbkk.api.domain.user.User;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

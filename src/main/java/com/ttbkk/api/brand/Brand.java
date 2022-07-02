@@ -1,8 +1,8 @@
-package com.ttbkk.api.domain.brand;
+package com.ttbkk.api.brand;
 
 import com.ttbkk.api.BaseTimeEntity;
-import com.ttbkk.api.domain.place.Place;
-import com.ttbkk.api.domain.user.User;
+import com.ttbkk.api.place.Place;
+import com.ttbkk.api.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +53,6 @@ public class Brand extends BaseTimeEntity {
     @Builder
     public Brand(String name, String description) {
         this.id = UUID.randomUUID().toString();
-        System.out.println(id.getBytes(StandardCharsets.UTF_8));
         this.name = name;
         this.description = description;
     }

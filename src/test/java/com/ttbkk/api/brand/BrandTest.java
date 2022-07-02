@@ -1,7 +1,5 @@
 package com.ttbkk.api.brand;
 
-import com.ttbkk.api.domain.brand.Brand;
-import com.ttbkk.api.domain.user.User;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

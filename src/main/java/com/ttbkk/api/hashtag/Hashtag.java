@@ -1,4 +1,4 @@
-package com.ttbkk.api.domain.hashtag;
+package com.ttbkk.api.hashtag;
 
 import com.ttbkk.api.BaseTimeEntity;
 import lombok.Getter;

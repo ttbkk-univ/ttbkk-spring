@@ -1,12 +1,11 @@
-package com.ttbkk.api.domain.user;
+package com.ttbkk.api.user;
 
 import com.ttbkk.api.BaseTimeEntity;
-import com.ttbkk.api.domain.brand.Brand;
-import com.ttbkk.api.domain.place.Place;
+import com.ttbkk.api.brand.Brand;
+import com.ttbkk.api.place.Place;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
@@ -26,7 +25,7 @@ public class User extends BaseTimeEntity {
 
     @Id
     @Column(columnDefinition = "CHAR(32)")
-    private String id;
+    private UUID id;
 
     @NotNull
     @Column(columnDefinition = "VARCHAR(50)")
@@ -58,7 +57,7 @@ public class User extends BaseTimeEntity {
 
     @Builder
     public User(String nickname, String socialId, String socialType) {
-        this.id = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID();
         this.nickname = nickname;
         this.socialId = socialId;
         this.socialType = socialType;

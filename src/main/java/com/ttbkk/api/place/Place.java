@@ -1,8 +1,8 @@
-package com.ttbkk.api.domain.place;
+package com.ttbkk.api.place;
 
 import com.ttbkk.api.BaseTimeEntity;
-import com.ttbkk.api.domain.brand.Brand;
-import com.ttbkk.api.domain.user.User;
+import com.ttbkk.api.brand.Brand;
+import com.ttbkk.api.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

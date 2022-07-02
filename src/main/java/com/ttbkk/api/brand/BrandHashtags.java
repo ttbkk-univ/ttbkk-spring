@@ -1,7 +1,6 @@
-package com.ttbkk.api.domain;
+package com.ttbkk.api.brand;
 
-import com.ttbkk.api.domain.brand.Brand;
-import com.ttbkk.api.domain.hashtag.Hashtag;
+import com.ttbkk.api.hashtag.Hashtag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
