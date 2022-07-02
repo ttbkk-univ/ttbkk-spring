@@ -21,6 +21,7 @@ import javax.persistence.*;
                 )
         })
 public class PlaceHashtags {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,4 +33,5 @@ public class PlaceHashtags {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hashtag_id", columnDefinition = "VARCHAR(150)")
     private Hashtag hashtag;
+
 }

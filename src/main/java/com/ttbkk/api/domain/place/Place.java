@@ -31,6 +31,7 @@ public class Place extends BaseTimeEntity {
     @NotNull
     @Column(columnDefinition = "DECIMAL(15,13)")
     private BigDecimal latitude;
+
     @NotNull
     @Column(columnDefinition = "DECIMAL(15,12)")
     private BigDecimal longitude;
@@ -60,4 +61,5 @@ public class Place extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id", columnDefinition = "CHAR(32)")
     private Brand brand;
+
 }

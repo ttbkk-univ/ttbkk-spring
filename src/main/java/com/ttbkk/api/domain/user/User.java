@@ -37,7 +37,6 @@ public class User extends BaseTimeEntity {
     @Column(name = "social_type", columnDefinition = "VARCHAR(20)")
     private String socialType;
 
-
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
     private List<Brand> createBrands = new ArrayList<>();
 
@@ -57,4 +56,5 @@ public class User extends BaseTimeEntity {
         this.socialId = socialId;
         this.socialType = socialType;
     }
+
 }

@@ -21,6 +21,7 @@ import javax.persistence.*;
                 )
         })
 public class BrandHashtags {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

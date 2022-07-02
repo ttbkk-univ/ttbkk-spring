@@ -2,6 +2,7 @@ package com.ttbkk.api.domain.hashtag;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,13 +19,12 @@ public class Hashtag {
     @Column(columnDefinition = "VARCHAR(150)")
     private String name;
 
-    @NotNull
+    @CreatedDate
     @Column(name = "created_at", columnDefinition = "DATETIME(6)")
     private LocalDateTime createdAt;
 
     public Hashtag(String name) {
         this.name = name;
-        this.createdAt = LocalDateTime.now();
     }
 
 }

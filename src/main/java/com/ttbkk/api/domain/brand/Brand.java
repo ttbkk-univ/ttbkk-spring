@@ -20,6 +20,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "brand")
 public class Brand extends BaseTimeEntity {
+
     @Id
     @Column(columnDefinition = "CHAR(32)")
     private UUID id;    //UUID 타입의 기본키 매핑. 크기는 CHAR(32)
@@ -41,4 +42,5 @@ public class Brand extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "brand")
     private List<Place> places = new ArrayList<>();
+
 }
