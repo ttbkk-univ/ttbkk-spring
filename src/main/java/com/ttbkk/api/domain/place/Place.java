@@ -3,6 +3,7 @@ package com.ttbkk.api.domain.place;
 import com.ttbkk.api.BaseTimeEntity;
 import com.ttbkk.api.domain.brand.Brand;
 import com.ttbkk.api.domain.user.User;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -61,5 +62,17 @@ public class Place extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id", columnDefinition = "CHAR(32)")
     private Brand brand;
+
+    @Builder
+    public Place(String name, BigDecimal latitude, BigDecimal longitude, boolean isDeleted, String description, String telephone, String address) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.isDeleted = isDeleted;
+        this.description = description;
+        this.telephone = telephone;
+        this.address = address;
+    }
 
 }

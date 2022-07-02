@@ -3,6 +3,7 @@ package com.ttbkk.api.domain.brand;
 import com.ttbkk.api.BaseTimeEntity;
 import com.ttbkk.api.domain.place.Place;
 import com.ttbkk.api.domain.user.User;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -42,5 +43,12 @@ public class Brand extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "brand")
     private List<Place> places = new ArrayList<>();
+
+    @Builder
+    public Brand(String name, String description) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+        this.description = description;
+    }
 
 }
