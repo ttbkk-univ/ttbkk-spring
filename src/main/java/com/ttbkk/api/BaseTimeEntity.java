@@ -21,10 +21,6 @@ public abstract class BaseTimeEntity {
     @Column(name = "created_at", columnDefinition = "DATETIME(6)")
     private LocalDateTime createdAt;
 
-    @LastModifiedDate
-    @Column(name = "updated_at", columnDefinition = "DATETIME(6)")
-    private LocalDateTime updatedAt;
-
 }
 
 

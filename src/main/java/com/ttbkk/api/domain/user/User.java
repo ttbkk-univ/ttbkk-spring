@@ -6,9 +6,12 @@ import com.ttbkk.api.domain.place.Place;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -23,7 +26,7 @@ public class User extends BaseTimeEntity {
 
     @Id
     @Column(columnDefinition = "CHAR(32)")
-    private UUID id;
+    private String id;
 
     @NotNull
     @Column(columnDefinition = "VARCHAR(50)")
@@ -36,6 +39,10 @@ public class User extends BaseTimeEntity {
     @NotNull
     @Column(name = "social_type", columnDefinition = "VARCHAR(20)")
     private String socialType;
+
+    @LastModifiedDate
+    @Column(name = "updated_at", columnDefinition = "DATETIME(6)")
+    private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
     private List<Brand> createBrands = new ArrayList<>();
@@ -51,7 +58,7 @@ public class User extends BaseTimeEntity {
 
     @Builder
     public User(String nickname, String socialId, String socialType) {
-        this.id = UUID.randomUUID();
+        this.id = UUID.randomUUID().toString();
         this.nickname = nickname;
         this.socialId = socialId;
         this.socialType = socialType;

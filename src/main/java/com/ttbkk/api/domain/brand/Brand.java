@@ -6,9 +6,12 @@ import com.ttbkk.api.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -24,7 +27,7 @@ public class Brand extends BaseTimeEntity {
 
     @Id
     @Column(columnDefinition = "CHAR(32)")
-    private UUID id;    //UUID 타입의 기본키 매핑. 크기는 CHAR(32)
+    private String id;    //UUID 타입의 기본키 매핑. 크기는 CHAR(32)
 
     @NotNull
     @Column(columnDefinition = "VARCHAR(150)")
@@ -32,6 +35,10 @@ public class Brand extends BaseTimeEntity {
 
     @Column(columnDefinition = "LONGTEXT")
     private String description;
+
+    @LastModifiedDate
+    @Column(name = "updated_at", columnDefinition = "DATETIME(6)")
+    private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by_id", columnDefinition = "CHAR(32)")
@@ -46,7 +53,8 @@ public class Brand extends BaseTimeEntity {
 
     @Builder
     public Brand(String name, String description) {
-        this.id = UUID.randomUUID();
+        this.id = UUID.randomUUID().toString();
+        System.out.println(id.getBytes(StandardCharsets.UTF_8));
         this.name = name;
         this.description = description;
     }

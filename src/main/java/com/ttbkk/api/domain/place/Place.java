@@ -6,10 +6,12 @@ import com.ttbkk.api.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 //Entity 클래스 . BaseTimeEntity 클래스를 상속 받아 자동 시간 생성.
@@ -22,7 +24,7 @@ public class Place extends BaseTimeEntity {
 
     @Id
     @Column(columnDefinition = "CHAR(32)")
-    private UUID id;
+    private String id;
 
     @NotNull
     @Column(columnDefinition = "VARCHAR(100)")
@@ -50,6 +52,10 @@ public class Place extends BaseTimeEntity {
     @Column(columnDefinition = "VARCHAR(100)")
     private String address;
 
+    @LastModifiedDate
+    @Column(name = "updated_at", columnDefinition = "DATETIME(6)")
+    private LocalDateTime updatedAt;
+
     //user, brand 연관관계
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by_id", columnDefinition = "CHAR(32)")
@@ -65,7 +71,7 @@ public class Place extends BaseTimeEntity {
 
     @Builder
     public Place(String name, BigDecimal latitude, BigDecimal longitude, boolean isDeleted, String description, String telephone, String address) {
-        this.id = UUID.randomUUID();
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;

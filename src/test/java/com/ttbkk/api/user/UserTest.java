@@ -1,6 +1,7 @@
-package com.ttbkk.api.hashtag;
+package com.ttbkk.api.user;
 
 import com.ttbkk.api.domain.hashtag.Hashtag;
+import com.ttbkk.api.domain.user.User;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,24 +10,30 @@ import org.springframework.test.annotation.Commit;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.util.UUID;
+
 
 @Transactional
 @SpringBootTest
 @Commit
-public class HashtagTest {
+public class UserTest {
 
     @Autowired
     EntityManager em;
 
     //엔티티 getCreatedAt null 검사 테스트
     @Test
-    public void hashtag_entity_verify(){
+    public void user_entity_verify(){
+        User user = User.builder()
+                .nickname("정지원")
+                .socialId("test id")
+                .socialType("test type")
+                .build();
 
-        Hashtag hashtag = new Hashtag("hashtag");
-        em.persist(hashtag);
-        Assertions.assertThat(hashtag.getCreatedAt()).isNotNull();
-
+        em.persist(user);
+        System.out.println(user.getCreatedAt());
+        System.out.println(user.getUpdatedAt());
+        Assertions.assertThat(user.getUpdatedAt()).isNotNull();
     }
 
 }
+

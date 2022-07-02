@@ -1,8 +1,10 @@
 package com.ttbkk.api.domain.hashtag;
 
+import com.ttbkk.api.BaseTimeEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,15 +15,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "hashtag")
-public class Hashtag {
+public class Hashtag extends BaseTimeEntity{
 
     @Id
     @Column(columnDefinition = "VARCHAR(150)")
     private String name;
-
-    @CreatedDate
-    @Column(name = "created_at", columnDefinition = "DATETIME(6)")
-    private LocalDateTime createdAt;
 
     public Hashtag(String name) {
         this.name = name;
