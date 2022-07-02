@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-//Brand 와 HashTag 의 매핑테이블
-//unique 키 (제약조건) 생성 (place_id, hashtag_id)
-//Place, Hashtag 클래스와 N:1 연관관계를 맺고 있어 해당 Place, Hashtag 객체 필드로 가지고 있음.
+//Place와 Hashtag의 N:M 관계를 구현하기 위한 중간 테이블입니다.
 @Getter
 @NoArgsConstructor
 @Entity
