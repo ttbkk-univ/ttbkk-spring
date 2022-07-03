@@ -23,7 +23,7 @@ public class User extends BaseTimeEntity {
 
     @Id
     @Column(columnDefinition = "CHAR(32)")
-    private UUID id;
+    private String id;
 
     @NotNull
     @Column(columnDefinition = "VARCHAR(50)")
@@ -51,7 +51,7 @@ public class User extends BaseTimeEntity {
 
     @Builder
     public User(String nickname, String socialId, String socialType) {
-        this.id = UUID.randomUUID();
+        this.id = UUID.randomUUID().toString().replace("_", "");
         this.nickname = nickname;
         this.socialId = socialId;
         this.socialType = socialType;
