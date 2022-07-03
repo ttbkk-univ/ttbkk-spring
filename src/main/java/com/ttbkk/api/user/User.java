@@ -6,11 +6,9 @@ import com.ttbkk.api.place.Place;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -38,10 +36,6 @@ public class User extends BaseTimeEntity {
     @NotNull
     @Column(name = "social_type", columnDefinition = "VARCHAR(20)")
     private String socialType;
-
-    @LastModifiedDate
-    @Column(name = "updated_at", columnDefinition = "DATETIME(6)")
-    private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
     private List<Brand> createBrands = new ArrayList<>();

@@ -52,10 +52,6 @@ public class Place extends BaseTimeEntity {
     @Column(columnDefinition = "VARCHAR(100)")
     private String address;
 
-    @LastModifiedDate
-    @Column(name = "updated_at", columnDefinition = "DATETIME(6)")
-    private LocalDateTime updatedAt;
-
     //user, brand 연관관계
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by_id", columnDefinition = "CHAR(32)")

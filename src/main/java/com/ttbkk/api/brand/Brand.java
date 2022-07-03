@@ -37,10 +37,6 @@ public class Brand extends BaseTimeEntity {
     @Column(columnDefinition = "LONGTEXT")
     private String description;
 
-    @LastModifiedDate
-    @Column(name = "updated_at", columnDefinition = "DATETIME(6)")
-    private LocalDateTime updatedAt;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by_id", columnDefinition = "CHAR(32)")
     private User createdBy;
