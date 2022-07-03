@@ -46,7 +46,7 @@ public class Brand extends BaseTimeEntity {
 
     @Builder
     public Brand(String name, String description) {
-        this.id = UUID.randomUUID().toString().replace("_", "");
+        this.id = UUID.randomUUID().toString().replace("-", "");
         this.name = name;
         this.description = description;
     }

@@ -51,7 +51,7 @@ public class User extends BaseTimeEntity {
 
     @Builder
     public User(String nickname, String socialId, String socialType) {
-        this.id = UUID.randomUUID().toString().replace("_", "");
+        this.id = UUID.randomUUID().toString().replace("-", "");
         this.nickname = nickname;
         this.socialId = socialId;
         this.socialType = socialType;

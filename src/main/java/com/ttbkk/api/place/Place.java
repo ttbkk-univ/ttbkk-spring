@@ -67,7 +67,7 @@ public class Place extends BaseTimeEntity {
 
     @Builder
     public Place(String name, BigDecimal latitude, BigDecimal longitude, boolean isDeleted, String description, String telephone, String address) {
-        this.id = UUID.randomUUID().toString().replace("_", "");
+        this.id = UUID.randomUUID().toString().replace("-", "");
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
