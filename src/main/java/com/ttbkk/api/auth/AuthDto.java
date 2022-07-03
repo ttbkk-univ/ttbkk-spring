@@ -7,15 +7,15 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotEmpty;
 import java.math.BigInteger;
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class AuthDto {
     @Getter
     @Setter
     @ToString
     public static class SignInRequest {
-        @NotEmpty(message = "accessToken 는 필수값입니다")
-        public String accessToken;
+        @NotEmpty(message = "authProviderToken 은 필수값입니다")
+        private String authProviderToken;
     }
 
     @Getter
@@ -23,8 +23,12 @@ public class AuthDto {
     @Builder
     @ToString
     public static class SignInResult {
-        String accessToken;
+        private String accessToken;
 
+        /**
+         * SignInResult 생성자.
+         * @param accessToken User 객체로 생성 된 accessToken
+         */
         public SignInResult(String accessToken) {
             this.accessToken = accessToken;
         }
@@ -34,34 +38,38 @@ public class AuthDto {
     @Setter
     @ToString
     public static class JwtGoogle {
-        public JwtGoogle(LinkedHashMap<String, Object> hashmap) {
+        /**
+         * JwtGoogle 인스턴스 생성자.
+         * @param hashmap 파싱 된 Google JWT.
+         */
+        public JwtGoogle(Map<String, Object> hashmap) {
             this.iss = (String) hashmap.get("iss");
             this.nbf = (BigInteger) hashmap.get("nbf");
             this.aud = (String) hashmap.get("aud");
             this.sub = (String) hashmap.get("sub");
             this.email = (String) hashmap.get("email");
-            this.email_verified = (boolean) hashmap.get("email_verified");
+            this.emailVerified = (boolean) hashmap.get("email_verified");
             this.azp = (String) hashmap.get("azp");
             this.name = (String) hashmap.get("name");
             this.picture = (String) hashmap.get("picture");
-            this.given_name = (String) hashmap.get("given_name");
+            this.givenName = (String) hashmap.get("given_name");
             this.iat = (BigInteger) hashmap.get("iat");
             this.exp = (BigInteger) hashmap.get("exp");
             this.jti = (String) hashmap.get("jti");
         }
 
-        String iss;
-        BigInteger nbf;
-        String aud;
-        String sub;
-        String email;
-        boolean email_verified;
-        String azp;
-        String name;
-        String picture;
-        String given_name;
-        BigInteger iat;
-        BigInteger exp;
-        String jti;
+        private String iss;
+        private BigInteger nbf;
+        private String aud;
+        private String sub;
+        private String email;
+        private boolean emailVerified;
+        private String azp;
+        private String name;
+        private String picture;
+        private String givenName;
+        private BigInteger iat;
+        private BigInteger exp;
+        private String jti;
     }
 }

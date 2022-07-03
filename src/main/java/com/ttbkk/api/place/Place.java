@@ -1,17 +1,15 @@
 package com.ttbkk.api.place;
 
-import com.ttbkk.api.BaseTimeEntity;
+import com.ttbkk.api.common.entity.BaseTimeEntity;
 import com.ttbkk.api.brand.Brand;
 import com.ttbkk.api.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 //Entity 클래스 . BaseTimeEntity 클래스를 상속 받아 자동 시간 생성.
@@ -65,6 +63,16 @@ public class Place extends BaseTimeEntity {
     @JoinColumn(name = "brand_id", columnDefinition = "CHAR(32)")
     private Brand brand;
 
+    /**
+     * Place 생성자.
+     * @param name 장소 이름
+     * @param latitude 위도
+     * @param longitude 경도
+     * @param isDeleted 삭제처리 여부
+     * @param description 설명
+     * @param telephone 전화번호
+     * @param address 주소
+     */
     @Builder
     public Place(String name, BigDecimal latitude, BigDecimal longitude, boolean isDeleted, String description, String telephone, String address) {
         this.id = UUID.randomUUID().toString().replace("-", "");

@@ -5,48 +5,64 @@ import com.ttbkk.api.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.json.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthService {
+    /**
+     * JWT 관련 기능을 담고있는 서비스 입니다.
+     */
+    @Autowired
     private final JWTService jwtService;
+
+    /**
+     * 유저의 CRUD 기능을 제공하는 서비스 입니다.
+     */
+    @Autowired
     private final UserService userService;
 
-    public AuthDto.SignInResult signIn(AuthDto.SignInRequest request) throws ParseException {
-        LinkedHashMap<String, Object> jwtHashMap = jwtService.parse(request.accessToken);
+    /**
+     * 로그인 함수.
+     * 자세한 내용은 AuthController.signIn 참고.
+     * @param authProviderToken google 등으로부터 받은 JWT
+     * @return String 우리 서버에서 발급하는 JWT
+     * @throws ParseException 파싱 예외처리
+     */
+    public String signIn(String authProviderToken) throws ParseException {
+        Map<String, Object> jwtHashMap = jwtService.parse(authProviderToken);
         AuthDto.JwtGoogle googleJwt = new AuthDto.JwtGoogle(jwtHashMap);
-        User user = userService.findByEmail(googleJwt.email);
-
-        if (user == null) {
-            user = User.builder()
-                    .email(googleJwt.email)
-                    .name(googleJwt.name)
-                    .picture(googleJwt.picture)
-                    .build();
-            // 회원가입 로직
-            // ...
-        }
-        String accessToken = jwtService.encode(user);
-        return new AuthDto.SignInResult(accessToken);
+        User user = userService
+            .findBySocialId(googleJwt.getEmail())
+            .orElse(
+                userService.create(
+                    googleJwt.getEmail(),
+                    googleJwt.getName(),
+                    "GOOGLE"
+                )
+            );
+        return jwtService.encode(user, googleJwt.getPicture());
     }
 
+    /**
+     * 내 정보 조회.
+     * 자세한 내용은 AuthController.myInfo 참고.
+     * @param accessToken 우리 서버에서 발급받은 JWT
+     * @return User 토큰으로부터 파싱/조회 된 유저
+     * @throws ParseException 파싱 예외처리
+     */
     public User myInfo(String accessToken) throws ParseException {
-        LinkedHashMap<String, Object> jwtHashMap = jwtService.parse(accessToken);
-        String email = (String) jwtHashMap.get("email");
-        String name = (String) jwtHashMap.get("name");
-        String picture = (String) jwtHashMap.get("picture");
+        Map<String, Object> jwtHashMap = jwtService.parse(accessToken);
+        String socialId = (String) jwtHashMap.get("socialId");
+        String nickname = (String) jwtHashMap.get("nickname");
 
-        // User user = userService.findByEmail(email);
-        // db 에 원래 유저가 생성되어있어야 하지만, db가 없으니 임시로 생성해준다.
-        User user = User.builder()
-                .email(email)
-                .picture(picture)
-                .name(name)
-                .build();
-        return user;
+        return User.builder()
+            .socialId(socialId)
+            .nickname(nickname)
+            .build();
     }
 }

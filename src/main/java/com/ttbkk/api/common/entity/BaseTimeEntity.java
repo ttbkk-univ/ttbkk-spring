@@ -1,4 +1,4 @@
-package com.ttbkk.api;
+package com.ttbkk.api.common.entity;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
@@ -17,10 +17,16 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseTimeEntity {
 
+    /**
+     * entity 의 생성된 시간을 저장합니다.
+     */
     @CreatedDate
     @Column(name = "created_at", columnDefinition = "DATETIME(6)")
     private LocalDateTime createdAt;
 
+    /**
+     * entity 의 최종 수정된 시간을 저장합니다.
+     */
     @LastModifiedDate
     @Column(name = "updated_at", columnDefinition = "DATETIME(6)")
     private LocalDateTime updatedAt;

@@ -16,17 +16,19 @@ import javax.transaction.Transactional;
 public class BrandTest {
 
     @Autowired
-    EntityManager em;
+    private EntityManager entityManager;
 
-    //엔티티 getCreatedAt null 검사 테스트
+    /**
+     * 엔티티 getCreatedAt null 검사 테스트.
+     */
     @Test
-    public void brandEntityVerify(){
+    public void brandEntityVerify() {
         Brand brand = Brand.builder()
                 .name("정지원")
                 .description("test description")
                 .build();
 
-        em.persist(brand);
+        this.entityManager.persist(brand);
         System.out.println(brand.getCreatedAt());
         System.out.println(brand.getUpdatedAt());
         Assertions.assertThat(brand.getUpdatedAt()).isNotNull();

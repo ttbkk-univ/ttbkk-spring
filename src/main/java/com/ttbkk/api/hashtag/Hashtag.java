@@ -1,14 +1,11 @@
 package com.ttbkk.api.hashtag;
 
-import com.ttbkk.api.BaseTimeEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 //Entity 클래스
@@ -27,6 +24,10 @@ public class Hashtag {
     @Column(name = "created_at", columnDefinition = "DATETIME(6)")
     private LocalDateTime createdAt;
 
+    /**
+     * Hashtag 생성자.
+     * @param name 해시태그 명
+     */
     public Hashtag(String name) {
         this.name = name;
     }
