@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"
+            integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<div
+        id="g_id_onload"
+        data-client_id="849238286511-utifb85m2v9gm55f14p7s21din35ee0o.apps.googleusercontent.com"
+        data-callback="callback"
+>
+</div>
+<div>
+    <li>
+        <span>이메일</span>
+        <input id="email"></input>
+    </li>
+    <li>
+        <span>이름</span>
+        <input id="name"></input>
+    </li>
+    <li>
+        <span>프로필</span>
+        <img id="picture"/>
+    </li>
+</div>
+<script>
+    function callback(data) {
+        const baseUrl = "http://localhost:8080";
+        console.log("before fetch")
+        axios.post(
+            `${baseUrl}/api/v1/auth/signin/google`,
+            {accessToken: data.credential},
+        )
+            .then((res) => {
+                console.log(res);
+                const {accessToken} = res.data;
+                return accessToken;
+            })
+            .then((accessToken) => {
+                return axios.get(
+                    `${baseUrl}/api/v1/auth/myinfo`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${accessToken}`,
+                        },
+                    }
+                );
+            })
+            .then((res) => {
+                console.log(res);
+                const {picture, name, email} = res.data;
+                const pictureElement = document.getElementById("picture");
+                pictureElement.setAttribute("src", picture);
+                pictureElement.setAttribute("width", "64px");
+                pictureElement.setAttribute("height", "64px");
+
+                const nameElement = document.getElementById("name");
+                nameElement.setAttribute("value", name);
+
+                const emailElement = document.getElementById("email");
+                emailElement.setAttribute("value", email);
+            })
+    }
+</script>
+</body>
+</html>
