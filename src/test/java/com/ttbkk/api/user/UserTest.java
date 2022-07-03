@@ -20,7 +20,7 @@ public class UserTest {
 
     //엔티티 getCreatedAt null 검사 테스트
     @Test
-    public void user_entity_verify(){
+    public void userEntityVerify(){
         User user = User.builder()
                 .nickname("정지원")
                 .socialId("test id")

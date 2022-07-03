@@ -15,14 +15,14 @@ import javax.transaction.Transactional;
 public class HashtagTest {
 
     @Autowired
-    EntityManager em;
+    EntityManager entityManager;
 
     //엔티티 getCreatedAt null 검사 테스트
     @Test
-    public void hashtag_entity_verify(){
+    public void hashtagEntityVerify() {
 
         Hashtag hashtag = new Hashtag("hashtag");
-        em.persist(hashtag);
+        entityManager.persist(hashtag);
         Assertions.assertThat(hashtag.getCreatedAt()).isNotNull();
 
     }

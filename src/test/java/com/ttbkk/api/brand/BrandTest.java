@@ -20,7 +20,7 @@ public class BrandTest {
 
     //엔티티 getCreatedAt null 검사 테스트
     @Test
-    public void brand_entity_verify(){
+    public void brandEntityVerify(){
         Brand brand = Brand.builder()
                 .name("정지원")
                 .description("test description")

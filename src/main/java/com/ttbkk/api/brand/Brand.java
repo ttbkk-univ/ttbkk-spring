@@ -6,6 +6,7 @@ import com.ttbkk.api.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class Brand extends BaseTimeEntity {
 
     @Id
     @Column(columnDefinition = "CHAR(32)")
+    @Type(type = "uuid-char")
     private String id;    //UUID 타입의 기본키 매핑. 크기는 CHAR(32)
 
     @NotNull
@@ -52,7 +54,7 @@ public class Brand extends BaseTimeEntity {
 
     @Builder
     public Brand(String name, String description) {
-        this.id = UUID.randomUUID().toString();
+        UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
     }
