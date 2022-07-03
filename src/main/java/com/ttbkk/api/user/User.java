@@ -1,6 +1,6 @@
 package com.ttbkk.api.user;
 
-import com.ttbkk.api.BaseTimeEntity;
+import com.ttbkk.api.common.entity.BaseTimeEntity;
 import com.ttbkk.api.brand.Brand;
 import com.ttbkk.api.place.Place;
 import lombok.Builder;
@@ -38,17 +38,23 @@ public class User extends BaseTimeEntity {
     private String socialType;
 
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
-    private List<Brand> createBrands = new ArrayList<>();
+    private final List<Brand> createBrands = new ArrayList<>();
 
     @OneToMany(mappedBy = "updatedBy", cascade = CascadeType.ALL)
-    private List<Brand> updateBrands = new ArrayList<>();
+    private final List<Brand> updateBrands = new ArrayList<>();
 
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
-    private List<Place> createPlaces = new ArrayList<>();
+    private final List<Place> createPlaces = new ArrayList<>();
 
     @OneToMany(mappedBy = "updatedBy", cascade = CascadeType.ALL)
-    private List<Place> updatePlaces = new ArrayList<>();
+    private final List<Place> updatePlaces = new ArrayList<>();
 
+    /**
+     * User 생성자.
+     * @param nickname 닉네임
+     * @param socialId 로그인 서비스에서 사용중인 식별자. 예) email
+     * @param socialType 로그인 서비스 이름
+     */
     @Builder
     public User(String nickname, String socialId, String socialType) {
         this.id = UUID.randomUUID().toString().replace("-", "");

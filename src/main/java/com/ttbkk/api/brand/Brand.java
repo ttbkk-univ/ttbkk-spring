@@ -1,6 +1,6 @@
 package com.ttbkk.api.brand;
 
-import com.ttbkk.api.BaseTimeEntity;
+import com.ttbkk.api.common.entity.BaseTimeEntity;
 import com.ttbkk.api.place.Place;
 import com.ttbkk.api.user.User;
 import lombok.Builder;
@@ -42,8 +42,13 @@ public class Brand extends BaseTimeEntity {
     private User updatedBy;
 
     @OneToMany(mappedBy = "brand")
-    private List<Place> places = new ArrayList<>();
+    private final List<Place> places = new ArrayList<>();
 
+    /**
+     * Brand 생성자.
+     * @param name 브랜드 이름
+     * @param description 브랜드 설명
+     */
     @Builder
     public Brand(String name, String description) {
         this.id = UUID.randomUUID().toString().replace("-", "");

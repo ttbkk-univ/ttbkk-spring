@@ -13,21 +13,24 @@ import javax.transaction.Transactional;
 @Transactional
 @SpringBootTest
 @Commit
-public class UserTest {
+class UserTest {
 
+    /**
+     * entity manager 입니다.
+     */
     @Autowired
-    EntityManager em;
+    private EntityManager entityManager;
 
     //엔티티 getCreatedAt null 검사 테스트
     @Test
-    public void userEntityVerify(){
+    void userEntityVerify() {
         User user = User.builder()
                 .nickname("정지원")
                 .socialId("test id")
                 .socialType("test type")
                 .build();
 
-        em.persist(user);
+        this.entityManager.persist(user);
         System.out.println(user.getCreatedAt());
         System.out.println(user.getUpdatedAt());
         Assertions.assertThat(user.getUpdatedAt()).isNotNull();
