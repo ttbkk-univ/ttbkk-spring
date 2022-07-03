@@ -11,7 +11,6 @@ import javax.transaction.Transactional;
 
 @Transactional
 @SpringBootTest
-@Commit
 public class HashtagTest {
 
     @Autowired

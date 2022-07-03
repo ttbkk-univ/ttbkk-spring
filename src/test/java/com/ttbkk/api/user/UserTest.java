@@ -12,7 +12,6 @@ import javax.transaction.Transactional;
 
 @Transactional
 @SpringBootTest
-@Commit
 public class UserTest {
 
     @Autowired
@@ -28,9 +27,8 @@ public class UserTest {
                 .build();
 
         em.persist(user);
-        System.out.println(user.getCreatedAt());
-        System.out.println(user.getUpdatedAt());
         Assertions.assertThat(user.getUpdatedAt()).isNotNull();
+
     }
 
 }
