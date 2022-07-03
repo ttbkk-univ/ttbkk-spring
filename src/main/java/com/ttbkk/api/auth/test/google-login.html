@@ -17,16 +17,12 @@
 </div>
 <div>
     <li>
-        <span>이메일</span>
-        <input id="email"></input>
+        <span>socialId</span>
+        <input id="socialId"></input>
     </li>
     <li>
-        <span>이름</span>
-        <input id="name"></input>
-    </li>
-    <li>
-        <span>프로필</span>
-        <img id="picture"/>
+        <span>nickname</span>
+        <input id="nickname"></input>
     </li>
 </div>
 <script>
@@ -34,8 +30,8 @@
         const baseUrl = "http://localhost:8080";
         console.log("before fetch")
         axios.post(
-            `${baseUrl}/api/v1/auth/signin/google`,
-            {accessToken: data.credential},
+            `${baseUrl}/auth/signin/google`,
+            {authProviderToken: data.credential},
         )
             .then((res) => {
                 console.log(res);
@@ -44,7 +40,7 @@
             })
             .then((accessToken) => {
                 return axios.get(
-                    `${baseUrl}/api/v1/auth/myinfo`,
+                    `${baseUrl}/auth/myinfo`,
                     {
                         headers: {
                             Authorization: `Bearer ${accessToken}`,
@@ -54,17 +50,12 @@
             })
             .then((res) => {
                 console.log(res);
-                const {picture, name, email} = res.data;
-                const pictureElement = document.getElementById("picture");
-                pictureElement.setAttribute("src", picture);
-                pictureElement.setAttribute("width", "64px");
-                pictureElement.setAttribute("height", "64px");
+                const {nickname, socialId} = res.data;
+                const nameElement = document.getElementById("nickname");
+                nameElement.setAttribute("value", nickname);
 
-                const nameElement = document.getElementById("name");
-                nameElement.setAttribute("value", name);
-
-                const emailElement = document.getElementById("email");
-                emailElement.setAttribute("value", email);
+                const emailElement = document.getElementById("socialId");
+                emailElement.setAttribute("value", socialId);
             })
     }
 </script>

@@ -29,6 +29,7 @@ public class AuthService {
     /**
      * 로그인 함수.
      * 자세한 내용은 AuthController.signIn 참고.
+     *
      * @param authProviderToken google 등으로부터 받은 JWT
      * @return String 우리 서버에서 발급하는 JWT
      * @throws ParseException 파싱 예외처리
@@ -38,8 +39,8 @@ public class AuthService {
         AuthDto.JwtGoogle googleJwt = new AuthDto.JwtGoogle(jwtHashMap);
         User user = userService
             .findBySocialId(googleJwt.getEmail())
-            .orElse(
-                userService.create(
+            .orElseGet(
+                () -> userService.create(
                     googleJwt.getEmail(),
                     googleJwt.getName(),
                     "GOOGLE"
@@ -51,6 +52,7 @@ public class AuthService {
     /**
      * 내 정보 조회.
      * 자세한 내용은 AuthController.myInfo 참고.
+     *
      * @param accessToken 우리 서버에서 발급받은 JWT
      * @return User 토큰으로부터 파싱/조회 된 유저
      * @throws ParseException 파싱 예외처리
