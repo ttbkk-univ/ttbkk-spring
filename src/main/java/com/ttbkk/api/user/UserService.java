@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.util.Optional;
 
+import static com.ttbkk.api.user.QUser.user;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -29,13 +31,12 @@ public class UserService {
      * @return Optional<User> 유저를 찾지 못한 경우 null 이 반환됩니다.
      */
     public Optional<User> findBySocialId(String socialId) {
-        QUser qUser = QUser.user;
         JPAQuery<User> query = new JPAQuery<>(this.entityManager);
         return Optional.ofNullable(
             query
-                .from(qUser)
+                .from(user)
                 .where(
-                    qUser.socialId.eq(socialId)
+                    user.socialId.eq(socialId)
                 )
                 .fetchOne()
         );
