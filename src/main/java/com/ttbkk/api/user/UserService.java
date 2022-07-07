@@ -46,14 +46,12 @@ public class UserService {
      * 유저를 생성합니다.
      *
      * @param socialId   구글 로그인 시 email 에 해당됩니다.
-     * @param nickname   구글 로그인 시 name 에 해당됩니다.
      * @param socialType 구글 로그인 시 GOOGLE 에 해당됩니다.
      * @return User 생성된 유저가 반환됩니다.
      */
-    public User create(String socialId, String nickname, String socialType) {
+    public User create(String socialId, String socialType) {
         User user = User.builder()
             .socialId(socialId)
-            .nickname(nickname)
             .socialType(socialType)
             .build();
         this.entityManager.persist(user);

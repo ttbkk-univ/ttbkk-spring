@@ -20,10 +20,6 @@
         <span>socialId</span>
         <input id="socialId"></input>
     </li>
-    <li>
-        <span>nickname</span>
-        <input id="nickname"></input>
-    </li>
 </div>
 <script>
     function callback(data) {
@@ -50,9 +46,7 @@
             })
             .then((res) => {
                 console.log(res);
-                const {nickname, socialId} = res.data;
-                const nameElement = document.getElementById("nickname");
-                nameElement.setAttribute("value", nickname);
+                const {socialId} = res.data;
 
                 const emailElement = document.getElementById("socialId");
                 emailElement.setAttribute("value", socialId);

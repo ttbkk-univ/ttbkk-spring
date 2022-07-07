@@ -38,15 +38,14 @@ public class AuthService {
         Map<String, Object> jwtHashMap = jwtService.parse(authProviderToken);
         AuthDto.JwtGoogle googleJwt = new AuthDto.JwtGoogle(jwtHashMap);
         User user = userService
-            .findBySocialId(googleJwt.getEmail())
+            .findBySocialId(googleJwt.getSub())
             .orElseGet(
                 () -> userService.create(
-                    googleJwt.getEmail(),
-                    googleJwt.getName(),
+                    googleJwt.getSub(),
                     "GOOGLE"
                 )
             );
-        return jwtService.encode(user, googleJwt.getPicture());
+        return jwtService.encode(user);
     }
 
     /**
@@ -60,11 +59,9 @@ public class AuthService {
     public User myInfo(String accessToken) throws ParseException {
         Map<String, Object> jwtHashMap = jwtService.parse(accessToken);
         String socialId = (String) jwtHashMap.get("socialId");
-        String nickname = (String) jwtHashMap.get("nickname");
 
         return User.builder()
             .socialId(socialId)
-            .nickname(nickname)
             .build();
     }
 }
