@@ -8,7 +8,6 @@ import lombok.ToString;
 import javax.validation.constraints.NotEmpty;
 import java.math.BigInteger;
 import java.util.Map;
-import java.util.Optional;
 
 public class AuthDto {
     @Getter
