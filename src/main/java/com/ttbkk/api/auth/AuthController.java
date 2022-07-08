@@ -1,6 +1,8 @@
 package com.ttbkk.api.auth;
 
+import com.ttbkk.api.common.exception.UnauthorizedException;
 import com.ttbkk.api.user.User;
+import com.ttbkk.api.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.json.ParseException;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -16,6 +19,7 @@ import javax.validation.Valid;
 @RequestMapping("/auth")
 public class AuthController {
     private final AuthService authService;
+    private final UserService userService;
 
     /**
      * 인증 기능을 제공하는 provider 로 부터 받은 JWT 를 유저로부터 받아,

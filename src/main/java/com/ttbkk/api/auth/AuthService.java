@@ -1,5 +1,6 @@
 package com.ttbkk.api.auth;
 
+import com.ttbkk.api.common.exception.UnauthorizedException;
 import com.ttbkk.api.user.User;
 import com.ttbkk.api.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -59,9 +60,8 @@ public class AuthService {
     public User myInfo(String accessToken) throws ParseException {
         Map<String, Object> jwtHashMap = jwtService.parse(accessToken);
         String socialId = (String) jwtHashMap.get("socialId");
-
-        return User.builder()
-            .socialId(socialId)
-            .build();
+        return this.userService.findBySocialId(socialId).orElseThrow(
+            UnauthorizedException::new
+        );
     }
 }
