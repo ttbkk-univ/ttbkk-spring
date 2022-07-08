@@ -12,7 +12,6 @@ import javax.transaction.Transactional;
 
 @Transactional
 @SpringBootTest
-@Commit
 class UserTest {
 
     /**
@@ -30,8 +29,6 @@ class UserTest {
                 .build();
 
         this.entityManager.persist(user);
-        System.out.println(user.getCreatedAt());
-        System.out.println(user.getUpdatedAt());
         Assertions.assertThat(user.getUpdatedAt()).isNotNull();
     }
 

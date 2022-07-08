@@ -12,7 +12,6 @@ import javax.transaction.Transactional;
 
 @Transactional
 @SpringBootTest
-@Commit
 public class BrandTest {
 
     @Autowired
@@ -29,8 +28,6 @@ public class BrandTest {
                 .build();
 
         this.entityManager.persist(brand);
-        System.out.println(brand.getCreatedAt());
-        System.out.println(brand.getUpdatedAt());
         Assertions.assertThat(brand.getUpdatedAt()).isNotNull();
     }
 
