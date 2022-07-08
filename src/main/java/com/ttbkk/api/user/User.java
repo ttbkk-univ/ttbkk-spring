@@ -26,10 +26,6 @@ public class User extends BaseTimeEntity {
     private String id;
 
     @NotNull
-    @Column(columnDefinition = "VARCHAR(50)")
-    private String nickname;
-
-    @NotNull
     @Column(name = "social_id", columnDefinition = "VARCHAR(50)")
     private String socialId;
 
@@ -51,14 +47,12 @@ public class User extends BaseTimeEntity {
 
     /**
      * User 생성자.
-     * @param nickname 닉네임
      * @param socialId 로그인 서비스에서 사용중인 식별자. 예) email
      * @param socialType 로그인 서비스 이름
      */
     @Builder
-    public User(String nickname, String socialId, String socialType) {
+    public User(String socialId, String socialType) {
         this.id = UUID.randomUUID().toString().replace("-", "");
-        this.nickname = nickname;
         this.socialId = socialId;
         this.socialType = socialType;
     }
