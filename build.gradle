@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        queryDslVersion = "5.0.0"
+        queryDslVersion = "4.4.0"
     }
 }
 
@@ -72,6 +72,12 @@ sourceSets {
 compileQuerydsl{
     options.annotationProcessorPath = configurations.querydsl
 }
+compileQuerydsl.doFirst {
+    if (file(querydslDir).exists()) {
+        delete(file(querydslDir))
+    }
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor

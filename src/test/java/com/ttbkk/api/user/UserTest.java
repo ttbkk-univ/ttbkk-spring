@@ -25,7 +25,6 @@ class UserTest {
     @Test
     void userEntityVerify() {
         User user = User.builder()
-                .nickname("정지원")
                 .socialId("test id")
                 .socialType("test type")
                 .build();
