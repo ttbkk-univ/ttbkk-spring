@@ -57,4 +57,14 @@ public class UserService {
         this.entityManager.persist(user);
         return user;
     }
+
+    /**
+     * id를 받아 유저를 삭제합니다.
+     * @param id User.id
+     */
+    public void deleteById(String id) {
+        User user = new User();
+        user.setId(id);
+        this.entityManager.remove(user);
+    }
 }
