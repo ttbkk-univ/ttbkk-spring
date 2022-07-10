@@ -47,21 +47,4 @@ public class AuthService {
             );
         return jwtService.encode(user);
     }
-
-    /**
-     * 내 정보 조회.
-     * 자세한 내용은 AuthController.myInfo 참고.
-     *
-     * @param accessToken 우리 서버에서 발급받은 JWT
-     * @return User 토큰으로부터 파싱/조회 된 유저
-     * @throws ParseException 파싱 예외처리
-     */
-    public User myInfo(String accessToken) throws ParseException {
-        Map<String, Object> jwtHashMap = jwtService.parse(accessToken);
-        String socialId = (String) jwtHashMap.get("socialId");
-
-        return User.builder()
-            .socialId(socialId)
-            .build();
-    }
 }
