@@ -72,15 +72,14 @@ sourceSets {
 compileQuerydsl{
     options.annotationProcessorPath = configurations.querydsl
 }
-compileQuerydsl.doFirst {
-    if (file(querydslDir).exists()) {
-        delete(file(querydslDir))
-    }
-}
-
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
     querydsl.extendsFrom compileClasspath
+}
+
+// 자동 생성된 querydsl Q클래스를 gradle clean으로 제거
+clean {
+    delete file('src/main/generated')
 }
