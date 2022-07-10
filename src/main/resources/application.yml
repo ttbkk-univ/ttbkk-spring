@@ -7,7 +7,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
   datasource:
     hikari:
       driver-class-name: com.mysql.cj.jdbc.Driver
