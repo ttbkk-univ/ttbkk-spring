@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-@Aspect     // AOP Aspect
+@Aspect
 @Component
 public class IsAdminAspect  extends BaseAuthCheckAspect {
     /**

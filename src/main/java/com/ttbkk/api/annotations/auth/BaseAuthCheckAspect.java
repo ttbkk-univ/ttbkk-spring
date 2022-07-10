@@ -6,15 +6,11 @@ import com.ttbkk.api.user.User;
 import com.ttbkk.api.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.json.ParseException;
-import org.aspectj.lang.annotation.Aspect;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @RequiredArgsConstructor
-@Aspect     // AOP Aspect
-@Component
 public abstract class BaseAuthCheckAspect {
     private static final String AUTHORIZATION = "Authorization";
     private static final String TOKEN_PREFIX = "Bearer ";

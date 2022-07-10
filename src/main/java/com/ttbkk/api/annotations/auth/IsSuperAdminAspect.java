@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
-@Aspect     // AOP Aspect
+@Aspect
 @Component
 public class IsSuperAdminAspect extends BaseAuthCheckAspect {
     /**
