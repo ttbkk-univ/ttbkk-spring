@@ -1,5 +1,6 @@
 package com.ttbkk.api.auth;
 
+import com.ttbkk.api.annotations.auth.IsUser;
 import com.ttbkk.api.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,16 +38,15 @@ public class AuthController {
      * token 을 사용해 유저의 정보를 조회합니다.
      * 우선 간단한 구현을 위해 토큰을 파싱하도록만 되어있지만,
      * 이후 socialId 를 통해 user 전체 entity 를 조회해서 받아올 수 있도록 수정할 예정입니다.
-     * @param authorization signIn 시 발급받은 JWT 를 담고 있습니다.
+     * @param currentUser IsUser AOP 에서 토큰을 통해 조회되는 유저 정보.
      * @return User 파싱 된 유저 입니다.
      * @throws ParseException 파싱에 실패할 시 발생하는 예외 처리 입니다.
      */
+    @IsUser
     @GetMapping("/myinfo")
     public ResponseEntity<User> signIn(
-            @RequestHeader("Authorization") String authorization
+        User currentUser
     ) throws ParseException {
-        String token = authorization.split(" ")[1];
-        User user = authService.myInfo(token);
-        return ResponseEntity.status(HttpStatus.OK).body(user);
+        return ResponseEntity.status(HttpStatus.OK).body(currentUser);
     }
 }
