@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-//Place와 Hashtag의 N:M 관계를 구현하기 위한 중간 테이블입니다.
+//Place 와 Hashtag 의 N:M 관계를 구현하기 위한 중간 테이블입니다.
 @Getter
 @NoArgsConstructor
 @Entity

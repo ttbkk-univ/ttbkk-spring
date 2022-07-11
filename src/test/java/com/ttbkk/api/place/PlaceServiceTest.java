@@ -1,4 +1,5 @@
 package com.ttbkk.api.place;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,16 +8,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 
-import java.math.BigDecimal;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 도메인 Place 의 Repository Test.
+ * 도메인 Place 의 Service Test.
  */
 @SpringBootTest
 @Transactional
-class PlaceRepositoryTest {
+class PlaceServiceTest {
+
+    @Autowired
+    private PlaceService placeService;
+
     @Autowired
     private PlaceRepository placeRepository;
 
@@ -57,12 +60,13 @@ class PlaceRepositoryTest {
     }
 
     /**
-     * getPlacesAndCountInGrid 메서드 동작 Test.
+     * getPlacesAndCountInGrid 메서드 검증 Test.
      */
     @Test
-    @DisplayName("getPlacesAndCountInGrid 메서드 동작 Test")
+    @DisplayName("getPlacesAndCountInGrid 메서드 검증 Test")
     void getPlacesAndCountInGrid() {
-        PlaceDto.GridResponseDto placesAndCountInGrid = placeRepository.getPlacesAndCountInGrid(BigDecimal.valueOf(89.222222222222), BigDecimal.valueOf(100.222222222222), BigDecimal.valueOf(-30.222222222222), BigDecimal.valueOf(-30.222222222222));
+        PlaceDto.GridRequestDto requestDto = new PlaceDto.GridRequestDto("60.2222222222222,130.2222222222222", "-20.2222222222222,-20.2222222222222");
+        PlaceDto.GridResponseDto placesAndCountInGrid = placeService.getPlacesAndCountInGrid(requestDto);
 
         assertThat(placesAndCountInGrid.getEdges()).extracting("name").containsOnly("A", "B");
         assertThat(placesAndCountInGrid.getCount()).isEqualTo(placesAndCountInGrid.getEdges().size());
