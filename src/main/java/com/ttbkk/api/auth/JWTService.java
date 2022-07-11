@@ -22,10 +22,9 @@ public class JWTService {
     /**
      * 유저 데이터를 JWT로 암호화 하는 함수.
      * @param user User 객체
-     * @param imgUrl 로그인 시 받을 수 있는 로그인 제공사에 저장된 프로필 이미지
      * @return String 생성된 JWT String
      */
-    public String encode(User user, String imgUrl) {
+    public String encode(User user) {
         Date now = new Date();
         String secretKey = "secret"; // 토큰 변경에 필요한 secret key
         int expireSeconds = 60 * 60; // 토큰의 만료 기간
@@ -34,8 +33,6 @@ public class JWTService {
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + Duration.ofMinutes(expireSeconds).toMillis()))
                 .claim("socialId", user.getSocialId())
-                .claim("nickname", user.getNickname())
-                .claim("imgUrl", imgUrl)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }

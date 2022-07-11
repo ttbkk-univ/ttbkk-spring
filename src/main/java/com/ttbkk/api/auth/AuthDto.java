@@ -40,6 +40,7 @@ public class AuthDto {
     public static class JwtGoogle {
         /**
          * JwtGoogle 인스턴스 생성자.
+         * 필수값이면서 유저를 식별 가능한 값은 sub이므로, 해당 값을 우리 서버의 유저 식별자로 사용한다.
          * @param hashmap 파싱 된 Google JWT.
          */
         public JwtGoogle(Map<String, Object> hashmap) {
@@ -58,18 +59,18 @@ public class AuthDto {
             this.jti = (String) hashmap.get("jti");
         }
 
-        private String iss;
-        private BigInteger nbf;
-        private String aud;
-        private String sub;
+        private String iss; // Issuer (who created and signed this token)
+        private BigInteger nbf; // Not valid before (seconds since Unix epoch)
+        private String aud; // Audience (who or what the token is intended for)
+        private String sub; // Subject (whom the token refers to)
         private String email;
         private boolean emailVerified;
-        private String azp;
+        private String azp; // Authorized party (the party to which this token was issued)
         private String name;
         private String picture;
         private String givenName;
-        private BigInteger iat;
-        private BigInteger exp;
-        private String jti;
+        private BigInteger iat; // Issued at (seconds since Unix epoch)
+        private BigInteger exp; // Expiration time (seconds since Unix epoch)
+        private String jti; // JWT ID (unique identifier for this token)
     }
 }

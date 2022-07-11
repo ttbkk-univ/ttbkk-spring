@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        queryDslVersion = "5.0.0"
+        queryDslVersion = "4.4.0"
     }
 }
 
@@ -77,4 +77,9 @@ configurations {
         extendsFrom annotationProcessor
     }
     querydsl.extendsFrom compileClasspath
+}
+
+// 자동 생성된 querydsl Q클래스를 gradle clean으로 제거
+clean {
+    delete file('src/main/generated')
 }
