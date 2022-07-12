@@ -1,7 +1,9 @@
 package com.ttbkk.api.annotations.auth;
 
 import com.ttbkk.api.auth.JWTService;
+import com.ttbkk.api.common.exception.UnauthorizedException;
 import com.ttbkk.api.user.User;
+import com.ttbkk.api.user.UserRole;
 import com.ttbkk.api.user.UserService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -15,12 +17,13 @@ import java.util.Arrays;
 
 @Aspect
 @Component
-public class IsAdminAspect  extends BaseAuthCheckAspect {
+public class IsAdminAspect extends BaseAuthCheckAspect {
     /**
      * 클래스 생성자.
+     *
      * @param httpServletRequest header.authorization으로 전달되는 JWT를 받아오기 위함.
-     * @param jwtService JWT를 파싱하기 위함.
-     * @param userService JWT로부터 얻은 socialId로 유저의 정보를 조회하기 위함.
+     * @param jwtService         JWT를 파싱하기 위함.
+     * @param userService        JWT로부터 얻은 socialId로 유저의 정보를 조회하기 위함.
      */
     public IsAdminAspect(HttpServletRequest httpServletRequest, JWTService jwtService, UserService userService) {
         super(httpServletRequest, jwtService, userService);
@@ -35,10 +38,14 @@ public class IsAdminAspect  extends BaseAuthCheckAspect {
      */
     @Around("@annotation(com.ttbkk.api.annotations.auth.IsAdmin)") // 어노테이션과 Aspect 연결
     public Object check(final ProceedingJoinPoint joinPoint) throws Throwable {
-        User admin = this.getUser();
-        // TODO user role 체크하는 로직
-        ArrayList<String> targets = new ArrayList<>(Arrays.asList("ADMIN", "SUPER_ADMIN"));
-//        targets.contains(user.role);
-        return joinPoint.proceed(new Object[]{admin});
+        User requestUser = this.getUser();
+        ArrayList<String> targets = new ArrayList<>(Arrays.asList(
+            UserRole.ADMIN.toString(),
+            UserRole.SUPER_ADMIN.toString()
+        ));
+        if (!targets.contains(requestUser.getRole().toString())) {
+            throw new UnauthorizedException();
+        }
+        return joinPoint.proceed(new Object[]{requestUser});
     }
 }

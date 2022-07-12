@@ -1,28 +1,35 @@
 package com.ttbkk.api.user;
 
 import com.querydsl.jpa.impl.JPAQuery;
-import lombok.RequiredArgsConstructor;
+import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.Optional;
 
-import static com.ttbkk.api.user.QUser.user;
-
 @Slf4j
 @Service
-@RequiredArgsConstructor
 @Transactional
 public class UserService {
 
+    private final EntityManager entityManager;
+
+    private final QUser qUser;
+
+    private final JPAQuery<User> query;
+
     /**
-     * entity manager 입니다.
+     * 클래스 생성자.
+     *
+     * @param entityManager EntityManager
      */
-    @Autowired
-    private EntityManager entityManager;
+    public UserService(EntityManager entityManager) {
+        this.entityManager = entityManager;
+        this.query = new JPAQuery<>(this.entityManager);
+        this.qUser = QUser.user;
+    }
 
     /**
      * 입력된 socialId를 가지는 유저가 존재하는지 조회합니다.
@@ -31,12 +38,11 @@ public class UserService {
      * @return Optional<User> 유저를 찾지 못한 경우 null 이 반환됩니다.
      */
     public Optional<User> findBySocialId(String socialId) {
-        JPAQuery<User> query = new JPAQuery<>(this.entityManager);
         return Optional.ofNullable(
-            query
-                .from(user)
+            this.query
+                .from(qUser)
                 .where(
-                    user.socialId.eq(socialId)
+                    qUser.socialId.eq(socialId)
                 )
                 .fetchOne()
         );
@@ -53,18 +59,31 @@ public class UserService {
         User user = User.builder()
             .socialId(socialId)
             .socialType(socialType)
+            .role(UserRole.USER)
             .build();
         this.entityManager.persist(user);
         return user;
     }
 
     /**
-     * id를 받아 유저를 삭제합니다.
-     * @param id User.id
+     * 넘겨받은 id를 가지는 유저를 찾아 삭제합니다.
+     * @param id 유저의 id 입니다.
      */
-    public void deleteById(String id) {
-        User user = new User();
-        user.setId(id);
+    public void deleteById(String id) throws NotFoundException {
+        User user = Optional.ofNullable(
+            this.query
+                .from(qUser)
+                .where(qUser.id.eq(id))
+                .fetchOne())
+            .orElseThrow(() -> new NotFoundException("User Not Found"));
+        this.entityManager.remove(user);
+    }
+
+    /**
+     * 유저를 삭제합니다.
+     * @param user 삭제 할 유저입니다.
+     */
+    public void delete(User user) {
         this.entityManager.remove(user);
     }
 }
