@@ -1,6 +1,5 @@
 package com.ttbkk.api.place;
 
-import com.ttbkk.api.common.exception.BaseException;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
@@ -13,8 +12,8 @@ public class PlaceDto {
      */
     @Getter
     public static class GridResponseDto {
-        private List<Place> edges;
         private int count;
+        private List<Place> edges;
 
         /**
          * 생성자.
@@ -31,26 +30,22 @@ public class PlaceDto {
      * GridApi 요청 데이터를 담는 Dto 클래스입니다.
      */
     @Getter
+    @NoArgsConstructor
     public static class GridRequestDto {
-        private String topRightX;
-        private String topRightY;
-        private String botLeftX;
-        private String botLeftY;
+        @NotNull
+        private String topRight;
+        @NotNull
+        private String botLeft;
 
         /**
-         * if문 ~ : 좌표값이 latitude 와 longitude 2가지 요소로 이루어져있는지 검증.
+         * GridRequestDto 생성자.
          *
-         * @param topRight Grid 지역 안의 우측상단 꼭지점의 좌표값
-         * @param botLeft Grid 지역 안의 좌측하단 꼭지점의 좌표값
+         * @param topRight Grid 지역 안의 우측상단 꼭지점의 좌표값.
+         * @param botLeft Grid 지역 안의 좌측하단 꼭지점의 좌표값.
          */
-        public GridRequestDto(@NotNull String topRight, @NotNull String botLeft) {
-            if (topRight.split(",").length != 2 || botLeft.split(",").length != 2) {
-                throw new BaseException("Invalid Request Parameter : 좌표값 확인");
-            }
-            this.topRightX = topRight.split(",")[0];
-            this.topRightY = topRight.split(",")[1];
-            this.botLeftX = botLeft.split(",")[0];
-            this.botLeftY = botLeft.split(",")[1];
+        public GridRequestDto(String topRight, String botLeft) {
+            this.topRight = topRight;
+            this.botLeft = botLeft;
         }
     }
 }

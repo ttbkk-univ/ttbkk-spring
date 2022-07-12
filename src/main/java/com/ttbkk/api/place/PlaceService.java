@@ -16,12 +16,18 @@ public class PlaceService {
     private final PlaceRepository placeRepository;
 
     /**
-     * dto 의 String data 를 BigDecimal type 으로 변환하여 Repo 에 넘겨준다.
+     * dto 의 String data 를 latitude 와 longitude 로 분리한다.
+     * 분리한 String data 를 BigDecimal type 으로 변환하여 Repo 에 넘겨준다.
      * @param dto client 의 requestData
      * @return PlaceDto.GridResponseDto
      */
     public PlaceDto.GridResponseDto getPlacesAndCountInGrid(PlaceDto.GridRequestDto dto) {
-        return placeRepository.getPlacesAndCountInGrid(new BigDecimal(dto.getTopRightX()), new BigDecimal(dto.getTopRightY()), new BigDecimal(dto.getBotLeftX()), new BigDecimal(dto.getBotLeftY()));
+        BigDecimal topRightX = new BigDecimal(dto.getTopRight().split(",")[0]);
+        BigDecimal topRightY = new BigDecimal(dto.getTopRight().split(",")[1]);
+        BigDecimal botLeftX = new BigDecimal(dto.getBotLeft().split(",")[0]);
+        BigDecimal botLeftY = new BigDecimal(dto.getBotLeft().split(",")[1]);
+
+        return placeRepository.getPlacesAndCountInGrid(topRightX, topRightY, botLeftX, botLeftY);
     }
 
 }
