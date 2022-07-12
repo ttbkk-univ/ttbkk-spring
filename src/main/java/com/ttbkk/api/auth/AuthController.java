@@ -2,6 +2,7 @@ package com.ttbkk.api.auth;
 
 import com.ttbkk.api.annotations.auth.IsUser;
 import com.ttbkk.api.user.User;
+import com.ttbkk.api.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.json.ParseException;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 @RequestMapping("/auth")
 public class AuthController {
     private final AuthService authService;
+    private final UserService userService;
 
     /**
      * 인증 기능을 제공하는 provider 로 부터 받은 JWT 를 유저로부터 받아,
@@ -40,13 +42,12 @@ public class AuthController {
      * 이후 socialId 를 통해 user 전체 entity 를 조회해서 받아올 수 있도록 수정할 예정입니다.
      * @param currentUser IsUser AOP 에서 토큰을 통해 조회되는 유저 정보.
      * @return User 파싱 된 유저 입니다.
-     * @throws ParseException 파싱에 실패할 시 발생하는 예외 처리 입니다.
      */
     @IsUser
     @GetMapping("/myinfo")
     public ResponseEntity<User> signIn(
         User currentUser
-    ) throws ParseException {
+    ) {
         return ResponseEntity.status(HttpStatus.OK).body(currentUser);
     }
 }
