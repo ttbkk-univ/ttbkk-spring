@@ -67,20 +67,22 @@ public class UserService {
 
     /**
      * 넘겨받은 id를 가지는 유저를 찾아 삭제합니다.
+     *
      * @param id 유저의 id 입니다.
      */
     public void deleteById(String id) throws NotFoundException {
         User user = Optional.ofNullable(
-            this.query
-                .from(qUser)
-                .where(qUser.id.eq(id))
-                .fetchOne())
+                this.query
+                    .from(qUser)
+                    .where(qUser.id.eq(id))
+                    .fetchOne())
             .orElseThrow(() -> new NotFoundException("User Not Found"));
         this.entityManager.remove(user);
     }
 
     /**
      * 유저를 삭제합니다.
+     *
      * @param user 삭제 할 유저입니다.
      */
     public void delete(User user) {

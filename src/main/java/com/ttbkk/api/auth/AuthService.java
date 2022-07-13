@@ -4,6 +4,7 @@ import com.ttbkk.api.user.User;
 import com.ttbkk.api.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.json.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -24,9 +25,10 @@ public class AuthService {
     /**
      * 클래스 생성자.
      *
-     * @param jwtService JWTService
+     * @param jwtService  JWTService
      * @param userService UserService
      */
+    @Autowired
     public AuthService(JWTService jwtService, UserService userService) {
         this.jwtService = jwtService;
         this.userService = userService;

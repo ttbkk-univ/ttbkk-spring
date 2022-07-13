@@ -33,7 +33,7 @@ public class User extends BaseTimeEntity {
     private UserRole role;
 
     @NotNull
-    @Column(name = "social_id", columnDefinition = "VARCHAR(50)")
+    @Column(name = "social_id", columnDefinition = "VARCHAR(50)", unique = true)
     private String socialId;
 
     @NotNull
