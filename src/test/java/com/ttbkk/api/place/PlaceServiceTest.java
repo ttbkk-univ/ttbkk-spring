@@ -65,7 +65,7 @@ class PlaceServiceTest {
     @Test
     @DisplayName("getPlacesAndCountInGrid 메서드 검증 Test")
     void getPlacesAndCountInGrid() {
-        PlaceDto.GridRequestDto requestDto = new PlaceDto.GridRequestDto("60.2222222222222,130.2222222222222", "-20.2222222222222,-20.2222222222222");
+        PlaceDto.GridRequestDto requestDto = new PlaceDto.GridRequestDto("89.2222222222223217839,100.222222222222312312", "-30.222222222222432422,-30.222222222222432422");
         PlaceDto.GridResponseDto placesAndCountInGrid = placeService.getPlacesAndCountInGrid(requestDto);
 
         assertThat(placesAndCountInGrid.getEdges()).extracting("name").containsOnly("A", "B");

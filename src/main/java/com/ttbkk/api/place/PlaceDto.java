@@ -3,6 +3,7 @@ package com.ttbkk.api.place;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 public class PlaceDto {
@@ -28,13 +29,19 @@ public class PlaceDto {
 
     /**
      * GridApi 요청 데이터를 담는 Dto 클래스입니다.
+     *
+     * .@Pattern : 정규식을 통한 data format 검증
+     * ex) XX.XXXX,YY.YYYY
      */
     @Getter
     @NoArgsConstructor
     public static class GridRequestDto {
         @NotNull
+        @Pattern(regexp = "^-?\\d{1,2}\\.\\d{0,100},-?\\d{1,3}\\.\\d{0,100}$", message = "좌표값 데이터 포맷을 확인해주세요.")
         private String topRight;
+
         @NotNull
+        @Pattern(regexp = "^-?\\d{1,2}\\.\\d{0,100},-?\\d{1,3}\\.\\d{0,100}$", message = "좌표값 데이터 포맷을 확인해주세요.")
         private String botLeft;
 
         /**

@@ -62,7 +62,8 @@ class PlaceRepositoryTest {
     @Test
     @DisplayName("getPlacesAndCountInGrid 메서드 동작 Test")
     void getPlacesAndCountInGrid() {
-        PlaceDto.GridResponseDto placesAndCountInGrid = placeRepository.getPlacesAndCountInGrid(BigDecimal.valueOf(89.222222222222), BigDecimal.valueOf(100.222222222222), BigDecimal.valueOf(-30.222222222222), BigDecimal.valueOf(-30.222222222222));
+        PlaceDto.GridResponseDto placesAndCountInGrid = placeRepository.getPlacesAndCountInGrid(BigDecimal.valueOf(89.222222222222),
+                BigDecimal.valueOf(100.222222222222), BigDecimal.valueOf(-30.222222222222), BigDecimal.valueOf(-30.222222222222));
 
         assertThat(placesAndCountInGrid.getEdges()).extracting("name").containsOnly("A", "B");
         assertThat(placesAndCountInGrid.getCount()).isEqualTo(placesAndCountInGrid.getEdges().size());
