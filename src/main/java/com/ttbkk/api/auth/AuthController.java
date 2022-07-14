@@ -49,9 +49,7 @@ public class AuthController {
      */
     @IsUser
     @GetMapping("/myinfo")
-    public ResponseEntity<User> signIn(
-        User currentUser
-    ) {
+    public ResponseEntity<User> signIn(User currentUser) {
         return ResponseEntity.status(HttpStatus.OK).body(currentUser);
     }
 }
