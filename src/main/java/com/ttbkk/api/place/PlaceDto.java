@@ -31,7 +31,6 @@ public class PlaceDto {
      * GridApi 요청 데이터를 담는 Dto 클래스입니다.
      *
      * .@Pattern : 정규식을 통한 data format 검증
-     * ex) XX.XXXX,YY.YYYY
      */
     @Getter
     @NoArgsConstructor
