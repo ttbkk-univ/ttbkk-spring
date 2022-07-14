@@ -3,21 +3,25 @@ package com.ttbkk.api.user;
 import com.ttbkk.api.annotations.auth.IsAdmin;
 import com.ttbkk.api.annotations.auth.IsUser;
 import javassist.NotFoundException;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired
     private final UserService userService;
+
+    /**
+     * 클래스 생성자.
+      * @param userService UserService
+     */
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     /**
      * header로 넘어온 토큰을 통해 얻은 유저 본인을 삭제합니다.

@@ -24,14 +24,14 @@
 <script>
     function callback(data) {
         const baseUrl = "http://localhost:8080";
-        console.log("before fetch")
+        console.log({googleJWT: data.credential});
         axios.post(
             `${baseUrl}/auth/signin/google`,
             {authProviderToken: data.credential},
         )
             .then((res) => {
-                console.log(res);
                 const {accessToken} = res.data;
+                console.log({ttbkkJWT: accessToken});
                 return accessToken;
             })
             .then((accessToken) => {
@@ -45,9 +45,8 @@
                 );
             })
             .then((res) => {
-                console.log(res);
                 const {socialId} = res.data;
-
+                console.log({myinfo: res.data});
                 const emailElement = document.getElementById("socialId");
                 emailElement.setAttribute("value", socialId);
             })

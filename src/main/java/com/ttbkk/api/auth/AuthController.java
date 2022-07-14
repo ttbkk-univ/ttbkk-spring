@@ -2,7 +2,6 @@ package com.ttbkk.api.auth;
 
 import com.ttbkk.api.annotations.auth.IsUser;
 import com.ttbkk.api.user.User;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.json.ParseException;
 import org.springframework.http.HttpStatus;
@@ -13,10 +12,17 @@ import javax.validation.Valid;
 
 @Slf4j
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthController {
     private final AuthService authService;
+
+    /**
+     * 클래스 생성자.
+      * @param authService AuthService
+     */
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
 
     /**
      * 인증 기능을 제공하는 provider 로 부터 받은 JWT 를 유저로부터 받아,

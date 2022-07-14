@@ -4,7 +4,6 @@ import com.ttbkk.api.user.User;
 import com.ttbkk.api.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.json.ParseException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -12,23 +11,16 @@ import java.util.Map;
 @Slf4j
 @Service
 public class AuthService {
-    /**
-     * JWT 관련 기능을 담고있는 서비스 입니다.
-     */
+
     private final JWTService jwtService;
 
-    /**
-     * 유저의 CRUD 기능을 제공하는 서비스 입니다.
-     */
     private final UserService userService;
 
     /**
      * 클래스 생성자.
-     *
-     * @param jwtService  JWTService
+     * @param jwtService JWTService
      * @param userService UserService
      */
-    @Autowired
     public AuthService(JWTService jwtService, UserService userService) {
         this.jwtService = jwtService;
         this.userService = userService;
