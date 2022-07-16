@@ -6,8 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * 웹 주소를 통해서 들어오는 곳.
@@ -29,6 +31,16 @@ public class BrandController {
     }
 
     /**
+     * 파라미터에 해당하는 브랜드 검색하기.
+     * @param name 브랜드 이름
+     * @return 검색한 이름의 브랜드
+     */
+    @GetMapping("/find")
+    public Optional<Brand> getBrandByName(String name) {
+        return brandService.findByName(name);
+    }
+
+    /**
      * 새 브랜드 항목을 생성.
      * @param param POST 로 name 과 description 을 받아온다.
      * @return 브랜드를 새로 생성
@@ -44,5 +56,16 @@ public class BrandController {
 //        Brand brand = new BrandDto.CreateBrandRequest(param));
         brandService.createBrand(brand);
         return ResponseEntity.status(HttpStatus.OK).body(brandRequest);
+    }
+
+    /**
+     * 브랜드 명으로 삭제하기.
+     * @param param 브랜드 이름
+     */
+    @PostMapping("/delete")
+    public void deleteBrandByName(@RequestBody HashMap<String, Object> param) {
+        String name = param.get("name").toString();
+//        System.out.println(name);
+        brandService.deleteByName(name);
     }
 }

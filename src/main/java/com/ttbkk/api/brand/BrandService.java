@@ -2,6 +2,7 @@ package com.ttbkk.api.brand;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +26,7 @@ public class BrandService {
 
     /**
      * 전체 브랜드 조회하기.
-     * @return Brand의 List
+     * @return Brand 의 List
      */
     public List<Brand> findAll() {
         return brandRepository.findAll();
@@ -55,6 +56,15 @@ public class BrandService {
      */
     public void deleteBrand(String id) {
         brandRepository.deleteById(id);
+    }
+
+    /**
+     * 브랜드 이름으로 삭제하기.
+     * @param name 브랜드명
+     */
+    @Transactional
+    public void deleteByName(String name) {
+        brandRepository.deleteByName(name);
     }
 
     /**
