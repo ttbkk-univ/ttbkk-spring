@@ -27,6 +27,8 @@ public abstract class BaseAuthCheckAspect {
      */
     protected User getUser() throws ParseException {
         String authorization = httpServletRequest.getHeader(AUTHORIZATION); // HTTP Header 에서 AccessToken을 꺼냄
+
+        // AccessToken이 비어있거나 올바르지 않은 형태인 경우 예외처리
         if (authorization == null
             || !authorization.startsWith(TOKEN_PREFIX)
             || authorization.split(" ").length != 2) {
