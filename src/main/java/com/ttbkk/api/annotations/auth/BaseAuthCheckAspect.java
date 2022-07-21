@@ -13,7 +13,17 @@ import java.util.Map;
 @RequiredArgsConstructor
 public abstract class BaseAuthCheckAspect {
     private static final String AUTHORIZATION = "Authorization";
+
+    /**
+     * Bearer 타입 토큰을 사용합니다.
+     * "Bearer <JWT>" 형태의 Authorization 에서 <JWT> 부분을 파싱하기 위해 "Bearer " 을 TOKEN_PREFIX 로 정의합니다.
+     * 참고: https://datatracker.ietf.org/doc/html/rfc6750
+     */
     private static final String TOKEN_PREFIX = "Bearer ";
+
+    /**
+     * User.socialId를 JWT의 식별자로 사용합니다.
+     */
     private static final String USER_IDENTIFIER_KEY = "socialId";
     private final HttpServletRequest httpServletRequest;
     private final JWTService jwtService;
@@ -35,6 +45,7 @@ public abstract class BaseAuthCheckAspect {
             throw new UnauthorizedException();
         }
         Map<String, Object> jwtMap = jwtService.parse(authorization.split(" ")[1]); // Token 검증
+        //
         if (!jwtMap.containsKey(USER_IDENTIFIER_KEY)) {
             throw new UnauthorizedException();
         }
