@@ -28,7 +28,12 @@ public class User extends BaseTimeEntity {
     private String id;
 
     @NotNull
-    @Column(name = "social_id", columnDefinition = "VARCHAR(50)")
+    @Column(columnDefinition = "DEFAULT 'USER'")
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
+    @NotNull
+    @Column(name = "social_id", columnDefinition = "VARCHAR(50)", unique = true)
     private String socialId;
 
     @NotNull
@@ -51,12 +56,14 @@ public class User extends BaseTimeEntity {
      * User 생성자.
      * @param socialId 로그인 서비스에서 사용중인 식별자. 예) email
      * @param socialType 로그인 서비스 이름
+     * @param role 유저의 역할
      */
     @Builder
-    public User(String socialId, String socialType) {
+    public User(String socialId, String socialType, UserRole role) {
         this.id = UUID.randomUUID().toString().replace("-", "");
         this.socialId = socialId;
         this.socialType = socialType;
+        this.role = role;
     }
 
 }
