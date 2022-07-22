@@ -36,11 +36,13 @@ public class PlaceDto {
     @NoArgsConstructor
     public static class GridRequestDto {
         @NotNull
-        @Pattern(regexp = "^-?\\d{1,2}\\.\\d{0,100},-?\\d{1,3}\\.\\d{0,100}$", message = "좌표값 데이터 포맷을 확인해주세요.")
+        @Pattern(regexp = "^-?\\d{1,2}\\.\\d{0,100},-?\\d{1,3}\\.\\d{0,100}$",
+                message = "좌표값 데이터 포맷을 확인해주세요. (데이터 포맷: '{latitude정보}','{longitude정보}')")
         private String topRight;
 
         @NotNull
-        @Pattern(regexp = "^-?\\d{1,2}\\.\\d{0,100},-?\\d{1,3}\\.\\d{0,100}$", message = "좌표값 데이터 포맷을 확인해주세요.")
+        @Pattern(regexp = "^-?\\d{1,2}\\.\\d{0,100},-?\\d{1,3}\\.\\d{0,100}$",
+                message = "좌표값 데이터 포맷을 확인해주세요. (데이터 포맷: '{latitude정보}','{longitude정보}')")
         private String botLeft;
 
         /**
