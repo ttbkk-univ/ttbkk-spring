@@ -102,7 +102,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({Exception.class})
     public ResponseEntity<Object> handleAllException(final Exception e) {
         log.warn("handleAllException", e);
-        final ErrorCode errorCode = CommonErrorCode.INTERNAL_SERVER_ERROR;
+        final ErrorCode errorCode = CommonErrorCode.UNEXPECTED_ERROR;
         return handleException(errorCode);
     }
 

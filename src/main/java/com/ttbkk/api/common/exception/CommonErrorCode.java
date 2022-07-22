@@ -15,9 +15,9 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum CommonErrorCode implements ErrorCode {
 
-    INVALID_PARAMETER(HttpStatus.BAD_REQUEST, "Invalid parameter"),
-    RESOURCE_NOT_FOUND(HttpStatus.NOT_FOUND, "Resource not exists"),
-    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error"),;
+    INVALID_PARAMETER(HttpStatus.BAD_REQUEST, "서버에서 요청을 이해할수 없습니다. 요청을 확인해주세요."),
+    RESOURCE_NOT_FOUND(HttpStatus.NOT_FOUND, "서버에서 요청받은 리소스를 찾을 수 없습니다."),
+    UNEXPECTED_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "예상치 못한 에러가 발생했습니다.");
 
     private final HttpStatus httpStatus;
     private final String message;
