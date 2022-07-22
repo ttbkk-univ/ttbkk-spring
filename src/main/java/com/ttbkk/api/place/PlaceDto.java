@@ -30,6 +30,7 @@ public class PlaceDto {
     /**
      * GridApi 요청 데이터를 담는 Dto 클래스입니다.
      *
+     * Controller @Validated 를 통해 검증하고 오류 발생 시 GlobalExceptionHandler 클래스의 handleMethodArgumentNotValid 메서드 실행.
      * .@Pattern : 정규식을 통한 data format 검증
      */
     @Getter
