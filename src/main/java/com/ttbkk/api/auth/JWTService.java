@@ -3,7 +3,6 @@ package com.ttbkk.api.auth;
 import com.ttbkk.api.user.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.json.JSONParser;
 import org.apache.tomcat.util.json.ParseException;
@@ -16,7 +15,6 @@ import java.util.Map;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class JWTService {
 
     /**
@@ -29,10 +27,12 @@ public class JWTService {
         String secretKey = "secret"; // 토큰 변경에 필요한 secret key
         int expireSeconds = 60 * 60; // 토큰의 만료 기간
         return Jwts.builder()
-                .setIssuer(user.getSocialId())
+                .setIssuer("https://api.ttbkk.com")
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + Duration.ofMinutes(expireSeconds).toMillis()))
+                .claim("id", user.getId())
                 .claim("socialId", user.getSocialId())
+                .claim("role", user.getRole())
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
