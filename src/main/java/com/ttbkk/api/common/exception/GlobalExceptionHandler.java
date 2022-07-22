@@ -73,18 +73,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * @Validate or @Validated 로 에러 발생한 경우, CommonErrorCode.INVALID_PARAMETER 에 대한 ErrorResponse 를 만들고,
      * ResponseEntity 에 담아 클라이언트에게 리턴한다.
      *
-     * @param e MethodArgumentNotValidException
-     * @param headers HttpHeaders
-     * @param status HttpStatus
-     * @param request WebRequest
+     * @param e the exception
+     * @param headers the headers to be written to the response
+     * @param status the selected response status
+     * @param request the current request
      * @return ResponseEntity (body 에는 ErrorResponse 가 담겨져 있고 status 와 함께 리턴)
      */
     @Override
     public ResponseEntity<Object> handleMethodArgumentNotValid(
-            final MethodArgumentNotValidException e,
-            final HttpHeaders headers,
-            final HttpStatus status,
-            final WebRequest request) {
+            MethodArgumentNotValidException e,
+            HttpHeaders headers,
+            HttpStatus status,
+            WebRequest request) {
         log.warn("handleIllegalArgument", e);
         final ErrorCode errorCode = CommonErrorCode.INVALID_PARAMETER;
         return handleException(e, errorCode);
