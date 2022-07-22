@@ -73,6 +73,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * @Validate or @Validated 로 에러 발생한 경우, CommonErrorCode.INVALID_PARAMETER 에 대한 ErrorResponse 를 만들고,
      * ResponseEntity 에 담아 클라이언트에게 리턴한다.
      *
+     * 이후 방안 확정 후 final 키워드 추가 필요 (parameters)
+     *
      * @param e the exception
      * @param headers the headers to be written to the response
      * @param status the selected response status
