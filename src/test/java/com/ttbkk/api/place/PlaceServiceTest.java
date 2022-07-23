@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -28,8 +30,8 @@ class PlaceServiceTest {
     void settingTest() {
         Place placeA = Place.builder()
                 .name("A")
-                .latitude(-10.222222222222)
-                .longitude(-10.222222222222)
+                .latitude(BigDecimal.valueOf(-10.345678912345))
+                .longitude(BigDecimal.valueOf(-10.345678912345))
                 .isDeleted(false)
                 .description("test description1")
                 .telephone("000-0000-0000")
@@ -37,8 +39,8 @@ class PlaceServiceTest {
                 .build();
         Place placeB = Place.builder()
                 .name("B")
-                .latitude(50.222222222222)
-                .longitude(50.222222222222)
+                .latitude(BigDecimal.valueOf(50.345678912345))
+                .longitude(BigDecimal.valueOf(50.345678912345))
                 .isDeleted(false)
                 .description("test description2")
                 .telephone("000-0000-0000")
@@ -46,8 +48,8 @@ class PlaceServiceTest {
                 .build();
         Place placeC = Place.builder()
                 .name("C")
-                .latitude(89.222222222222)
-                .longitude(220.222222222222)
+                .latitude(BigDecimal.valueOf(89.345678912345))
+                .longitude(BigDecimal.valueOf(150.345678912345))
                 .isDeleted(false)
                 .description("test description3")
                 .telephone("000-0000-0000")

@@ -30,8 +30,8 @@ class PlaceTest {
     public void placeEntityVerify() {
         Place place = Place.builder()
                 .name("test place")
-                .latitude(21.214)
-                .longitude(213.21412)
+                .latitude(BigDecimal.valueOf(21.214))
+                .longitude(BigDecimal.valueOf(213.21412))
                 .isDeleted(false)
                 .description("test description")
                 .telephone("000-0000-0000")
