@@ -5,9 +5,12 @@ spring:
   lifecycle:
     timeout-per-shutdown-phase: 20s
   jpa:
-    show-sql: true
+    show_sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
   datasource:
     hikari:
       driver-class-name: com.mysql.cj.jdbc.Driver
