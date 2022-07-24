@@ -6,7 +6,7 @@ import java.math.BigDecimal;
  * 복잡한 쿼리들은 SpringDataJpa 가 아닌 Querydsl 로 처리.
  * 복잡한 쿼리들을 처리 하는 인터페이스.
  */
-public interface PlaceRepositoryCustom {
+public interface PlaceQueryRepository {
     /**
      * Grid 영역 안의 places 와 places 의 수를 return 하는 메서드.
      *

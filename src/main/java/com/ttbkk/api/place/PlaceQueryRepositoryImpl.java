@@ -10,11 +10,11 @@ import java.util.List;
 import static com.ttbkk.api.place.QPlace.place;
 
 /**
- * PlaceRepositoryCustom 을 구현한 구현체.
+ * PlaceQueryRepository 을 구현한 구현체.
  * Querydsl 을 이용하여 복잡한 로직 처리.
  * JpaRepository 를 상속받은 인터페이스 혹은 implements 받은 인터페이스의 이름에 "impl" 을 더해서 클래스명을 지어준다. - 규칙
  * */
-public class PlaceRepositoryCustomImpl implements PlaceRepositoryCustom {
+public class PlaceQueryRepositoryImpl implements PlaceQueryRepository {
 
     private final JPAQueryFactory queryFactory;
 
@@ -22,7 +22,7 @@ public class PlaceRepositoryCustomImpl implements PlaceRepositoryCustom {
      * Querydsl 을 사용하기 위해 JPAQueryFactory 생성자 주입.
      * @param entityManager EntityManager 객체
      */
-    public PlaceRepositoryCustomImpl(EntityManager entityManager) {
+    public PlaceQueryRepositoryImpl(EntityManager entityManager) {
         this.queryFactory = new JPAQueryFactory(entityManager);
     }
 
