@@ -1,5 +1,6 @@
 package com.ttbkk.api.place;
 
+import com.ttbkk.api.errors.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,8 @@ public class PlaceController {
      * @return PlaceDto.GridResponseDto
      */
     @PostMapping("/grid")
-    public ResponseEntity<PlaceDto.GridResponseDto> callGridApi(@RequestBody @Validated PlaceDto.GridRequestDto request) {
+    public ResponseEntity<PlaceDto.GridResponseDto> callGridApi(@RequestBody @Validated PlaceDto.GridRequestDto request) throws NotFoundException {
+        if (true) throw new NotFoundException("place를 찾을 수 없습니다.");
         PlaceDto.GridResponseDto response = placeService.getPlacesAndCountInGrid(request);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

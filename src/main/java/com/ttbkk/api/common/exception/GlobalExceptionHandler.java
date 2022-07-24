@@ -1,14 +1,11 @@
 package com.ttbkk.api.common.exception;
 
+import com.ttbkk.api.errors.BaseException;
+import com.ttbkk.api.errors.ExceptionResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 
 import org.springframework.validation.BindException;
@@ -22,7 +19,7 @@ import java.util.stream.Collectors;
  */
 @RestControllerAdvice
 @Slf4j
-public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler {
 
     /**
      * RestApiException 이 발생하면 해당 예외에 대한 ErrorResponse 를 만들고, ResponseEntity 에 담아 클라이언트에게 리턴한다.
@@ -81,16 +78,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * @param request the current request
      * @return ResponseEntity (body 에는 ErrorResponse 가 담겨져 있고 status 와 함께 리턴)
      */
-    @Override
-    public ResponseEntity<Object> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException e,
-            HttpHeaders headers,
-            HttpStatus status,
-            WebRequest request) {
-        log.warn("handleIllegalArgument", e);
-        final ErrorCode errorCode = CommonErrorCode.INVALID_PARAMETER;
-        return handleException(e, errorCode);
-    }
+//    @Override
+//    public ResponseEntity<Object> handleMethodArgumentNotValid(
+//            MethodArgumentNotValidException e,
+//            HttpHeaders headers,
+//            HttpStatus status,
+//            WebRequest request) {
+//        log.warn("handleIllegalArgument", e);
+//        final ErrorCode errorCode = CommonErrorCode.INVALID_PARAMETER;
+//        return han1dleException(e, errorCode);
+//    }
 
     /**
      * @ExceptionHandler 에 따로 설정하지 않은 예외가 발생하였을때 CommonErrorCode.INTERNAL_SERVER_ERROR 에 대한 ErrorResponse 를 만들고,
@@ -100,10 +97,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * @return ResponseEntity (body 에는 ErrorResponse 가 담겨져 있고 status 와 함께 리턴).
      */
     @ExceptionHandler({Exception.class})
-    public ResponseEntity<Object> handleAllException(final Exception e) {
+    public ResponseEntity<Object> handleAllException(final BaseException e) {
         log.warn("handleAllException", e);
         final ErrorCode errorCode = CommonErrorCode.UNEXPECTED_ERROR;
-        return handleException(errorCode);
+        ExceptionResponse body = new ExceptionResponse(e);
+        return ResponseEntity.status(e.getStatus().value())
+            .body(body);
     }
 
     /**

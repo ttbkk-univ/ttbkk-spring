@@ -1,7 +1,7 @@
 package com.ttbkk.api.annotations.auth;
 
 import com.ttbkk.api.auth.JWTService;
-import com.ttbkk.api.common.exception.UnauthorizedException;
+//import com.ttbkk.api.common.exception.UnauthorizedException;
 import com.ttbkk.api.user.User;
 import com.ttbkk.api.user.UserRole;
 import com.ttbkk.api.user.UserService;
@@ -40,7 +40,7 @@ public class IsSuperAdminAspect extends BaseAuthCheckAspect {
         User requestUser = this.getUser();
         ArrayList<String> targets = new ArrayList<>(Arrays.asList(UserRole.SUPER_ADMIN.toString()));
         if (!targets.contains(requestUser.getRole().toString())) {
-            throw new UnauthorizedException();
+//            throw new UnauthorizedException();
         }
         return joinPoint.proceed(new Object[]{requestUser});
     }
