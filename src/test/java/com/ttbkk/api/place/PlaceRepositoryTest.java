@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.transaction.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -67,11 +68,24 @@ class PlaceRepositoryTest {
     @Test
     @DisplayName("getPlacesAndCountInGrid 메서드 동작 Test")
     void getPlacesAndCountInGrid() {
-        PlaceDto.GridResponseDto placesAndCountInGrid = placeRepository.getPlacesAndCountInGrid(BigDecimal.valueOf(89.222222222222),
-                BigDecimal.valueOf(100.222222222222), BigDecimal.valueOf(-30.222222222222), BigDecimal.valueOf(-30.222222222222));
+        List<Place> places = placeRepository.getPlacesAndCountInGrid(BigDecimal.valueOf(89.222222222222), BigDecimal.valueOf(100.222222222222), BigDecimal.valueOf(-30.222222222222), BigDecimal.valueOf(-30.222222222222));
+        PlaceDto.GridResponseDto gridResponseDto = new PlaceDto.GridResponseDto(places);
 
-        assertThat(placesAndCountInGrid.getEdges()).extracting("name").containsOnly("A", "B");
-        assertThat(placesAndCountInGrid.getCount()).isEqualTo(placesAndCountInGrid.getEdges().size());
+        assertThat(gridResponseDto.getEdges()).extracting("name").containsOnly("A", "B");
+        assertThat(gridResponseDto.getCount()).isEqualTo(gridResponseDto.getEdges().size());
+    }
+
+    /**
+     * getPlacesAndCountInGrid 해당하는 데이터 없을때 NullPointerException 발생하는지 Test.
+     */
+    @Test
+    @DisplayName("NullPointerException 발생하는지 Test")
+    void getPlacesAndCountInGridNULL() {
+        List<Place> places = placeRepository.getPlacesAndCountInGrid(BigDecimal.valueOf(-90.3213), BigDecimal.valueOf(-130.3213), BigDecimal.valueOf(-80.222222222222), BigDecimal.valueOf(-90.222222222222));
+        PlaceDto.GridResponseDto gridResponseDto = new PlaceDto.GridResponseDto(places);
+
+        assertThat(gridResponseDto.getEdges()).isEmpty();
+        assertThat(gridResponseDto.getCount()).isEqualTo(0);
     }
 }
 
