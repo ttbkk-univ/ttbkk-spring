@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Place 관련 Service 로직 구현 클래스.
@@ -28,7 +29,9 @@ public class PlaceService {
         BigDecimal botLeftX = new BigDecimal(dto.getBotLeft().split(",")[0]);
         BigDecimal botLeftY = new BigDecimal(dto.getBotLeft().split(",")[1]);
 
-        return placeRepository.getPlacesAndCountInGrid(topRightX, topRightY, botLeftX, botLeftY);
+        List<Place> places = placeRepository.getPlacesAndCountInGrid(topRightX, topRightY, botLeftX, botLeftY);
+
+        return new PlaceDto.GridResponseDto(places);
     }
 
     /**

@@ -36,8 +36,8 @@ public class PlaceQueryRepositoryImpl implements PlaceQueryRepository {
      * @return PlaceDto.GridResponseDto
      */
     @Override
-    public PlaceDto.GridResponseDto getPlacesAndCountInGrid(BigDecimal topRightX, BigDecimal topRightY, BigDecimal botLeftX, BigDecimal botLeftY) {
-        List<Place> places = queryFactory
+    public List<Place> getPlacesAndCountInGrid(BigDecimal topRightX, BigDecimal topRightY, BigDecimal botLeftX, BigDecimal botLeftY) {
+        List<Place> results = queryFactory
                 .selectFrom(place)
                 .where(
                         place.latitude.lt(topRightX),
@@ -47,6 +47,6 @@ public class PlaceQueryRepositoryImpl implements PlaceQueryRepository {
                 )
                 .fetch();
 
-        return new PlaceDto.GridResponseDto(places);
+        return results;
     }
 }

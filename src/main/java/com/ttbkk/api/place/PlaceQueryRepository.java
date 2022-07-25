@@ -1,6 +1,7 @@
 package com.ttbkk.api.place;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 복잡한 쿼리들은 SpringDataJpa 가 아닌 Querydsl 로 처리.
@@ -16,6 +17,6 @@ public interface PlaceQueryRepository {
      * @param botLeftY  bottomLeft 위치의 longitude
      * @return PlaceDto.GridResponseDto
      */
-    PlaceDto.GridResponseDto getPlacesAndCountInGrid(BigDecimal topRightX, BigDecimal topRightY, BigDecimal botLeftX, BigDecimal botLeftY);
+    List<Place> getPlacesAndCountInGrid(BigDecimal topRightX, BigDecimal topRightY, BigDecimal botLeftX, BigDecimal botLeftY);
 
 }
