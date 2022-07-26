@@ -3,6 +3,7 @@ package com.ttbkk.api.user;
 import com.ttbkk.api.common.entity.BaseTimeEntity;
 import com.ttbkk.api.brand.Brand;
 import com.ttbkk.api.place.Place;
+import com.ttbkk.api.review.Review;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -51,6 +52,9 @@ public class User extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "updatedBy", cascade = CascadeType.ALL)
     private final List<Place> updatePlaces = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private final List<Review> reviews = new ArrayList<>();
 
     /**
      * User 생성자.
