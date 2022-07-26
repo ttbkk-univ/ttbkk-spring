@@ -23,34 +23,7 @@
 </div>
 <script>
     function callback(data) {
-        const baseUrl = "http://localhost:8080";
-        console.log("before fetch")
-        axios.post(
-            `${baseUrl}/auth/signin/google`,
-            {authProviderToken: data.credential},
-        )
-            .then((res) => {
-                console.log(res);
-                const {accessToken} = res.data;
-                return accessToken;
-            })
-            .then((accessToken) => {
-                return axios.get(
-                    `${baseUrl}/auth/myinfo`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${accessToken}`,
-                        },
-                    }
-                );
-            })
-            .then((res) => {
-                console.log(res);
-                const {socialId} = res.data;
-
-                const emailElement = document.getElementById("socialId");
-                emailElement.setAttribute("value", socialId);
-            })
+        console.log(data);
     }
 </script>
 </body>
