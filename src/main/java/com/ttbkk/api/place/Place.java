@@ -66,7 +66,7 @@ public class Place extends BaseTimeEntity {
     @JoinColumn(name = "brand_id", columnDefinition = "CHAR(32)")
     private Brand brand;
 
-    @OneToMany(mappedBy = "place", columnDefinition = "CHAR(32)")
+    @OneToMany(mappedBy = "place")
     private final List<Review> reviews = new ArrayList<>();
 
     /**
