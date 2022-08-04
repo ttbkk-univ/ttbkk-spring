@@ -42,8 +42,13 @@ public class Review extends BaseTimeEntity {
     @JoinColumn(name = "place_id", columnDefinition = "CHAR(32)")
     private Place place;
 
+    /**
+     * Review 생성자
+     * @param star 별점
+     * @param comment 리뷰 내용
+     */
     @Builder
-    public Review(String id, int star, String comment) {
+    public Review(int star, String comment) {
         this.id = UUID.randomUUID().toString().replace("-", "");
         this.star = star;
         this.comment = comment;
