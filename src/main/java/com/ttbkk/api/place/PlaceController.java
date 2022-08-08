@@ -29,9 +29,7 @@ public class PlaceController {
      */
     @GetMapping("/grid")
     public ResponseEntity<PlaceDto.GridResponseDto> callGridApi(@RequestParam @Pattern(regexp = "^-?\\d{1,2}\\.\\d{0,100},-?\\d{1,3}\\.\\d{0,100}$", message = "좌표값 데이터 포맷을 확인해주세요. (데이터 포맷: '{latitude정보}','{longitude정보}')") String topRight,
-    @RequestParam @Pattern(regexp = "^-?\\d{1,2}\\.\\d{0,100},-?\\d{1,3}\\.\\d{0,100}$", message = "좌표값 데이터 포맷을 확인해주세요. (데이터 포맷: '{latitude정보}','{longitude정보}')")
-            String bottomLeft) throws Exception {
-
+                                                                @RequestParam @Pattern(regexp = "^-?\\d{1,2}\\.\\d{0,100},-?\\d{1,3}\\.\\d{0,100}$", message = "좌표값 데이터 포맷을 확인해주세요. (데이터 포맷: '{latitude정보}','{longitude정보}')") String bottomLeft) {
         PlaceDto.GridRequestDto request = new PlaceDto.GridRequestDto(topRight, bottomLeft);
         PlaceDto.GridResponseDto response = placeService.getPlacesAndCountInGrid(request);
         return ResponseEntity.status(HttpStatus.OK).body(response);

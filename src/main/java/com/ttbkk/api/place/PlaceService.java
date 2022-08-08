@@ -1,5 +1,7 @@
 package com.ttbkk.api.place;
 
+import com.ttbkk.api.common.exception.CustomErrorType;
+import com.ttbkk.api.common.exception.RestApiException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,7 @@ public class PlaceService {
      * @param dto client 의 requestData
      * @return PlaceDto.GridResponseDto
      */
-    public PlaceDto.GridResponseDto getPlacesAndCountInGrid(PlaceDto.GridRequestDto dto) throws Exception {
+    public PlaceDto.GridResponseDto getPlacesAndCountInGrid(PlaceDto.GridRequestDto dto) {
         BigDecimal topRightX = new BigDecimal(dto.getTopRight().split(",")[0]);
         BigDecimal topRightY = new BigDecimal(dto.getTopRight().split(",")[1]);
         BigDecimal bottomLeftX = new BigDecimal(dto.getBottomLeft().split(",")[0]);
@@ -64,22 +66,22 @@ public class PlaceService {
     /**
      * grid 영역의 크기를 검사하는 메서드.
      * grid 영역의 size 는 0.2 < size < 1
-     *
+     * <p>
      * compareTo() -> 자기 자신이 비교 대상보다 작으면 음수, 같으면 0, 크면 양수
      *
-     * @param topRightX topRight 지점의 latitude
-     * @param topRightY topRight 지점의 longitude
+     * @param topRightX   topRight 지점의 latitude
+     * @param topRightY   topRight 지점의 longitude
      * @param bottomLeftX bottomLeft 지점의 latitude
      * @param bottomLeftY bottomLeft 지점의 longitude
      */
-    private void verifyGridSize(BigDecimal topRightX, BigDecimal topRightY, BigDecimal bottomLeftX, BigDecimal bottomLeftY) throws Exception {
+    private void verifyGridSize(BigDecimal topRightX, BigDecimal topRightY, BigDecimal bottomLeftX, BigDecimal bottomLeftY) {
+
         if (topRightY.subtract(bottomLeftY).abs().compareTo(BigDecimal.valueOf(0.2)) == -1
                 || topRightY.subtract(bottomLeftY).abs().compareTo(BigDecimal.valueOf(1)) == 1
                 || topRightX.subtract(bottomLeftX).abs().compareTo(BigDecimal.valueOf(0.2)) == -1
                 || topRightX.subtract(bottomLeftX).abs().compareTo(BigDecimal.valueOf(1)) == 1) {
 
-            //추후 Custom 예외처리로 바꿀 예정. -> 새로운 pr에서 처리.
-            throw new Exception("verifyGridSize exception");
+            throw new RestApiException(CustomErrorType.INVALID_GRID_SIZE);
         }
     }
 }
