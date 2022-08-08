@@ -8,10 +8,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
 
 @Slf4j
+@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/place")
@@ -29,11 +28,10 @@ public class PlaceController {
      * @return ResponseEntity<PlaceDto.GridResponseDto>
      */
     @GetMapping("/grid")
-    public ResponseEntity<PlaceDto.GridResponseDto> callGridApi(@Validated @Size(max = 3) @RequestParam String topRight, @Validated
-    @Pattern(regexp = "^-?\\d{1,2}\\.\\d{0,100},-?\\d{1,3}\\.\\d{0,100}$", message = "좌표값 데이터 포맷을 확인해주세요. (데이터 포맷: '{latitude정보}','{longitude정보}')")
-    @RequestParam String bottomLeft) {
+    public ResponseEntity<PlaceDto.GridResponseDto> callGridApi(@RequestParam @Pattern(regexp = "^-?\\d{1,2}\\.\\d{0,100},-?\\d{1,3}\\.\\d{0,100}$", message = "좌표값 데이터 포맷을 확인해주세요. (데이터 포맷: '{latitude정보}','{longitude정보}')") String topRight,
+    @RequestParam @Pattern(regexp = "^-?\\d{1,2}\\.\\d{0,100},-?\\d{1,3}\\.\\d{0,100}$", message = "좌표값 데이터 포맷을 확인해주세요. (데이터 포맷: '{latitude정보}','{longitude정보}')")
+            String bottomLeft) {
 
-        System.out.println(topRight + ", " + bottomLeft);
         PlaceDto.GridRequestDto request = new PlaceDto.GridRequestDto(topRight, bottomLeft);
         PlaceDto.GridResponseDto response = placeService.getPlacesAndCountInGrid(request);
         return ResponseEntity.status(HttpStatus.OK).body(response);
