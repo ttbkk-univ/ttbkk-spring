@@ -66,11 +66,14 @@ class PlaceServiceTest {
      */
     @Test
     @DisplayName("getPlacesAndCountInGrid 메서드 검증 Test")
-    void getPlacesAndCountInGrid() {
+    void getPlacesAndCountInGrid() throws Exception {
         PlaceDto.GridRequestDto requestDto = new PlaceDto.GridRequestDto("89.2222222222223217839,100.222222222222312312", "-30.222222222222432422,-30.222222222222432422");
         PlaceDto.GridResponseDto placesAndCountInGrid = placeService.getPlacesAndCountInGrid(requestDto);
 
         assertThat(placesAndCountInGrid.getEdges()).extracting("name").containsOnly("A", "B");
         assertThat(placesAndCountInGrid.getCount()).isEqualTo(placesAndCountInGrid.getEdges().size());
     }
+
+//    @Test
+//    @DisplayName("verifyGridSize 메서드 검증 Test")
 }
