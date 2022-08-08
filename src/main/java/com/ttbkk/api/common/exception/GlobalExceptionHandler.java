@@ -38,6 +38,23 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
+     * 예외 최상위 클래스 Exception.class 가 발생하였을때 처리하는 메서드.
+     *
+     * 예상치 못한 에러가 발생하였을때, 처리된다.
+     * @param e Exception
+     * @return ErrorResponse
+     */
+    @ExceptionHandler(Exception.class)
+    public ErrorResponse handleException(Exception e) {
+        log.error("Exception", e);
+        return ErrorResponse.builder()
+                .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+                .errorCode("UNEXPECTED_ERROR")
+                .message("예상치 못한 에러가 발생하였습니다.")
+                .build();
+    }
+
+    /**
      * Validated 또는 Valid 의 유효성검사를 통해 발생되는 예외 처리 메서드.
      * @param e ConstraintViolationException
      * @return ErrorResponse
