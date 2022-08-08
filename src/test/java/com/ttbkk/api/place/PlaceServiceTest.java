@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * 도메인 Place 의 Service Test.
@@ -39,8 +40,8 @@ class PlaceServiceTest {
                 .build();
         Place placeB = Place.builder()
                 .name("B")
-                .latitude(BigDecimal.valueOf(50.345678912345))
-                .longitude(BigDecimal.valueOf(50.345678912345))
+                .latitude(BigDecimal.valueOf(89.4222322222))
+                .longitude(BigDecimal.valueOf(100.42235678912345))
                 .isDeleted(false)
                 .description("test description2")
                 .telephone("000-0000-0000")
@@ -67,13 +68,29 @@ class PlaceServiceTest {
     @Test
     @DisplayName("getPlacesAndCountInGrid 메서드 검증 Test")
     void getPlacesAndCountInGrid() throws Exception {
-        PlaceDto.GridRequestDto requestDto = new PlaceDto.GridRequestDto("89.2222222222223217839,100.222222222222312312", "-30.222222222222432422,-30.222222222222432422");
+        PlaceDto.GridRequestDto requestDto = new PlaceDto.GridRequestDto("89.7222222222223217839,100.722222222222312312", "89.2222222222223217839,100.222222222222312312");
         PlaceDto.GridResponseDto placesAndCountInGrid = placeService.getPlacesAndCountInGrid(requestDto);
 
-        assertThat(placesAndCountInGrid.getEdges()).extracting("name").containsOnly("A", "B");
+        assertThat(placesAndCountInGrid.getEdges()).extracting("name").containsOnly("B");
         assertThat(placesAndCountInGrid.getCount()).isEqualTo(placesAndCountInGrid.getEdges().size());
     }
 
-//    @Test
-//    @DisplayName("verifyGridSize 메서드 검증 Test")
+    /**
+     * grid size 가 1보다 크기 때문에 exception 발생 예상 테스트.
+     *
+     * @throws Exception
+     */
+    @Test
+    @DisplayName("verifyGridSize 메서드 검증 Test")
+    void verifyGridSize() throws Exception {
+
+        PlaceDto.GridRequestDto requestDto = new PlaceDto.GridRequestDto("90.7222222222223217839,102.722222222222312312", "89.2222222222223217839,100.222222222222312312");
+        assertThatExceptionOfType(Exception.class)
+                .isThrownBy(() -> {
+                    placeService.getPlacesAndCountInGrid(requestDto);
+                })
+                .withMessageContaining("verifyGridSize")
+                .withNoCause();
+
+    }
 }

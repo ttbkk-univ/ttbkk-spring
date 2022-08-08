@@ -63,6 +63,7 @@ public class PlaceService {
 
     /**
      * grid 영역의 크기를 검사하는 메서드.
+     * grid 영역의 size 는 0.2 < size < 1
      *
      * compareTo() -> 자기 자신이 비교 대상보다 작으면 음수, 같으면 0, 크면 양수
      *
