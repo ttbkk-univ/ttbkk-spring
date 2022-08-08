@@ -31,19 +31,19 @@ public class PlaceQueryRepositoryImpl implements PlaceQueryRepository {
      *
      * @param topRightX topRight 위치의 latitude
      * @param topRightY topRight 위치의 longitude
-     * @param botLeftX bottomLeft 위치의 latitude
-     * @param botLeftY bottomLeft 위치의 longitude
+     * @param bottomLeftX bottomLeft 위치의 latitude
+     * @param bottomLeftY bottomLeft 위치의 longitude
      * @return PlaceDto.GridResponseDto
      */
     @Override
-    public List<Place> getPlacesAndCountInGrid(BigDecimal topRightX, BigDecimal topRightY, BigDecimal botLeftX, BigDecimal botLeftY) {
+    public List<Place> getPlacesAndCountInGrid(BigDecimal topRightX, BigDecimal topRightY, BigDecimal bottomLeftX, BigDecimal bottomLeftY) {
         List<Place> results = queryFactory
                 .selectFrom(place)
                 .where(
                         place.latitude.lt(topRightX),
-                        place.latitude.gt(botLeftX),
+                        place.latitude.gt(bottomLeftX),
                         place.longitude.lt(topRightY),
-                        place.longitude.gt(botLeftY)
+                        place.longitude.gt(bottomLeftY)
                 )
                 .fetch();
 

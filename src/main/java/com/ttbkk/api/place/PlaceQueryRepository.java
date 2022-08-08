@@ -13,10 +13,10 @@ public interface PlaceQueryRepository {
      *
      * @param topRightX topRight 위치의 latitude
      * @param topRightY topRight 위치의 longitude
-     * @param botLeftX  bottomLeft 위치의 latitude
-     * @param botLeftY  bottomLeft 위치의 longitude
+     * @param bottomLeftX  bottomLeft 위치의 latitude
+     * @param bottomLeftY  bottomLeft 위치의 longitude
      * @return PlaceDto.GridResponseDto
      */
-    List<Place> getPlacesAndCountInGrid(BigDecimal topRightX, BigDecimal topRightY, BigDecimal botLeftX, BigDecimal botLeftY);
+    List<Place> getPlacesAndCountInGrid(BigDecimal topRightX, BigDecimal topRightY, BigDecimal bottomLeftX, BigDecimal bottomLeftY);
 
 }

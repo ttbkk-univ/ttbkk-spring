@@ -26,10 +26,10 @@ public class PlaceService {
     public PlaceDto.GridResponseDto getPlacesAndCountInGrid(PlaceDto.GridRequestDto dto) {
         BigDecimal topRightX = new BigDecimal(dto.getTopRight().split(",")[0]);
         BigDecimal topRightY = new BigDecimal(dto.getTopRight().split(",")[1]);
-        BigDecimal botLeftX = new BigDecimal(dto.getBotLeft().split(",")[0]);
-        BigDecimal botLeftY = new BigDecimal(dto.getBotLeft().split(",")[1]);
+        BigDecimal bottomLeftX = new BigDecimal(dto.getBottomLeft().split(",")[0]);
+        BigDecimal bottomLeftY = new BigDecimal(dto.getBottomLeft().split(",")[1]);
 
-        List<Place> places = placeRepository.getPlacesAndCountInGrid(topRightX, topRightY, botLeftX, botLeftY);
+        List<Place> places = placeRepository.getPlacesAndCountInGrid(topRightX, topRightY, bottomLeftX, bottomLeftY);
 
         return new PlaceDto.GridResponseDto(places);
     }

@@ -1,4 +1,4 @@
-package com.ttbkk.api.common.exception;
+package com.ttbkk.api.common.restapiexception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.ttbkk.api.common.exception;
+package com.ttbkk.api.common.restapiexception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

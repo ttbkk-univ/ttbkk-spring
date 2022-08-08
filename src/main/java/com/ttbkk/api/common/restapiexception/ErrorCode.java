@@ -1,4 +1,4 @@
-package com.ttbkk.api.common.exception;
+package com.ttbkk.api.common.restapiexception;
 
 import org.springframework.http.HttpStatus;
 
