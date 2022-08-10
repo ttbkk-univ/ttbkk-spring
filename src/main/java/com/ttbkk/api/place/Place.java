@@ -41,7 +41,7 @@ public class Place extends BaseTimeEntity {
 
     @NotNull
     @Column(name = "is_deleted", columnDefinition = "TINYINT(1)")
-    private boolean isDeleted;
+    private boolean isDeleted = false;
 
     @Column(columnDefinition = "LONGTEXT")
     private String description;
@@ -51,6 +51,14 @@ public class Place extends BaseTimeEntity {
 
     @Column(columnDefinition = "VARCHAR(100)")
     private String address;
+
+    /**
+     * isDeleted field setter method.
+     * @param isDeleted
+     */
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
 
     //user, brand 연관관계
     @ManyToOne(fetch = FetchType.LAZY)
@@ -70,18 +78,16 @@ public class Place extends BaseTimeEntity {
      * @param name 장소 이름
      * @param latitude 위도
      * @param longitude 경도
-     * @param isDeleted 삭제처리 여부
      * @param description 설명
      * @param telephone 전화번호
      * @param address 주소
      */
     @Builder
-    public Place(String name, BigDecimal latitude, BigDecimal longitude, boolean isDeleted, String description, String telephone, String address) {
+    public Place(String name, BigDecimal latitude, BigDecimal longitude, String description, String telephone, String address) {
         this.id = UUID.randomUUID().toString().replace("-", "");
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.isDeleted = isDeleted;
         this.description = description;
         this.telephone = telephone;
         this.address = address;
