@@ -28,7 +28,7 @@ public class PlaceDto {
     }
 
     /**
-     * GridApi 요청 받을시 return 하는 Dto 클래스입니다.
+     * Place Create Api (장소생성) 요청시 request data 를 담는 Dto.
      */
     @Getter
     @NoArgsConstructor
@@ -53,4 +53,5 @@ public class PlaceDto {
 
         private String address;
     }
+
 }

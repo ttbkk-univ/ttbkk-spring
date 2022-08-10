@@ -39,59 +39,86 @@ public class PlaceService {
     }
 
     /**
-     * 외부에서 사용하지 않는 메서드 이므로 private method 로 구현.
      * DB 스펙과 충돌하지 않게 최대 길이인 15를 넘지 않는지 확인하여 넘는다면 크기를 조절하는 메서드.
+     * 외부에서 사용하지 않는 메서드 이므로 private method 로 구현.
      *
      * locInfo.length() - 1 이유 : "." 은 decimal 크기에 포함되지 않는다.
      *
      * @param locationInfo 한 지점의 latitude 또는 longitude.
      * @return String
      */
-    private String handleLocationLength(String locationInfo) {
-        final int maxTotalLength = 15;
-
-        int curSize = locationInfo.length();
+    private String verifyLocationSize(String locationInfo) {
+        final int maxTotalSize = 15;
 
         if (locationInfo.contains(".")) {
-            curSize -= 1;
+            return handleSizeIfContainDot(locationInfo, maxTotalSize);
         }
-
-        if (curSize > maxTotalLength) {
-            return locationInfo.substring(0, maxTotalLength + 1);
-        }
-        return locationInfo;
+        return handleSizeIfNoneDot(locationInfo, maxTotalSize);
     }
 
     /**
-     * 외부에서 사용하지 않는 메서드 이므로 private method 로 구현.
      * DB 스펙과 충돌하지 않게 latitude 의 최대 소수점 길이인 13을 넘진 않는지 확인하여 넘는다면 크기를 조절하고 BigDecimal 타입으로 반환.
-     *
+     * 외부에서 사용하지 않는 메서드 이므로 private method 로 구현.
      * @param latitude
      * @return BigDecimal type
      */
     private BigDecimal verifyDecimalsLatitude(String latitude) {
         final int maxDecimalLatitude = 13;
-        int length = latitude.split("\\.")[1].length();
-        if (length > maxDecimalLatitude) {
-            return new BigDecimal(latitude.substring(0, maxDecimalLatitude + 1));
+        if (latitude.contains(".")) {
+            String decimalPart = latitude.split("\\.")[1];
+            return new BigDecimal(handleSizeIfNoneDot(decimalPart, maxDecimalLatitude));
         }
         return new BigDecimal(latitude);
     }
 
     /**
-     * 외부에서 사용하지 않는 메서드 이므로 private method 로 구현.
      * DB 스펙과 충돌하지 않게 latitude 의 최대 소수점 길이인 12을 넘진 않는지 확인하여 넘는다면 크기를 조절하고 BigDecimal 타입으로 반환.
+     * 외부에서 사용하지 않는 메서드 이므로 private method 로 구현.
      *
      * @param longitude
      * @return BigDecimal type
      */
     private BigDecimal verifyDecimalsLongitude(String longitude) {
         final int maxDecimalLongitude = 12;
-        int length = longitude.split("\\.")[1].length();
-        if (length > maxDecimalLongitude) {
-            return new BigDecimal(longitude.substring(0, maxDecimalLongitude + 1));
+        if (longitude.contains(".")) {
+            String decimalPart = longitude.split("\\.")[1];
+            return new BigDecimal(handleSizeIfNoneDot(decimalPart, maxDecimalLongitude));
         }
         return new BigDecimal(longitude);
+    }
+
+    /**
+     * "." 을 포함하는 (소수점이 있는) 값을 maxSize 에 따라 handling 하는 메서드.
+     *
+     * decimal 은 "." 은 크기에서 무시되기 때문에 "." 을 포함하는 값과 "." 을 포함하지 않는 값을 처리하는 방식을 분리 하였다.
+     *
+     * @param locationInfo (좌표 관련)값
+     * @param maxSize 해당 값이 가질수 있는 최대 크기
+     * @return String
+     */
+    private String handleSizeIfContainDot(String locationInfo, int maxSize) {
+        int currentSize = locationInfo.length() - 1;
+        if (currentSize > maxSize) {
+            return locationInfo.substring(0, maxSize + 2);
+        }
+        return locationInfo;
+    }
+
+    /**
+     * "." 을 포함하지않는 (소수점이 없는) 값을 maxSize 에 따라 handling 하는 메서드.
+     *
+     * decimal 은 "." 은 크기에서 무시되기 때문에 "." 을 포함하는 값과 "." 을 포함하지 않는 값을 처리하는 방식을 분리 하였다.
+     *
+     * @param locationInfo (좌표 관련)값
+     * @param maxSize 해당 값이 가질수 있는 최대 크기
+     * @return String
+     */
+    private String handleSizeIfNoneDot(String locationInfo, int maxSize) {
+        int currentSize = locationInfo.length();
+        if (currentSize > maxSize) {
+            return locationInfo.substring(0, maxSize + 1);
+        }
+        return locationInfo;
     }
 
     /**
