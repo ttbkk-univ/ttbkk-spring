@@ -1,6 +1,8 @@
-package com.ttbkk.api.place;
+package com.ttbkk.api.place.place_hashtags;
 
 import com.ttbkk.api.hashtag.Hashtag;
+import com.ttbkk.api.place.Place;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,4 +33,14 @@ public class PlaceHashtags {
     @JoinColumn(name = "hashtag_id", columnDefinition = "VARCHAR(150)")
     private Hashtag hashtag;
 
+    /**
+     * PlaceHashtags Entity 생성자.
+     * @param place
+     * @param hashtag
+     */
+    @Builder
+    public PlaceHashtags(Place place, Hashtag hashtag) {
+        this.place = place;
+        this.hashtag = hashtag;
+    }
 }

@@ -42,10 +42,10 @@ public class PlaceDto {
         private List<String> hashtags;
 
         @NotNull
-        private BigDecimal latitude;
+        private String latitude;
 
         @NotNull
-        private BigDecimal longitude;
+        private String longitude;
 
         private String description;
 
@@ -54,4 +54,32 @@ public class PlaceDto {
         private String address;
     }
 
+    @Getter
+    public static class PlaceResponseDto {
+        private String message;
+
+        /**
+         * PlaceResponseDto 생성자.
+         * @param message
+         */
+        public PlaceResponseDto(String message) {
+            this.message = message;
+        }
+    }
+
+    @Getter
+    public static class VerifiedCoordinate {
+        private BigDecimal latitude;
+        private BigDecimal longitude;
+
+        /**
+         * VerifiedCoordinate 생성자.
+         * @param latitude
+         * @param longitude
+         */
+        public VerifiedCoordinate(BigDecimal latitude, BigDecimal longitude) {
+            this.latitude = latitude;
+            this.longitude = longitude;
+        }
+    }
 }
