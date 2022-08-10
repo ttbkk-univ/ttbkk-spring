@@ -68,8 +68,9 @@ class PlaceServiceTest {
     @Test
     @DisplayName("getPlacesAndCountInGrid 메서드 검증 Test")
     void getPlacesAndCountInGrid() throws Exception {
-        PlaceDto.GridRequestDto requestDto = new PlaceDto.GridRequestDto("89.7222222222223217839,100.722222222222312312", "89.2222222222223217839,100.222222222222312312");
-        PlaceDto.GridResponseDto placesAndCountInGrid = placeService.getPlacesAndCountInGrid(requestDto);
+        String topRight = "89.7222222222223217839,100.722222222222312312";
+        String bottomLeft = "89.2222222222223217839,100.222222222222312312";
+        PlaceDto.GridResponseDto placesAndCountInGrid = placeService.getPlacesAndCountInGrid(topRight, bottomLeft);
 
         assertThat(placesAndCountInGrid.getEdges()).extracting("name").containsOnly("B");
         assertThat(placesAndCountInGrid.getCount()).isEqualTo(placesAndCountInGrid.getEdges().size());
@@ -84,10 +85,11 @@ class PlaceServiceTest {
     @DisplayName("verifyGridSize 메서드 검증 Test")
     void verifyGridSize() throws Exception {
 
-        PlaceDto.GridRequestDto requestDto = new PlaceDto.GridRequestDto("90.7222222222223217839,102.722222222222312312", "89.2222222222223217839,100.222222222222312312");
+        String topRight = "90.7222222222223217839,102.722222222222312312";
+        String bottomLeft = "89.2222222222223217839,100.222222222222312312";
         assertThatExceptionOfType(Exception.class)
                 .isThrownBy(() -> {
-                    placeService.getPlacesAndCountInGrid(requestDto);
+                    placeService.getPlacesAndCountInGrid(topRight, bottomLeft);
                 })
                 .withMessageContaining("verifyGridSize")
                 .withNoCause();
