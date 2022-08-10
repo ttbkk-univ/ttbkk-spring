@@ -24,4 +24,12 @@ public class PlaceDto {
             this.count = edges.size();
         }
     }
+
+    /**
+     * GridApi 요청 받을시 return 하는 Dto 클래스입니다.
+     */
+    @Getter
+    @NoArgsConstructor
+    public static class PlaceCreateRequestDto {
+    }
 }

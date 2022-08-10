@@ -52,14 +52,6 @@ public class Place extends BaseTimeEntity {
     @Column(columnDefinition = "VARCHAR(100)")
     private String address;
 
-    /**
-     * isDeleted field setter method.
-     * @param isDeleted
-     */
-    public void setDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
     //user, brand 연관관계
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by_id", columnDefinition = "CHAR(32)")
@@ -72,6 +64,38 @@ public class Place extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id", columnDefinition = "CHAR(32)")
     private Brand brand;
+
+    /**
+     * isDeleted field setter method.
+     * @param isDeleted
+     */
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    /**
+     * createdBy field setter method.
+     * @param createdBy
+     */
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    /**
+     * updatedBy field setter method.
+     * @param updatedBy
+     */
+    public void setUpdatedBy(User updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    /**
+     * brand field setter method.
+     * @param brand
+     */
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
 
     /**
      * Place 생성자.
