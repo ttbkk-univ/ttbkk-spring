@@ -32,7 +32,6 @@ class PlaceTest {
                 .name("test place")
                 .latitude(BigDecimal.valueOf(21.214))
                 .longitude(BigDecimal.valueOf(213.21412))
-                .isDeleted(false)
                 .description("test description")
                 .telephone("000-0000-0000")
                 .address("test address")
