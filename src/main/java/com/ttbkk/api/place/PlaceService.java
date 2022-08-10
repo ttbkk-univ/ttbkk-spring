@@ -40,27 +40,58 @@ public class PlaceService {
 
     /**
      * 외부에서 사용하지 않는 메서드 이므로 private method 로 구현.
-     * latitude 또는 longitude 를 DB에 저장하기 위해 DB 스펙으로 handling 하는 메서드.
+     * DB 스펙과 충돌하지 않게 최대 길이인 15를 넘지 않는지 확인하여 넘는다면 크기를 조절하는 메서드.
      *
      * locInfo.length() - 1 이유 : "." 은 decimal 크기에 포함되지 않는다.
-     * if (locInfo.contains("-")) 이 구문에서 curSize -1 을 해준 이유도 동일하다.
      *
-     * @param locInfo 한 지점의 latitude 또는 longitude.
-     * @return BigDecimal
+     * @param locationInfo 한 지점의 latitude 또는 longitude.
+     * @return String
      */
-    private BigDecimal makeLocInfoToDecimal(String locInfo) {
-        int decimalLength = 20;
-        int curSize = locInfo.length() - 1;
+    private String handleLocationLength(String locationInfo) {
+        final int maxTotalLength = 15;
 
-        if (locInfo.contains("-")) {
+        int curSize = locationInfo.length();
+
+        if (locationInfo.contains(".")) {
             curSize -= 1;
         }
-        if (curSize > decimalLength) {
-            String verifiedString = locInfo.substring(0, decimalLength + 1);
-            return new BigDecimal(verifiedString);
-        } else {
-            return new BigDecimal(locInfo);
+
+        if (curSize > maxTotalLength) {
+            return locationInfo.substring(0, maxTotalLength + 1);
         }
+        return locationInfo;
+    }
+
+    /**
+     * 외부에서 사용하지 않는 메서드 이므로 private method 로 구현.
+     * DB 스펙과 충돌하지 않게 latitude 의 최대 소수점 길이인 13을 넘진 않는지 확인하여 넘는다면 크기를 조절하고 BigDecimal 타입으로 반환.
+     *
+     * @param latitude
+     * @return BigDecimal type
+     */
+    private BigDecimal verifyDecimalsLatitude(String latitude) {
+        final int maxDecimalLatitude = 13;
+        int length = latitude.split("\\.")[1].length();
+        if (length > maxDecimalLatitude) {
+            return new BigDecimal(latitude.substring(0, maxDecimalLatitude + 1));
+        }
+        return new BigDecimal(latitude);
+    }
+
+    /**
+     * 외부에서 사용하지 않는 메서드 이므로 private method 로 구현.
+     * DB 스펙과 충돌하지 않게 latitude 의 최대 소수점 길이인 12을 넘진 않는지 확인하여 넘는다면 크기를 조절하고 BigDecimal 타입으로 반환.
+     *
+     * @param longitude
+     * @return BigDecimal type
+     */
+    private BigDecimal verifyDecimalsLongitude(String longitude) {
+        final int maxDecimalLongitude = 12;
+        int length = longitude.split("\\.")[1].length();
+        if (length > maxDecimalLongitude) {
+            return new BigDecimal(longitude.substring(0, maxDecimalLongitude + 1));
+        }
+        return new BigDecimal(longitude);
     }
 
     /**

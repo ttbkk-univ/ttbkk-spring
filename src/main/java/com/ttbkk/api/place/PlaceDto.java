@@ -2,6 +2,8 @@ package com.ttbkk.api.place;
 
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class PlaceDto {
@@ -31,5 +33,24 @@ public class PlaceDto {
     @Getter
     @NoArgsConstructor
     public static class PlaceCreateRequestDto {
+        @NotNull
+        private String name;
+
+        @NotNull
+        private String brand;
+
+        private List<String> hashtags;
+
+        @NotNull
+        private BigDecimal latitude;
+
+        @NotNull
+        private BigDecimal longitude;
+
+        private String description;
+
+        private String telephone;
+
+        private String address;
     }
 }
