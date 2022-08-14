@@ -1,6 +1,6 @@
 CREATE TABLE review (
     id char(32) NOT NULL,
-    star tinyint NOT NULL,
+    score tinyint NOT NULL,
     comment text,
     created_at datetime(6) DEFAULT NULL,
     updated_at datetime(6) DEFAULT NULL,
