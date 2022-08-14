@@ -1,5 +1,5 @@
 CREATE TABLE review (
-    id char(32) NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
     score tinyint NOT NULL,
     comment text,
     created_at datetime(6) DEFAULT NULL,
