@@ -3,10 +3,11 @@ package com.ttbkk.api.review;
 import com.ttbkk.api.common.entity.BaseTimeEntity;
 import com.ttbkk.api.place.Place;
 import com.ttbkk.api.user.User;
-import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,8 +24,8 @@ import lombok.NoArgsConstructor;
 public class Review extends BaseTimeEntity {
 
     @Id
-    @Column(columnDefinition = "CHAR(32)")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotNull
     @Column(columnDefinition = "TINYINT")
@@ -49,7 +50,6 @@ public class Review extends BaseTimeEntity {
      */
     @Builder
     public Review(int score, String comment) {
-        this.id = UUID.randomUUID().toString().replace("-", "");
         this.score = score;
         this.comment = comment;
     }
