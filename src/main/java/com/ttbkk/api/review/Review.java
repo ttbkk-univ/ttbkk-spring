@@ -27,8 +27,8 @@ public class Review extends BaseTimeEntity {
     private String id;
 
     @NotNull
-    @Column(columnDefinition = "TINYINT(1)")
-    private int star;
+    @Column(columnDefinition = "TINYINT")
+    private int score;
 
     @Column(columnDefinition = "TEXT")
     private String comment;
@@ -44,13 +44,13 @@ public class Review extends BaseTimeEntity {
 
     /**
      * Review 생성자
-     * @param star 별점
+     * @param score 별점
      * @param comment 리뷰 내용
      */
     @Builder
-    public Review(int star, String comment) {
+    public Review(int score, String comment) {
         this.id = UUID.randomUUID().toString().replace("-", "");
-        this.star = star;
+        this.score = score;
         this.comment = comment;
     }
 }
