@@ -4,6 +4,7 @@ import lombok.Getter;
 
 /**
  * CustomerErrorType 으로 생성하여, 예외 처리 할 수 있다.
+ * 상황에 대한 에러 메시지는 다양할 수 있으므로, parameter 로 받아 CustomerErrorType 의 재사용 할 수 있다.
  *
  * 발생한 예외를 처리해줄 예외 클래스(Exception Class)
  * RuntimeException 상속 받는 이유 : 예외 발생 하면 자동으로 롤백.
