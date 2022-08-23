@@ -23,7 +23,7 @@ import java.util.List;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
-     * Custom ErrorType 으로 예외가 발생한 경우 처리 하는 메서드.
+     * RestApiException 으로 throw 한 예외들 처리 하는 메서드.
      * @param e RestApiException
      * @return ErrorResponse
      */
@@ -33,24 +33,23 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ErrorResponse.builder()
                 .httpStatus(e.getErrorType().getHttpStatus())
                 .errorCode(e.getErrorType().toString())
-                .message(e.getErrorType().getMessage())
+                .message(e.getMessage())
                 .build();
     }
 
     /**
-     * 예외 최상위 클래스 Exception.class 가 발생하였을때 처리하는 메서드.
-     *
-     * 예상치 못한 에러가 발생하였을때, 처리된다.
-     * @param e Exception
+     * 예상하지 못한 예외들 처리.
+     * 즉 throw 하지 못한 예외들. Runtime 중에 발생하는 모든 예외들 처리.
+     * @param e RuntimeException
      * @return ErrorResponse
      */
-    @ExceptionHandler(Exception.class)
-    public ErrorResponse handleException(Exception e) {
-        log.error("Exception", e);
+    @ExceptionHandler(RuntimeException.class)
+    public ErrorResponse handleRuntimeException(RuntimeException e) {
+        log.error("RuntimeException", e);
         return ErrorResponse.builder()
                 .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
                 .errorCode("UNEXPECTED_ERROR")
-                .message("예상치 못한 에러가 발생하였습니다.")
+                .message(e.getMessage())
                 .build();
     }
 

@@ -18,11 +18,12 @@ public enum CustomErrorType {
     //User
     //Brand
     //Place
-    INVALID_COORDINATE_PARAMETER(HttpStatus.BAD_REQUEST, "좌표값 데이터 포맷을 확인해주세요. (데이터 포맷: '{latitude정보}','{longitude정보}')"),
-    INVALID_GRID_SIZE(HttpStatus.BAD_REQUEST, "0.2 < GRID_SIZE < 1");
+    INVALID_COORDINATE_PARAMETER(HttpStatus.BAD_REQUEST),
+    INVALID_GRID_SIZE(HttpStatus.BAD_REQUEST);
+
+    //"좌표값 데이터 포맷을 확인해주세요. (데이터 포맷: '{latitude정보}','{longitude정보}')"
+    //"0.2 < GRID_SIZE < 1"
 
     //Hashtag
-
     private final HttpStatus httpStatus;
-    private final String message;
 }

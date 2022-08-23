@@ -15,10 +15,13 @@ public class RestApiException extends RuntimeException {
 
     /**
      * RestApiException 생성자.
-     * @param errorType CustomErrorType
+     *
+     * @param errorType : 미리 정의해둔 Error 이름과 HttpStatus.
+     * @param message : 해당 에러에 대한 추가적인 메시지.
      */
-    public RestApiException(CustomErrorType errorType) {
-        super(errorType.getMessage());
+    public RestApiException(CustomErrorType errorType, String message) {
+        super(message);
         this.errorType = errorType;
     }
+
 }

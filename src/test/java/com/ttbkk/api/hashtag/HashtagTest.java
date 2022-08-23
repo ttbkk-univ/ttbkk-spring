@@ -8,14 +8,12 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 @Transactional
 @SpringBootTest
-@Commit
 public class HashtagTest {
 
     /**
