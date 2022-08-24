@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
  *  Error 추가 : {ErrorName} ({HttpStatus})
  *
  *  사용법
- *  ex) throw new RestApiException(CustomErrorType.INVALID_COORDINATE_PARAMETER, Custom Message);
+ *  ex) throw new BaseException(CustomErrorType.INVALID_COORDINATE_PARAMETER, Custom Message);
  */
 @Getter
 @RequiredArgsConstructor

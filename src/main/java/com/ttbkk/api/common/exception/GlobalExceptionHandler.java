@@ -23,13 +23,13 @@ import java.util.List;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
-     * RestApiException 으로 throw 한 예외들 처리 하는 메서드.
-     * @param e RestApiException
+     * BaseException 으로 throw 한 예외들 처리 하는 메서드.
+     * @param e BaseException
      * @return ErrorResponse
      */
-    @ExceptionHandler(RestApiException.class)
-    public ErrorResponse handleRestApiException(RestApiException e) {
-        log.error("RestApiException", e);
+    @ExceptionHandler(BaseException.class)
+    public ErrorResponse handleRestApiException(BaseException e) {
+        log.error("BaseException", e);
         return ErrorResponse.builder()
                 .httpStatus(e.getErrorType().getHttpStatus())
                 .errorCode(e.getErrorType().toString())
