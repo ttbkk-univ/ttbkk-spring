@@ -31,7 +31,7 @@ public class PlaceService {
         BigDecimal bottomLeftX = new BigDecimal(bottomLeft.split(",")[0]);
         BigDecimal bottomLeftY = new BigDecimal(bottomLeft.split(",")[1]);
 
-        verifyGridSize(topRightX, topRightY, bottomLeftX, bottomLeftY);
+        this.verifyGridSize(topRightX, topRightY, bottomLeftX, bottomLeftY);
 
         List<Place> places = placeRepository.getPlacesAndCountInGrid(topRightX, topRightY, bottomLeftX, bottomLeftY);
 
