@@ -1,20 +1,20 @@
-package com.ttbkk.api.common.exception;
+package com.ttbkk.api.common.old_exception;
 
 import lombok.Getter;
 
 @Getter
-public class TempException extends RuntimeException {
+public class BaseException extends RuntimeException {
     /**
-     * 기본 TempException Wrapper.
+     * 기본 BaseException Wrapper.
      */
-    public TempException() {
+    public BaseException() {
     }
 
     /**
      * 메시지를 포함하는 Base Exception Wrapper.
      * @param message 커스텀 에러 메시지.
      */
-    public TempException(String message) {
+    public BaseException(String message) {
         super(message);
     }
 }
