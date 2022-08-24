@@ -39,28 +39,24 @@ public class PlaceService {
     }
 
     /**
-     * 외부에서 사용하지 않는 메서드 이므로 private method 로 구현.
-     * latitude 또는 longitude 를 DB에 저장하기 위해 DB 스펙으로 handling 하는 메서드.
+     * 좌표의 form 을 먼저 검사하고,
+     * 해당 좌표를 세부적으로 검사하기 위해 double 형태로 convert 해주는 메서드 .
      *
-     * locInfo.length() - 1 이유 : "." 은 decimal 크기에 포함되지 않는다.
-     * if (locInfo.contains("-")) 이 구문에서 curSize -1 을 해준 이유도 동일하다.
-     *
-     * @param locInfo 한 지점의 latitude 또는 longitude.
-     * @return BigDecimal
+     * @param location 좌표 데이터.
+     * @return double[]
+     * @throws Exception IndexOutOfBoundsException, ClassCastException
      */
-    private BigDecimal makeLocInfoToDecimal(String locInfo) {
-        int decimalLength = 20;
-        int curSize = locInfo.length() - 1;
-
-        if (locInfo.contains("-")) {
-            curSize -= 1;
+    private double[] checkAndConvertLocationForm(String location) throws Exception {
+        double[] result = new double[2];
+        String[] locationData = location.split(",");
+        if (locationData.length != 2) {
+            throw new Exception("좌표 데이터를 확인해주세요.");
         }
-        if (curSize > decimalLength) {
-            String verifiedString = locInfo.substring(0, decimalLength + 1);
-            return new BigDecimal(verifiedString);
-        } else {
-            return new BigDecimal(locInfo);
-        }
+        //latitude
+        result[0] = Double.parseDouble(locationData[0]);
+        //longitude
+        result[1] = Double.parseDouble(locationData[1]);
+        return result;
     }
 
     /**
@@ -84,4 +80,6 @@ public class PlaceService {
             throw new Exception("verifyGridSize exception");
         }
     }
+
+
 }
