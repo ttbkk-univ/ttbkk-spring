@@ -39,6 +39,34 @@ public class PlaceService {
     }
 
     /**
+     * 경도의 정수부분 범위 검사하는 메서드.
+     *
+     * @param longitude
+     * @return double
+     * @throws Exception
+     */
+    private double checkLongitudeInteger(double longitude) throws Exception {
+        if (longitude >= -180 && longitude <= 180) {
+            return longitude;
+        }
+        throw new Exception("올바르지 않은 경도 데이터");
+    }
+
+    /**
+     * 위도의 정수부분 범위 검사하는 메서드.
+     *
+     * @param latitude
+     * @return double
+     * @throws Exception
+     */
+    private double checkLatitudeInteger(double latitude) throws Exception {
+        if (latitude >= -90 && latitude <= 90) {
+            return latitude;
+        }
+        throw new Exception("올바르지 않은 위도 데이터");
+    }
+
+    /**
      * 좌표의 form 을 먼저 검사하고,
      * 해당 좌표를 세부적으로 검사하기 위해 double 형태로 convert 해주는 메서드 .
      *
