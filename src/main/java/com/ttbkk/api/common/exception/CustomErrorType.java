@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 public enum CustomErrorType {
 
     //User
+    INVALID_TOKEN(HttpStatus.BAD_REQUEST),
+    UNAUTHORIZED(HttpStatus.FORBIDDEN),
     //Brand
     //Place
     INVALID_COORDINATE_PARAMETER(HttpStatus.BAD_REQUEST);
