@@ -90,6 +90,6 @@ class PlaceServiceTest {
                 })
                 .withMessageContaining("verifyGridSize")
                 .withNoCause();
-
     }
+
 }

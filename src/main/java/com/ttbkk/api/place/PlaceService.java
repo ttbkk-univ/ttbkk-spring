@@ -91,6 +91,9 @@ public class PlaceService {
      * 좌표의 form 을 먼저 검사하고,
      * 해당 좌표를 세부적으로 검사하기 위해 double 형태로 convert 해주는 메서드 .
      *
+     * result[0] : latitude
+     * result[1] : longitude
+     *
      * @param location 좌표 데이터.
      * @return double[]
      * @throws Exception IndexOutOfBoundsException, ClassCastException
@@ -99,12 +102,14 @@ public class PlaceService {
         double[] result = new double[2];
         String[] locationData = location.split(",");
         if (locationData.length != 2) {
-            throw new Exception("좌표 데이터를 확인해주세요.");
+            throw new Exception("좌표 데이터를 확인해주세요. [,]");
         }
-        //latitude
-        result[0] = Double.parseDouble(locationData[0]);
-        //longitude
-        result[1] = Double.parseDouble(locationData[1]);
+        try {
+            result[0] = Double.parseDouble(locationData[0]);
+            result[1] = Double.parseDouble(locationData[1]);
+        } catch (NumberFormatException e) {
+            throw new Exception("좌표 데이터를 확인해주세요. [문자열 포함]");
+        }
         return result;
     }
 
