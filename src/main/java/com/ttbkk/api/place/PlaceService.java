@@ -99,10 +99,10 @@ public class PlaceService {
      * @param bottomLeftY bottomLeft 지점의 longitude
      */
     private void verifyGridSize(BigDecimal topRightX, BigDecimal topRightY, BigDecimal bottomLeftX, BigDecimal bottomLeftY) throws Exception {
-        if (topRightY.subtract(bottomLeftY).abs().compareTo(BigDecimal.valueOf(0.2)) == -1
-                || topRightY.subtract(bottomLeftY).abs().compareTo(BigDecimal.valueOf(1)) == 1
-                || topRightX.subtract(bottomLeftX).abs().compareTo(BigDecimal.valueOf(0.2)) == -1
-                || topRightX.subtract(bottomLeftX).abs().compareTo(BigDecimal.valueOf(1)) == 1) {
+        if (topRightY.subtract(bottomLeftY).abs().compareTo(BigDecimal.valueOf(0.2)) < 0
+                || topRightY.subtract(bottomLeftY).abs().compareTo(BigDecimal.valueOf(1)) > 0
+                || topRightX.subtract(bottomLeftX).abs().compareTo(BigDecimal.valueOf(0.2)) < 0
+                || topRightX.subtract(bottomLeftX).abs().compareTo(BigDecimal.valueOf(1)) > 0) {
 
             //추후 Custom 예외처리로 바꿀 예정. -> 새로운 pr에서 처리.
             throw new Exception("verifyGridSize exception");
