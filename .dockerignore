@@ -1,0 +1,5 @@
+build
+.idea
+.gradle
+.github
+docker-compose
