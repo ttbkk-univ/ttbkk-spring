@@ -98,7 +98,9 @@ public class PlaceService {
      * @param bottomLeftX bottomLeft 지점의 latitude
      * @param bottomLeftY bottomLeft 지점의 longitude
      */
-    private void verifyGridSize(BigDecimal topRightX, BigDecimal topRightY, BigDecimal bottomLeftX, BigDecimal bottomLeftY) throws Exception {
+    private void verifyGridSize(BigDecimal topRightX, BigDecimal topRightY,
+                                BigDecimal bottomLeftX, BigDecimal bottomLeftY) throws Exception {
+
         if (topRightY.subtract(bottomLeftY).abs().compareTo(BigDecimal.valueOf(0.2)) < 0
                 || topRightY.subtract(bottomLeftY).abs().compareTo(BigDecimal.valueOf(1)) > 0
                 || topRightX.subtract(bottomLeftX).abs().compareTo(BigDecimal.valueOf(0.2)) < 0
@@ -108,6 +110,5 @@ public class PlaceService {
             throw new Exception("verifyGridSize exception");
         }
     }
-
 
 }

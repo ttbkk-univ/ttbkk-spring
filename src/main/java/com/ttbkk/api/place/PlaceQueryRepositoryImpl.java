@@ -36,7 +36,8 @@ public class PlaceQueryRepositoryImpl implements PlaceQueryRepository {
      * @return PlaceDto.GridResponseDto
      */
     @Override
-    public List<Place> getPlacesAndCountInGrid(BigDecimal topRightX, BigDecimal topRightY, BigDecimal bottomLeftX, BigDecimal bottomLeftY) {
+    public List<Place> getPlacesAndCountInGrid(BigDecimal topRightX, BigDecimal topRightY,
+                                               BigDecimal bottomLeftX, BigDecimal bottomLeftY) {
         List<Place> results = queryFactory
                 .selectFrom(place)
                 .where(
