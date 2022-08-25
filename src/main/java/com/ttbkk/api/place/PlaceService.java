@@ -20,16 +20,22 @@ public class PlaceService {
      * String type 의 파라미터 변수를 latitude 와 longitude 로 분리한다.
      * 분리한 String data 를 BigDecimal type 으로 변환하여 getPlacesAndCountInGrid 메서드에 파라미터로 넘겨준다.
      *
+     * locationData[0] : latitude
+     * locationData[1] : longitude
+     *
      * @param topRight : topRight 지점의 latitude&longitude
      * @param bottomLeft : bottomLeft 지점의 latitude&longitude
      * @return PlaceDto.GridResponseDto
      * @throws Exception
      */
     public PlaceDto.GridResponseDto getPlacesAndCountInGrid(String topRight, String bottomLeft) throws Exception {
-        BigDecimal topRightX = new BigDecimal(topRight.split(",")[0]);
-        BigDecimal topRightY = new BigDecimal(topRight.split(",")[1]);
-        BigDecimal bottomLeftX = new BigDecimal(bottomLeft.split(",")[0]);
-        BigDecimal bottomLeftY = new BigDecimal(bottomLeft.split(",")[1]);
+        double[] topLocation = this.checkLocationFormAndIntegerPart(topRight);
+        double[] bottomLocation = this.checkLocationFormAndIntegerPart(bottomLeft);
+
+        BigDecimal topRightX = BigDecimal.valueOf(topLocation[0]);
+        BigDecimal topRightY = BigDecimal.valueOf(topLocation[1]);
+        BigDecimal bottomLeftX = BigDecimal.valueOf(bottomLocation[0]);
+        BigDecimal bottomLeftY = BigDecimal.valueOf(bottomLocation[1]);
 
         this.verifyGridSize(topRightX, topRightY, bottomLeftX, bottomLeftY);
 
@@ -39,31 +45,46 @@ public class PlaceService {
     }
 
     /**
+     * 좌표를 받아올때 데이터 형식이 맞는지, 위도와 경도 범위가 올바른지 검사 하는 메서드.
+     * 추후 다른 기능 구현시 재사용 하기 위해 double[] 로 리턴. (ex) 소수자릿수 검사 등)
+     *
+     * locationData[0] : latitude
+     * locationData[1] : longitude
+     *
+     * @param location
+     * @return double[]
+     * @throws Exception
+     */
+    public double[] checkLocationFormAndIntegerPart(String location) throws Exception {
+        double[] locationData = this.checkAndConvertLocationForm(location);
+        this.checkLatitudeIntegerPart(locationData[0]);
+        this.checkLongitudeIntegerPart(locationData[1]);
+
+        return locationData;
+    }
+
+    /**
      * 경도의 정수부분 범위 검사하는 메서드.
      *
      * @param longitude
-     * @return double
      * @throws Exception
      */
-    private double checkLongitudeInteger(double longitude) throws Exception {
-        if (longitude >= -180 && longitude <= 180) {
-            return longitude;
+    private void checkLongitudeIntegerPart(double longitude) throws Exception {
+        if (longitude < -180 && longitude > 180) {
+            throw new Exception("올바르지 않은 경도 데이터");
         }
-        throw new Exception("올바르지 않은 경도 데이터");
     }
 
     /**
      * 위도의 정수부분 범위 검사하는 메서드.
      *
      * @param latitude
-     * @return double
      * @throws Exception
      */
-    private double checkLatitudeInteger(double latitude) throws Exception {
-        if (latitude >= -90 && latitude <= 90) {
-            return latitude;
+    private void checkLatitudeIntegerPart(double latitude) throws Exception {
+        if (latitude < -90 && latitude > 90) {
+            throw new Exception("올바르지 않은 위도 데이터");
         }
-        throw new Exception("올바르지 않은 위도 데이터");
     }
 
     /**
