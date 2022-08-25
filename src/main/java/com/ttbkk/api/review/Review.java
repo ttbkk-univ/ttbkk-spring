@@ -45,7 +45,7 @@ public class Review extends BaseTimeEntity {
 
     /**
      * Review 생성자
-     * @param score 별점
+     * @param score 점수
      * @param comment 리뷰 내용
      */
     @Builder
