@@ -70,7 +70,7 @@ public class PlaceService {
      * @throws Exception
      */
     private void checkLongitudeIntegerPart(double longitude) throws Exception {
-        if (longitude < -180 && longitude > 180) {
+        if (longitude < -180 || longitude > 180) {
             throw new Exception("올바르지 않은 경도 데이터");
         }
     }
@@ -82,7 +82,7 @@ public class PlaceService {
      * @throws Exception
      */
     private void checkLatitudeIntegerPart(double latitude) throws Exception {
-        if (latitude < -90 && latitude > 90) {
+        if (latitude < -90 || latitude > 90) {
             throw new Exception("올바르지 않은 위도 데이터");
         }
     }

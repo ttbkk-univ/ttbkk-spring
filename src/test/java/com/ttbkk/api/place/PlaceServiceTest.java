@@ -59,6 +59,28 @@ class PlaceServiceTest {
         placeRepository.save(placeC);
     }
 
+    @Test
+    @DisplayName("checkLocationFormAndIntegerPart 메서드 검증 Test")
+    void checkLocationFormAndIntegerPart() throws Exception {
+
+        String topRight = "90.7,222222222223217839,102.722222222222312312";
+        String bottomLeft = "890.2222222222223217839,100.222222222222312312";
+
+        assertThatExceptionOfType(Exception.class)
+                .isThrownBy(() -> {
+                    placeService.checkLocationFormAndIntegerPart(bottomLeft);
+                })
+                .withMessageContaining("위도")
+                .withNoCause();
+
+        assertThatExceptionOfType(Exception.class)
+                .isThrownBy(() -> {
+                    placeService.checkLocationFormAndIntegerPart(topRight);
+                })
+                .withMessageContaining(",")
+                .withNoCause();
+    }
+
     /**
      * getPlacesAndCountInGrid 메서드 검증 Test.
      */
