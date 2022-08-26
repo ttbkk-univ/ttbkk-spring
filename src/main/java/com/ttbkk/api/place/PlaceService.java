@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -15,6 +16,27 @@ import java.util.List;
 @Service
 public class PlaceService {
     private final PlaceRepository placeRepository;
+
+    /**
+     * Create Place Api (장소 생성) 메서드.
+     *
+     * @param requestDto
+     * @return PlaceDto.PlaceResponseDto
+     */
+    public PlaceDto.PlaceResponseDto createPlace(PlaceDto.PlaceCreateRequestDto requestDto) throws Exception {
+
+        //check location
+        double[] checkedFormAndInteger = this.checkLocationFormAndIntegerPart(requestDto.getLocation());
+        BigDecimal[] allChecked = checkLocationDecimalPart(checkedFormAndInteger);
+
+        //create Place
+
+
+        //user
+        //brand
+        //hashtag
+        return new PlaceDto.PlaceResponseDto("장소 생성 성공");
+    }
 
     /**
      * String type 의 파라미터 변수를 latitude 와 longitude 로 분리한다.
@@ -45,6 +67,55 @@ public class PlaceService {
     }
 
     /**
+     * location data 를 받아 DB 스펙에 맞춰 처리 후 BigDecimal 형태로 return 해주는 메서드.
+     *
+     * @param location
+     * @return BigDecimal[]
+     */
+    public BigDecimal[] checkLocationDecimalPart(double[] location) {
+        String latitude = checkLatitudeDecimalPart(location[0]);
+        String longitude = checkLongitudeDecimalPart(location[1]);
+
+        return typeCastingLocationToBigDecimal(latitude, longitude);
+    }
+
+    /**
+     * String type 의 location data 들 (latitude, longitude)을 받아 BigDecimal type 으로 Return.
+     * @param latitude
+     * @param longitude
+     * @return BigDecimal[]
+     */
+    private BigDecimal[] typeCastingLocationToBigDecimal(String latitude, String longitude) {
+        BigDecimal[] result = new BigDecimal[2];
+        result[0] = new BigDecimal(latitude);
+        result[1] = new BigDecimal(longitude);
+
+        return result;
+    }
+
+    /**
+     * latitude DB 스펙인 decimal(15,13) 를 맞춰주는 메서드.
+     *
+     * @param latitude
+     * @return String
+     */
+    private String checkLatitudeDecimalPart(double latitude) {
+        DecimalFormat decimalFormat = new DecimalFormat("0.0000000000000");
+        return decimalFormat.format(latitude);
+    }
+
+    /**
+     * longitude DB 스펙인 decimal(15,12) 를 맞춰주는 메서드.
+     *
+     * @param longitude
+     * @return String
+     */
+    private String checkLongitudeDecimalPart(double longitude) {
+        DecimalFormat decimalFormat = new DecimalFormat("0.000000000000");
+        return decimalFormat.format(longitude);
+    }
+
+    /**
      * 좌표를 받아올때 데이터 형식이 맞는지, 위도와 경도 범위가 올바른지 검사 하는 메서드.
      * 추후 다른 기능 구현시 재사용 하기 위해 double[] 로 리턴. (ex) 소수자릿수 검사 등)
      *
@@ -64,19 +135,6 @@ public class PlaceService {
     }
 
     /**
-     * 경도의 정수부분 범위 검사하는 메서드.
-     * -180 <= longitude <= 180.
-     *
-     * @param longitude
-     * @throws Exception
-     */
-    private void checkLongitudeIntegerPart(double longitude) throws Exception {
-        if (!(-90 <= longitude && longitude <= 90)) {
-            throw new Exception("올바르지 않은 경도 데이터");
-        }
-    }
-
-    /**
      * 위도의 정수부분 범위 검사하는 메서드.
      * -90 <= latitude <= 90
      *
@@ -86,6 +144,19 @@ public class PlaceService {
     private void checkLatitudeIntegerPart(double latitude) throws Exception {
         if (!(-90 <= latitude && latitude <= 90)) {
             throw new Exception("올바르지 않은 위도 데이터");
+        }
+    }
+
+    /**
+     * 경도의 정수부분 범위 검사하는 메서드.
+     * -180 <= longitude <= 180.
+     *
+     * @param longitude
+     * @throws Exception
+     */
+    private void checkLongitudeIntegerPart(double longitude) throws Exception {
+        if (!(-90 <= longitude && longitude <= 90)) {
+            throw new Exception("올바르지 않은 경도 데이터");
         }
     }
 

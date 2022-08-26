@@ -3,7 +3,6 @@ package com.ttbkk.api.place;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.util.List;
 
 public class PlaceDto {
@@ -42,10 +41,7 @@ public class PlaceDto {
         private List<String> hashtags;
 
         @NotNull
-        private String latitude;
-
-        @NotNull
-        private String longitude;
+        private String location;
 
         private String description;
 
@@ -64,22 +60,6 @@ public class PlaceDto {
          */
         public PlaceResponseDto(String message) {
             this.message = message;
-        }
-    }
-
-    @Getter
-    public static class VerifiedCoordinate {
-        private BigDecimal latitude;
-        private BigDecimal longitude;
-
-        /**
-         * VerifiedCoordinate 생성자.
-         * @param latitude
-         * @param longitude
-         */
-        public VerifiedCoordinate(BigDecimal latitude, BigDecimal longitude) {
-            this.latitude = latitude;
-            this.longitude = longitude;
         }
     }
 }
