@@ -71,7 +71,7 @@ public class PlaceService {
      * @throws Exception
      */
     private void checkLongitudeIntegerPart(double longitude) throws Exception {
-        if (!(-90 <= longitude && longitude <= 90)) {
+        if (!(-180 <= longitude && longitude <= 180)) {
             throw new Exception("올바르지 않은 경도 데이터");
         }
     }
