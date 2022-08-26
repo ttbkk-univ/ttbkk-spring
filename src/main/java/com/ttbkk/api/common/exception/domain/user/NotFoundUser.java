@@ -1,6 +1,6 @@
 package com.ttbkk.api.common.exception.domain.user;
 
-import com.ttbkk.api.common.exception.type.ForbiddenException;
+import com.ttbkk.api.common.exception.type.NotFoundException;
 import lombok.Getter;
 
 /**
@@ -9,7 +9,7 @@ import lombok.Getter;
  * 찾고자 하는 데이터가 없을때 보여주는 에러.
  */
 @Getter
-public class NotFoundUser extends ForbiddenException {
+public class NotFoundUser extends NotFoundException {
 
     private final String errorCode = "NOT_FOUND_USER";
     private final String message = "User 를 찾을 수 없습니다.";
