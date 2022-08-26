@@ -1,7 +1,7 @@
 package com.ttbkk.api.annotations.auth;
 
 import com.ttbkk.api.auth.JWTService;
-import com.ttbkk.api.common.exception.UnauthorizedException;
+import com.ttbkk.api.common.exception.domain.user.UnAuthorizedUser;
 import com.ttbkk.api.user.User;
 import com.ttbkk.api.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -42,15 +42,15 @@ public abstract class BaseAuthCheckAspect {
         if (authorization == null
             || !authorization.startsWith(TOKEN_PREFIX)
             || authorization.split(" ").length != 2) {
-            throw new UnauthorizedException();
+            throw new UnAuthorizedUser();
         }
         Map<String, Object> jwtMap = jwtService.parse(authorization.split(" ")[1]); // Token 검증
         //
         if (!jwtMap.containsKey(USER_IDENTIFIER_KEY)) {
-            throw new UnauthorizedException();
+            throw new UnAuthorizedUser();
         }
         return userService
-            .findBySocialId((String) jwtMap.get(USER_IDENTIFIER_KEY))
-            .orElseThrow(UnauthorizedException::new);
+                .findBySocialId((String) jwtMap.get(USER_IDENTIFIER_KEY))
+                .orElseThrow(() -> new UnAuthorizedUser());
     }
 }
