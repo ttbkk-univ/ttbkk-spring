@@ -8,12 +8,12 @@ import org.springframework.http.HttpStatus;
  * HttpStatus 가 UNAUTHORIZED 인 예외들의 부모 클래스.
  */
 @Getter
-public class UnAuthorizedException extends BaseException {
+public class UnauthorizedException extends BaseException {
     private final HttpStatus httpStatus = HttpStatus.UNAUTHORIZED;
 
     /**
-     * UnAuthorizedException 생성자.
+     * UnauthorizedException 생성자.
      */
-    public UnAuthorizedException() {
+    public UnauthorizedException() {
     }
 }

@@ -1,7 +1,7 @@
 package com.ttbkk.api.annotations.auth;
 
 import com.ttbkk.api.auth.JWTService;
-import com.ttbkk.api.common.exception.domain.user.UnAuthorizedUser;
+import com.ttbkk.api.common.exception.domain.user.UnauthorizedUser;
 import com.ttbkk.api.user.User;
 import com.ttbkk.api.user.UserRole;
 import com.ttbkk.api.user.UserService;
@@ -44,7 +44,7 @@ public class IsUserAspect extends BaseAuthCheckAspect {
             UserRole.SUPER_ADMIN.toString()
         ));
         if (!targets.contains(requestUser.getRole().toString())) {
-            throw new UnAuthorizedUser();
+            throw new UnauthorizedUser();
         }
         return joinPoint.proceed(new Object[]{requestUser});
     }
