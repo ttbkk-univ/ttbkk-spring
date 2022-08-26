@@ -65,24 +65,26 @@ public class PlaceService {
 
     /**
      * 경도의 정수부분 범위 검사하는 메서드.
+     * -180 <= longitude <= 180.
      *
      * @param longitude
      * @throws Exception
      */
     private void checkLongitudeIntegerPart(double longitude) throws Exception {
-        if (longitude < -180 || longitude > 180) {
+        if (!(-90 <= longitude && longitude <= 90)) {
             throw new Exception("올바르지 않은 경도 데이터");
         }
     }
 
     /**
      * 위도의 정수부분 범위 검사하는 메서드.
+     * -90 <= latitude <= 90
      *
      * @param latitude
      * @throws Exception
      */
     private void checkLatitudeIntegerPart(double latitude) throws Exception {
-        if (latitude < -90 || latitude > 90) {
+        if (!(-90 <= latitude && latitude <= 90)) {
             throw new Exception("올바르지 않은 위도 데이터");
         }
     }
