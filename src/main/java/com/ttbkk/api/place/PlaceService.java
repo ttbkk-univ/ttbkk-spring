@@ -30,7 +30,16 @@ public class PlaceService {
         BigDecimal[] allChecked = checkLocationDecimalPart(checkedFormAndInteger);
 
         //create Place
+        Place place = Place.builder()
+                .name(requestDto.getName())
+                .latitude(allChecked[0])
+                .longitude(allChecked[1])
+                .description(requestDto.getDescription())
+                .telephone(requestDto.getTelephone())
+                .address(requestDto.getAddress())
+                .build();
 
+        placeRepository.save(place);
 
         //user
         //brand
