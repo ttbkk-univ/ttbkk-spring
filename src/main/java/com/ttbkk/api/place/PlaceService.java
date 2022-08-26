@@ -29,13 +29,13 @@ public class PlaceService {
      * @throws Exception
      */
     public PlaceDto.GridResponseDto getPlacesAndCountInGrid(String topRight, String bottomLeft) throws Exception {
-        double[] topLocation = this.checkLocationFormAndIntegerPart(topRight);
-        double[] bottomLocation = this.checkLocationFormAndIntegerPart(bottomLeft);
+        double[] topRightLocation = this.checkLocationFormAndIntegerPart(topRight);
+        double[] bottomLeftLocation = this.checkLocationFormAndIntegerPart(bottomLeft);
 
-        BigDecimal topRightX = BigDecimal.valueOf(topLocation[0]);
-        BigDecimal topRightY = BigDecimal.valueOf(topLocation[1]);
-        BigDecimal bottomLeftX = BigDecimal.valueOf(bottomLocation[0]);
-        BigDecimal bottomLeftY = BigDecimal.valueOf(bottomLocation[1]);
+        BigDecimal topRightX = BigDecimal.valueOf(topRightLocation[0]);
+        BigDecimal topRightY = BigDecimal.valueOf(topRightLocation[1]);
+        BigDecimal bottomLeftX = BigDecimal.valueOf(bottomLeftLocation[0]);
+        BigDecimal bottomLeftY = BigDecimal.valueOf(bottomLeftLocation[1]);
 
         this.verifyGridSize(topRightX, topRightY, bottomLeftX, bottomLeftY);
 
