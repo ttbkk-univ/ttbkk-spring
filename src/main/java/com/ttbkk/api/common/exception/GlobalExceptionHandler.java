@@ -31,8 +31,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ErrorResponse handleRestApiException(BaseException e) {
         log.error("BaseException", e);
         return ErrorResponse.builder()
-                .httpStatus(e.getErrorType().getHttpStatus())
-                .errorCode(e.getErrorType().toString())
+                .httpStatus(e.getHttpStatus())
+                .errorCode(e.getErrorCode())
                 .message(e.getMessage())
                 .build();
     }
@@ -63,7 +63,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         log.error("ConstraintViolationException", e);
         return ErrorResponse.builder()
                 .httpStatus(HttpStatus.BAD_REQUEST)
-                .errorCode("ConstraintViolationException")
+                .errorCode("BAD_REQUEST_EXCEPTION")
                 .errors(getResultMessage(e.getConstraintViolations().iterator()))
                 .build();
     }

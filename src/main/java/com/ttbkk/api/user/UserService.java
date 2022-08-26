@@ -1,5 +1,6 @@
 package com.ttbkk.api.user;
 
+import com.ttbkk.api.common.exception.domain.user.NotFoundUser;
 import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -57,7 +58,7 @@ public class UserService {
     public void deleteById(String id) throws NotFoundException {
         User user = this.userRepository
             .findById(id)
-            .orElseThrow(() -> new NotFoundException("User Not Found"));
+            .orElseThrow(() -> new NotFoundUser());
         this.userRepository.remove(user);
     }
 

@@ -1,28 +1,21 @@
 package com.ttbkk.api.common.exception;
 
 import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
 /**
- * CustomerErrorType 으로 생성하여, 예외 처리 할 수 있다.
- * 상황에 대한 에러 메시지는 다양할 수 있으므로, parameter 로 받아 CustomerErrorType 의 재사용 할 수 있다.
- *
- * 발생한 예외를 처리해줄 예외 클래스(Exception Class)
- * RuntimeException 상속 받는 이유 : 예외 발생 하면 자동으로 롤백.
+ * Runtime 에서 발생하는 모든 예외들을 받을 수 있는 부모 클래스.
  */
 @Getter
 public class BaseException extends RuntimeException {
 
-    private CustomErrorType errorType;
+    private HttpStatus httpStatus;
+    private String errorCode;
+    private String message;
 
     /**
      * BaseException 생성자.
-     *
-     * @param errorType : 미리 정의해둔 Error 이름과 HttpStatus.
-     * @param message : 해당 에러에 대한 추가적인 메시지.
      */
-    public BaseException(CustomErrorType errorType, String message) {
-        super(message);
-        this.errorType = errorType;
+    public BaseException() {
     }
-
 }

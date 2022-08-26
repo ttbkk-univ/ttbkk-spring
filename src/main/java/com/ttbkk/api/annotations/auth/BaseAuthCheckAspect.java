@@ -1,8 +1,7 @@
 package com.ttbkk.api.annotations.auth;
 
 import com.ttbkk.api.auth.JWTService;
-import com.ttbkk.api.common.exception.BaseException;
-import com.ttbkk.api.common.exception.CustomErrorType;
+import com.ttbkk.api.common.exception.domain.user.UnAuthorizedUser;
 import com.ttbkk.api.user.User;
 import com.ttbkk.api.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -43,16 +42,15 @@ public abstract class BaseAuthCheckAspect {
         if (authorization == null
             || !authorization.startsWith(TOKEN_PREFIX)
             || authorization.split(" ").length != 2) {
-            throw new BaseException(CustomErrorType.INVALID_TOKEN, "TOKEN 비어있거나 올바르지 않습니다.");
+            throw new UnAuthorizedUser();
         }
         Map<String, Object> jwtMap = jwtService.parse(authorization.split(" ")[1]); // Token 검증
         //
         if (!jwtMap.containsKey(USER_IDENTIFIER_KEY)) {
-            throw new BaseException(CustomErrorType.INVALID_TOKEN, "TOKEN KEY 값이 올바르지 않습니다.");
+            throw new UnAuthorizedUser();
         }
         return userService
                 .findBySocialId((String) jwtMap.get(USER_IDENTIFIER_KEY))
-                .orElseThrow(() -> new BaseException(CustomErrorType.INVALID_TOKEN, "KEY 값을 가져올 수 없습니다."));
-
+                .orElseThrow(() -> new UnAuthorizedUser());
     }
 }
