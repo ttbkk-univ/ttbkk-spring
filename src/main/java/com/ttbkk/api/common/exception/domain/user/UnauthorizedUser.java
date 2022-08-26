@@ -2,7 +2,6 @@ package com.ttbkk.api.common.exception.domain.user;
 
 import com.ttbkk.api.common.exception.type.UnauthorizedException;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
 /**
  * User 도메인에서 UNAUTHORIZED 예외를 어떻게 보여줄건지 정의한 클래스.
@@ -14,13 +13,10 @@ public class UnauthorizedUser extends UnauthorizedException {
 
     private final String errorCode = "UNAUTHORIZED_USER";
     private final String message = "로그인을 해주세요.";
-    private HttpStatus httpStatus;
 
     /**
      * UnauthorizedUser 생성자.
      */
     public UnauthorizedUser() {
-        super();
-        this.httpStatus = super.getHttpStatus();
     }
 }
