@@ -59,6 +59,43 @@ class PlaceServiceTest {
         placeRepository.save(placeC);
     }
 
+    @Test
+    @DisplayName("checkLocationFormAndIntegerPart 메서드 검증 Test")
+    void checkLocationFormAndIntegerPart() throws Exception {
+
+        String commaError = "90.7,222222222223217839,102.722222222222312312";
+        String latitudeError = "890.2222222222223217839,100.222222222222312312";
+        String longitudeError = "89.2222222222223217839,-190.222222222222312312";
+        String stringError = "89.22222.2222.2223217839,-190.222222222222312312";
+
+        assertThatExceptionOfType(Exception.class)
+                .isThrownBy(() -> {
+                    placeService.checkLocationFormAndIntegerPart(commaError);
+                })
+                .withMessageContaining(",")
+                .withNoCause();
+
+        assertThatExceptionOfType(Exception.class)
+                .isThrownBy(() -> {
+                    placeService.checkLocationFormAndIntegerPart(latitudeError);
+                })
+                .withMessageContaining("위도")
+                .withNoCause();
+        assertThatExceptionOfType(Exception.class)
+                .isThrownBy(() -> {
+                    placeService.checkLocationFormAndIntegerPart(longitudeError);
+                })
+                .withMessageContaining("경도")
+                .withNoCause();
+
+        assertThatExceptionOfType(Exception.class)
+                .isThrownBy(() -> {
+                    placeService.checkLocationFormAndIntegerPart(stringError);
+                })
+                .withMessageContaining("문자열")
+                .withNoCause();
+    }
+
     /**
      * getPlacesAndCountInGrid 메서드 검증 Test.
      */
@@ -90,6 +127,6 @@ class PlaceServiceTest {
                 })
                 .withMessageContaining("verifyGridSize")
                 .withNoCause();
-
     }
+
 }
