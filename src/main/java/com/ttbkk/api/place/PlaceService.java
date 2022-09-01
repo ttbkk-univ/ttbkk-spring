@@ -1,5 +1,7 @@
 package com.ttbkk.api.place;
 
+import com.ttbkk.api.common.exception.domain.place.BadRequestGrid;
+import com.ttbkk.api.common.exception.domain.place.BadRequestLocation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +30,7 @@ public class PlaceService {
      * @return PlaceDto.GridResponseDto
      * @throws Exception
      */
-    public PlaceDto.GridResponseDto getPlacesAndCountInGrid(String topRight, String bottomLeft) throws Exception {
+    public PlaceDto.GridResponseDto getPlacesAndCountInGrid(String topRight, String bottomLeft) {
         double[] topRightLocation = this.checkLocationFormAndIntegerPart(topRight);
         double[] bottomLeftLocation = this.checkLocationFormAndIntegerPart(bottomLeft);
 
@@ -55,7 +57,7 @@ public class PlaceService {
      * @return double[]
      * @throws Exception
      */
-    public double[] checkLocationFormAndIntegerPart(String location) throws Exception {
+    public double[] checkLocationFormAndIntegerPart(String location) {
         double[] locationData = this.checkAndConvertLocationForm(location);
         this.checkLatitudeIntegerPart(locationData[0]);
         this.checkLongitudeIntegerPart(locationData[1]);
@@ -70,9 +72,9 @@ public class PlaceService {
      * @param longitude
      * @throws Exception
      */
-    private void checkLongitudeIntegerPart(double longitude) throws Exception {
+    private void checkLongitudeIntegerPart(double longitude) {
         if (!(-180 <= longitude && longitude <= 180)) {
-            throw new Exception("올바르지 않은 경도 데이터");
+            throw new BadRequestLocation();
         }
     }
 
@@ -83,9 +85,9 @@ public class PlaceService {
      * @param latitude
      * @throws Exception
      */
-    private void checkLatitudeIntegerPart(double latitude) throws Exception {
+    private void checkLatitudeIntegerPart(double latitude) {
         if (!(-90 <= latitude && latitude <= 90)) {
-            throw new Exception("올바르지 않은 위도 데이터");
+            throw new BadRequestLocation();
         }
     }
 
@@ -100,17 +102,17 @@ public class PlaceService {
      * @return double[]
      * @throws Exception IndexOutOfBoundsException, ClassCastException
      */
-    private double[] checkAndConvertLocationForm(String location) throws Exception {
+    private double[] checkAndConvertLocationForm(String location) {
         double[] result = new double[2];
         String[] locationData = location.split(",");
         if (locationData.length != 2) {
-            throw new Exception("좌표 데이터를 확인해주세요. [,]");
+            throw new BadRequestLocation();
         }
         try {
             result[0] = Double.parseDouble(locationData[0]);
             result[1] = Double.parseDouble(locationData[1]);
         } catch (NumberFormatException e) {
-            throw new Exception("좌표 데이터를 확인해주세요. [문자열 포함]");
+            throw new BadRequestLocation();
         }
         return result;
     }
@@ -119,7 +121,7 @@ public class PlaceService {
      * grid 영역의 크기를 검사하는 메서드.
      * grid 영역의 size 는 0.2 < size < 1
      *
-     * compareTo() -> 자기 자신이 비교 대상보다 작으면 음수, 같으면 0, 크면 양수
+     * compareTo() -> 자기 자신이 비교 대상보다 작으면 음수, 같으면 0, 크면 양수.
      *
      * @param topRightX topRight 지점의 latitude
      * @param topRightY topRight 지점의 longitude
@@ -127,7 +129,7 @@ public class PlaceService {
      * @param bottomLeftY bottomLeft 지점의 longitude
      */
     private void verifyGridSize(BigDecimal topRightX, BigDecimal topRightY,
-                                BigDecimal bottomLeftX, BigDecimal bottomLeftY) throws Exception {
+                                BigDecimal bottomLeftX, BigDecimal bottomLeftY) {
 
         if (topRightY.subtract(bottomLeftY).abs().compareTo(BigDecimal.valueOf(0.2)) < 0
                 || topRightY.subtract(bottomLeftY).abs().compareTo(BigDecimal.valueOf(1)) > 0
@@ -135,7 +137,7 @@ public class PlaceService {
                 || topRightX.subtract(bottomLeftX).abs().compareTo(BigDecimal.valueOf(1)) > 0) {
 
             //추후 Custom 예외처리로 바꿀 예정. -> 새로운 pr에서 처리.
-            throw new Exception("verifyGridSize exception");
+            throw new BadRequestGrid();
         }
     }
 

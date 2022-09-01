@@ -29,7 +29,7 @@ public class PlaceController {
     public ResponseEntity<PlaceDto.GridResponseDto> callGridApi(
             @RequestParam String topRight,
             @RequestParam String bottomLeft
-    ) throws Exception {
+    ) {
 
         PlaceDto.GridResponseDto response = placeService.getPlacesAndCountInGrid(topRight, bottomLeft);
         return ResponseEntity.status(HttpStatus.OK).body(response);

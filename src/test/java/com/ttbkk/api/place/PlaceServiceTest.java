@@ -1,5 +1,7 @@
 package com.ttbkk.api.place;
 
+import com.ttbkk.api.common.exception.domain.place.BadRequestGrid;
+import com.ttbkk.api.common.exception.domain.place.BadRequestLocation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -61,38 +63,38 @@ class PlaceServiceTest {
 
     @Test
     @DisplayName("checkLocationFormAndIntegerPart 메서드 검증 Test")
-    void checkLocationFormAndIntegerPart() throws Exception {
+    void checkLocationFormAndIntegerPart() {
 
         String commaError = "90.7,222222222223217839,102.722222222222312312";
         String latitudeError = "890.2222222222223217839,100.222222222222312312";
         String longitudeError = "89.2222222222223217839,-190.222222222222312312";
         String stringError = "89.22222.2222.2223217839,-190.222222222222312312";
 
-        assertThatExceptionOfType(Exception.class)
+        assertThatExceptionOfType(BadRequestLocation.class)
                 .isThrownBy(() -> {
                     placeService.checkLocationFormAndIntegerPart(commaError);
                 })
-                .withMessageContaining(",")
+                .withMessageContaining("Location")
                 .withNoCause();
 
-        assertThatExceptionOfType(Exception.class)
+        assertThatExceptionOfType(BadRequestLocation.class)
                 .isThrownBy(() -> {
                     placeService.checkLocationFormAndIntegerPart(latitudeError);
                 })
-                .withMessageContaining("위도")
+                .withMessageContaining("Location")
                 .withNoCause();
-        assertThatExceptionOfType(Exception.class)
+        assertThatExceptionOfType(BadRequestLocation.class)
                 .isThrownBy(() -> {
                     placeService.checkLocationFormAndIntegerPart(longitudeError);
                 })
-                .withMessageContaining("경도")
+                .withMessageContaining("Location")
                 .withNoCause();
 
         assertThatExceptionOfType(Exception.class)
                 .isThrownBy(() -> {
                     placeService.checkLocationFormAndIntegerPart(stringError);
                 })
-                .withMessageContaining("문자열")
+                .withMessageContaining("Location")
                 .withNoCause();
     }
 
@@ -101,7 +103,7 @@ class PlaceServiceTest {
      */
     @Test
     @DisplayName("getPlacesAndCountInGrid 메서드 검증 Test")
-    void getPlacesAndCountInGrid() throws Exception {
+    void getPlacesAndCountInGrid() {
         String topRight = "89.7222222222223217839,100.722222222222312312";
         String bottomLeft = "89.2222222222223217839,100.222222222222312312";
         PlaceDto.GridResponseDto placesAndCountInGrid = placeService.getPlacesAndCountInGrid(topRight, bottomLeft);
@@ -117,15 +119,15 @@ class PlaceServiceTest {
      */
     @Test
     @DisplayName("verifyGridSize 메서드 검증 Test")
-    void verifyGridSize() throws Exception {
+    void verifyGridSize() {
 
-        String topRight = "90.7222222222223217839,102.722222222222312312";
-        String bottomLeft = "89.2222222222223217839,100.222222222222312312";
-        assertThatExceptionOfType(Exception.class)
+        String topRight = "88.7222222222223217839,102.722222222222312312";
+        String bottomLeft = "87.2222222222223217839,100.222222222222312312";
+        assertThatExceptionOfType(BadRequestGrid.class)
                 .isThrownBy(() -> {
                     placeService.getPlacesAndCountInGrid(topRight, bottomLeft);
                 })
-                .withMessageContaining("verifyGridSize")
+                .withMessageContaining("Grid")
                 .withNoCause();
     }
 

@@ -14,14 +14,21 @@ spring:
   datasource:
     hikari:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_SCHEMA}?serverTimezone=UTC&characterEncoding=UTF-8
-      username: ${DB_USERNAME}
-      password: ${DB_PASSWORD}
+      jdbc-url: jdbc:mysql://localhost:3306/ttbkk?serverTimezone=UTC&characterEncoding=UTF-8
+#      jdbc-url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_SCHEMA}?serverTimezone=UTC&characterEncoding=UTF-8
+      username: root
+      password: password
+#      username: ${DB_USERNAME}
+#      password: ${DB_PASSWORD}
   flyway:
-    user: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-    schemas: ${DB_SCHEMA}
-    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_SCHEMA}?serverTimezone=UTC&characterEncoding=UTF-8
+    user: root
+    password: password
+    schemas: ttbkk
+#    user: ${DB_USERNAME}
+#    password: ${DB_PASSWORD}
+#    schemas: ${DB_SCHEMA}
+    url: jdbc:mysql://localhost:3306/ttbkk?serverTimezone=UTC&characterEncoding=UTF-8
+    #    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_SCHEMA}?serverTimezone=UTC&characterEncoding=UTF-8
     enabled: true
 
 #  h2:
