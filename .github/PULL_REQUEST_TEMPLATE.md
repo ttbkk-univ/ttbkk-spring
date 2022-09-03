@@ -3,8 +3,8 @@
 
 예시) 유저를 생성하는 기능을 추가하였습니다.
 
-## Trello Link
-예시) https://trello.com/c/ZpRfdFUV
+## Jira Link
+예시) https://ttbkk.atlassian.net/browse/TBK-3
 
 ## Background (해당 PR을 리뷰하는데 필요한 지식/키워드)
 예시) querydsl, jpa, java stream 등
@@ -14,7 +14,7 @@
 [체크박스 체크 방법](https://www.markdownguide.org/extended-syntax/#task-lists)
 
 - [ ] 작업한 내용에 대해 테스트를 진행했음.
-- [ ] [Trello](https://trello.com/b/2mSWQy6h/kanban)에 해당 작업물이 최신화 되어있음.
+- [ ] [Jira](https://ttbkk.atlassian.net/jira/software/c/projects/TBK/boards/1)에 해당 작업물이 최신화 되어있음.
 - [ ] untracked files나 unstaged files에 미처 반영하지 않은 코드가 없음. ([`git status`](https://git-scm.com/book/ko/v2/Git%EC%9D%98-%EA%B8%B0%EC%B4%88-%EC%88%98%EC%A0%95%ED%95%98%EA%B3%A0-%EC%A0%80%EC%9E%A5%EC%86%8C%EC%97%90-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B8%B0)로 누락된 코드가 있는지 체크합니다.)
 
 ## PR type
