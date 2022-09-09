@@ -22,6 +22,11 @@ import java.util.List;
 @EnableSwagger2
 public class SwaggerConfig {
 
+    /**
+     * Application에 있는 모든 api를 찾아서 documentation 해줍니다.
+     * Token을 받아서 저장 한 후 Header에 담아 보낼 수 있도록 securitySchemes가 설정 되어 있습니다.
+     * @return Docket
+     */
     @Bean
     public Docket restAPI() {
         return new Docket(DocumentationType.SWAGGER_2)
