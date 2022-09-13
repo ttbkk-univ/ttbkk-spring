@@ -14,11 +14,7 @@ spring:
         auto_quote_keyword: true
         format_sql: true
   flyway:
-    user: root
-    password: password
-    schemas: ttbkk
-    url: jdbc:mysql://localhost:3306/ttbkk?useUnicode=true&characterEncoding=utf8
-    enabled: true
+    enabled: false
 
 logging.level:
   org.hibernate.SQL: debug
