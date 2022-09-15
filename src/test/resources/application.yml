@@ -3,7 +3,7 @@ spring:
     active: test
   datasource:
     hikari:
-      url: jdbc:mysql://localhost:3306/ttbkk
+      url: jdbc:mysql://localhost:3306/ttbkk_test
       username: root
       password: password
   jpa:
