@@ -50,6 +50,10 @@ public class PlaceDto {
         private String address;
     }
 
+    /**
+     * String Type 으로 Response 해줄 때 사용 하는 Dto.
+     * Ex) 장소 생성, 수정, 삭제 등에 사용.
+     */
     @Getter
     public static class PlaceResponseDto {
         private String message;
