@@ -5,23 +5,23 @@ spring:
   lifecycle:
     timeout-per-shutdown-phase: 20s
   jpa:
-    show_sql: true
-#    properties:
-#      hibernate:
-#        format_sql: true
+    show-sql: true
+    #    properties:
+    #      hibernate:
+    #        format_sql: true
     hibernate:
       ddl-auto: none
   datasource:
     hikari:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://localhost:3306/ttbkk?serverTimezone=UTC&characterEncoding=UTF-8
-      username: root
-      password: password
+      jdbc-url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_SCHEMA}?serverTimezone=UTC&characterEncoding=UTF-8
+      username: ${DB_USERNAME}
+      password: ${DB_PASSWORD}
   flyway:
-    user: root
-    password: password
-    schemas: ttbkk
-    url: jdbc:mysql://localhost:3306/ttbkk?serverTimezone=UTC&characterEncoding=UTF-8
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    schemas: ${DB_SCHEMA}
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_SCHEMA}?serverTimezone=UTC&characterEncoding=UTF-8
     enabled: true
 
 #  h2:

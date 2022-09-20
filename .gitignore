@@ -38,3 +38,6 @@ out/
 ### MySQL
 docker-compose/mysql/data
 docker-compose/redis/data
+
+### Environment
+.env

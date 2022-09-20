@@ -2,7 +2,10 @@ package com.ttbkk.api.place;
 
 import com.ttbkk.api.common.entity.BaseTimeEntity;
 import com.ttbkk.api.brand.Brand;
+import com.ttbkk.api.review.Review;
 import com.ttbkk.api.user.User;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -65,6 +68,9 @@ public class Place extends BaseTimeEntity {
     @JoinColumn(name = "brand_id", columnDefinition = "CHAR(32)")
     private Brand brand;
 
+    @OneToMany(mappedBy = "place")
+    private final List<Review> reviews = new ArrayList<>();
+
     /**
      * isDeleted field setter method.
      * @param isDeleted
@@ -107,7 +113,8 @@ public class Place extends BaseTimeEntity {
      * @param address 주소
      */
     @Builder
-    public Place(String name, BigDecimal latitude, BigDecimal longitude, String description, String telephone, String address) {
+    public Place(String name, BigDecimal latitude, BigDecimal longitude, String description,
+                 String telephone, String address) {
         this.id = UUID.randomUUID().toString().replace("-", "");
         this.name = name;
         this.latitude = latitude;
