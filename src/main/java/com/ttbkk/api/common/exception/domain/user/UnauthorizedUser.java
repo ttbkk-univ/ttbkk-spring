@@ -9,7 +9,7 @@ import lombok.Getter;
  * 익명 유저의 접근이나, 토큰의 유효성 문제가 있을때 보여주는 에러.
  */
 @Getter
-public class UnAuthorizedUser extends UnauthorizedException {
+public class UnauthorizedUser extends UnauthorizedException {
 
     private final String errorCode = "UNAUTHORIZED_USER";
     private final String message = "로그인을 해주세요.";
@@ -17,7 +17,7 @@ public class UnAuthorizedUser extends UnauthorizedException {
     /**
      * UnauthorizedUser 생성자.
      */
-    public UnAuthorizedUser() {
+    public UnauthorizedUser() {
     }
 
 }
