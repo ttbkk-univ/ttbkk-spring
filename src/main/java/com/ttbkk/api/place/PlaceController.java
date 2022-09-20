@@ -42,15 +42,37 @@ public class PlaceController {
      *
      * @param requestDto
      * @param user
-     * @return PlaceDto.PlaceResponseDto.
+     * @return ResponseEntity<PlaceDto.PlaceResponseMessageDto>.
      */
     @PostMapping
     @IsUser
-    public ResponseEntity<PlaceDto.PlaceResponseDto> createPlaceApi(
+    public ResponseEntity<PlaceDto.PlaceResponseMessageDto> createPlaceApi(
             @RequestBody PlaceDto.PlaceCreateRequestDto requestDto,
             User user
     ) {
-        PlaceDto.PlaceResponseDto response = placeService.createPlace(requestDto, user);
+        PlaceDto.PlaceResponseMessageDto response = placeService.createPlace(requestDto, user);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+//    @GetMapping
+//    public ResponseEntity<PlaceDto.PlaceResponseDto> getPlaceApi(@PathVariable String placeId) {
+//        PlaceRepository
+//        return ResponseEntity.status(HttpStatus.OK).body(response);
+//    }
+
+    /**
+     * Place Update API.
+     * @param requestDto
+     * @param user
+     * @return ResponseEntity<PlaceDto.PlaceResponseMessageDto>.
+     */
+    @PatchMapping
+    @IsUser
+    public ResponseEntity<PlaceDto.PlaceResponseMessageDto> updatePlaceApi(
+            @RequestBody PlaceDto.PlaceUpdateRequestDto requestDto,
+            User user
+    ) {
+        PlaceDto.PlaceResponseMessageDto response = placeService.updatePlace(requestDto, user);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

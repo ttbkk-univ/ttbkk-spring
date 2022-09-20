@@ -19,23 +19,29 @@ import java.util.List;
 public class PlaceService {
     private final PlaceRepository placeRepository;
 
+//    public PlaceDto.PlaceResponseDto getPlace(String placeId) {
+//        Optional<Place> place = placeRepository.findById(placeId);
+//        if (place.isEmpty()) {
+//            re
+//        }
+//    }
+
     /**
      * Create Place API 메서드.
      * @param requestDto
      * @param user
      * @return PlaceDto.PlaceResponseDto.
      */
-    public PlaceDto.PlaceResponseDto createPlace(PlaceDto.PlaceCreateRequestDto requestDto, User user) {
+    public PlaceDto.PlaceResponseMessageDto createPlace(PlaceDto.PlaceCreateRequestDto requestDto, User user) {
 
         //check location
-        double[] checkedFormAndInteger = this.checkLocationFormAndIntegerPart(requestDto.getLocation());
-        BigDecimal[] allChecked = checkLocationDecimalPart(checkedFormAndInteger);
+        BigDecimal[] location = checkLocation(requestDto.getLocation());
 
         //create Place
         Place place = Place.builder()
                 .name(requestDto.getName())
-                .latitude(allChecked[0])
-                .longitude(allChecked[1])
+                .latitude(location[0])
+                .longitude(location[1])
                 .description(requestDto.getDescription())
                 .telephone(requestDto.getTelephone())
                 .address(requestDto.getAddress())
@@ -49,7 +55,51 @@ public class PlaceService {
         //user
         //brand
         //hashtag
-        return new PlaceDto.PlaceResponseDto("장소 생성 성공");
+        //review
+        return new PlaceDto.PlaceResponseMessageDto("장소 생성 성공");
+    }
+
+    /**
+     * 장소 업데이트 API 메서드.
+     * @param requestDto
+     * @param user
+     * @return PlaceDto.PlaceResponseMessageDto.
+     */
+    public PlaceDto.PlaceResponseMessageDto updatePlace(PlaceDto.PlaceUpdateRequestDto requestDto, User user) {
+
+        //check location
+        BigDecimal[] location = checkLocation(requestDto.getLocation());
+
+        //create Place
+        Place place = Place.builder()
+                .name(requestDto.getName())
+                .latitude(location[0])
+                .longitude(location[1])
+                .description(requestDto.getDescription())
+                .telephone(requestDto.getTelephone())
+                .address(requestDto.getAddress())
+                .build();
+
+        //로그인한 사람만 장소 생성 가능 할 시, place builder 에 추가할 예정.
+        //일단 setter 를 통해 주입.
+        place.setCreatedBy(user);
+
+        placeRepository.save(place);
+        //user
+        //brand
+        //hashtag
+        return new PlaceDto.PlaceResponseMessageDto("장소 업데이트 성공");
+    }
+
+    /**
+     * 좌표 값의 유효성 검사와 함께 DB 에 설정된 표준 크기로 맞춰주는 함수.
+     * @param location
+     * @return BigDecimal[]
+     */
+    public BigDecimal[] checkLocation(String location) {
+        double[] checkedFirstStep = this.checkLocationFormAndIntegerPart(location);
+        BigDecimal[] checkedLastStep = this.checkLocationDecimalPart(checkedFirstStep);
+        return checkedLastStep;
     }
 
     /**

@@ -113,8 +113,6 @@ class PlaceServiceTest {
 
     /**
      * grid size 가 1보다 크기 때문에 exception 발생 예상 테스트.
-     *
-     * @throws Exception
      */
     @Test
     @DisplayName("verifyGridSize 메서드 검증 Test")
@@ -130,12 +128,17 @@ class PlaceServiceTest {
                 .withNoCause();
     }
 
+    /**
+     * checkLocationDecimalPart 메서드 테스트.
+     * 자릿수 짜를때, 반올림.
+     */
     @Test
     @DisplayName("checkLocationDecimalPart 메서드 검증 Test")
     void checkAndConvertLocationForm() {
         double[] location1 = {79.23123213124127124124123, 80.21321412412321412412};
         BigDecimal[] result1 = placeService.checkLocationDecimalPart(location1);
-        assertThat(result1[0]).isEqualTo(79.2312321312412);
-        assertThat(result1[1]).isEqualTo(80.213214124123);
+        assertThat(result1[0]).isEqualTo(BigDecimal.valueOf(79.2312321312413));
+        assertThat(result1[1]).isEqualTo(BigDecimal.valueOf(80.213214124123));
     }
+
 }
