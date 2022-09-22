@@ -14,7 +14,7 @@ public class BadRequestLocation extends BadRequestException {
     private final String message = "올바르지 않은 Location 입니다.";
 
     /**
-     * ForbiddenUser 생성자.
+     * BadRequestLocation 생성자.
      */
     public BadRequestLocation() {
     }

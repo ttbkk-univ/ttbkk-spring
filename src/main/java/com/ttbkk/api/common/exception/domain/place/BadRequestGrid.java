@@ -14,7 +14,7 @@ public class BadRequestGrid extends BadRequestException {
     private final String message = "올바르지 않은 Grid Size 입니다.";
 
     /**
-     * ForbiddenUser 생성자.
+     * BadRequestGrid 생성자.
      */
     public BadRequestGrid() {
     }

@@ -1,6 +1,8 @@
 package com.ttbkk.api.place;
 import com.ttbkk.api.common.exception.domain.place.BadRequestGrid;
 import com.ttbkk.api.common.exception.domain.place.BadRequestLocation;
+import com.ttbkk.api.common.exception.domain.place.NotFoundPlace;
+import com.ttbkk.api.place.place_hashtags.PlaceHashtagsRepository;
 import com.ttbkk.api.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Place 관련 Service 로직 구현 클래스.
@@ -18,6 +21,8 @@ import java.util.List;
 @Service
 public class PlaceService {
     private final PlaceRepository placeRepository;
+
+    private final PlaceHashtagsRepository placeHashtagsRepository;
 
 //    public PlaceDto.PlaceResponseDto getPlace(String placeId) {
 //        Optional<Place> place = placeRepository.findById(placeId);
@@ -60,31 +65,39 @@ public class PlaceService {
     }
 
     /**
-     * 장소 업데이트 API 메서드.
+     * Update Place API 메서드.
+     * @param placeId
      * @param requestDto
      * @param user
-     * @return PlaceDto.PlaceResponseMessageDto.
+     * @return PlaceDto.PlaceResponseMessageDto updatePlace
      */
-    public PlaceDto.PlaceResponseMessageDto updatePlace(PlaceDto.PlaceUpdateRequestDto requestDto, User user) {
+    public PlaceDto.PlaceResponseMessageDto updatePlace(String placeId, PlaceDto.PlaceUpdateRequestDto requestDto, User user) {
+
+        //Get Place Entity
+        Optional<Place> optionalPlace = placeRepository.findById(placeId);
+        if (optionalPlace.isEmpty()) {
+            throw new NotFoundPlace();
+        }
+        Place place = optionalPlace.get();
+
+        //Get Brand Entity
 
         //check location
         BigDecimal[] location = checkLocation(requestDto.getLocation());
 
-        //create Place
-        Place place = Place.builder()
-                .name(requestDto.getName())
-                .latitude(location[0])
-                .longitude(location[1])
-                .description(requestDto.getDescription())
-                .telephone(requestDto.getTelephone())
-                .address(requestDto.getAddress())
-                .build();
+        //Brand 객체 내의 places 최신화.
+//        place.get().updatePlaceInBrand();
+
+        //Place 객체 Update
+        place.updatePlace(requestDto, location[0], location[1]);
+
+        //Set Brand, Hashtag
+
 
         //로그인한 사람만 장소 생성 가능 할 시, place builder 에 추가할 예정.
         //일단 setter 를 통해 주입.
-        place.setCreatedBy(user);
+        place.setUpdatedBy(user);
 
-        placeRepository.save(place);
         //user
         //brand
         //hashtag

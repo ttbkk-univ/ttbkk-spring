@@ -62,6 +62,7 @@ public class PlaceController {
 
     /**
      * Place Update API.
+     * @param placeId
      * @param requestDto
      * @param user
      * @return ResponseEntity<PlaceDto.PlaceResponseMessageDto>.
@@ -69,10 +70,11 @@ public class PlaceController {
     @PatchMapping
     @IsUser
     public ResponseEntity<PlaceDto.PlaceResponseMessageDto> updatePlaceApi(
+            @PathVariable String placeId,
             @RequestBody PlaceDto.PlaceUpdateRequestDto requestDto,
             User user
     ) {
-        PlaceDto.PlaceResponseMessageDto response = placeService.updatePlace(requestDto, user);
+        PlaceDto.PlaceResponseMessageDto response = placeService.updatePlace(placeId, requestDto, user);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

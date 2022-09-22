@@ -96,11 +96,49 @@ public class Place extends BaseTimeEntity {
     }
 
     /**
-     * brand field setter method.
+     * Place 생성시 Brand 연관관계 편의 메서드.
      * @param brand
      */
-    public void setBrand(Brand brand) {
+    public void setPlaceInBrand(Brand brand) {
         this.brand = brand;
+        this.brand.getPlaces().add(this);
+    }
+
+    /**
+     * Place 가 Update 될때 사용하는 연관관계 편의 메서드.
+     * @param brand : Update 될 Brand 객체.
+     * @param place : Update 되기 전 Place 객체.
+     */
+    public void updatePlaceInBrand(Brand brand, Place place) {
+        this.removePlaceInBrand(place);
+        this.setPlaceInBrand(brand);
+    }
+
+    /**
+     * Brand 에서 기존에 가지고 있는 Place 리스트 중 해당 Place 객체가 있다면 삭제하는 메서드.
+     * @param place
+     */
+    public void removePlaceInBrand(Place place) {
+        List<Place> places = this.brand.getPlaces();
+        if (places.contains(place)) {
+            places.remove(place);
+        }
+    }
+
+    /**
+     * Place Entity Update 메서드.
+     * @param dto
+     * @param checkedLatitude
+     * @param checkedLongitude
+     */
+    public void updatePlace(PlaceDto.PlaceUpdateRequestDto dto, BigDecimal checkedLatitude,
+                            BigDecimal checkedLongitude) {
+        this.name = dto.getName();
+        this.latitude = checkedLatitude;
+        this.longitude = checkedLongitude;
+        this.description = dto.getDescription();
+        this.telephone = dto.getTelephone();
+        this.address = dto.getAddress();
     }
 
     /**
