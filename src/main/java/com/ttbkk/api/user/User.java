@@ -1,9 +1,6 @@
 package com.ttbkk.api.user;
 
 import com.ttbkk.api.common.entity.BaseTimeEntity;
-import com.ttbkk.api.brand.Brand;
-import com.ttbkk.api.place.Place;
-import com.ttbkk.api.review.Review;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,8 +8,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 //Entity 클래스 . BaseTimeEntity 클래스를 상속 받아 자동 시간 생성.
@@ -40,21 +35,6 @@ public class User extends BaseTimeEntity {
     @NotNull
     @Column(name = "social_type", columnDefinition = "VARCHAR(20)")
     private String socialType;
-
-    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
-    private final List<Brand> createBrands = new ArrayList<>();
-
-    @OneToMany(mappedBy = "updatedBy", cascade = CascadeType.ALL)
-    private final List<Brand> updateBrands = new ArrayList<>();
-
-    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
-    private final List<Place> createPlaces = new ArrayList<>();
-
-    @OneToMany(mappedBy = "updatedBy", cascade = CascadeType.ALL)
-    private final List<Place> updatePlaces = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private final List<Review> reviews = new ArrayList<>();
 
     /**
      * User 생성자.
