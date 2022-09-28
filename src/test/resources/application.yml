@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: test
+  datasource:
+    hikari:
+      url: jdbc:mysql://localhost:3306/ttbkk_test
+      username: root
+      password: password
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        auto_quote_keyword: true
+        format_sql: true
+  flyway:
+    enabled: false
+
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.type: trace
