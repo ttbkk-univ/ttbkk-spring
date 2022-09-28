@@ -22,7 +22,6 @@ class PlaceRepositoryTest {
     @Autowired
     private PlaceRepository placeRepository;
 
-
     /**
      * @BeforEach Test 로직 돌기 전 먼저 실행.
      * Test 전 Test 할 데이터 저장 로직
@@ -37,6 +36,7 @@ class PlaceRepositoryTest {
                 .telephone("000-0000-0000")
                 .address("test address1")
                 .build();
+
         Place placeB = Place.builder()
                 .name("B")
                 .latitude(BigDecimal.valueOf(50.345678912345))
@@ -45,6 +45,7 @@ class PlaceRepositoryTest {
                 .telephone("000-0000-0000")
                 .address("test address2")
                 .build();
+
         Place placeC = Place.builder()
                 .name("C")
                 .latitude(BigDecimal.valueOf(89.345678912345))

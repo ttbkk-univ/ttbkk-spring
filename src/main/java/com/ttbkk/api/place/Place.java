@@ -74,6 +74,14 @@ public class Place extends BaseTimeEntity {
     private Brand brand;
 
     /**
+     * createdBy Setter method.
+     * @param createdBy
+     */
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    /**
      * Place 생성자.
      * @param name 장소 이름
      * @param latitude 위도
