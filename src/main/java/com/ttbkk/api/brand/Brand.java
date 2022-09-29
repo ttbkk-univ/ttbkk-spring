@@ -1,7 +1,6 @@
 package com.ttbkk.api.brand;
 
 import com.ttbkk.api.common.entity.BaseTimeEntity;
-import com.ttbkk.api.place.Place;
 import com.ttbkk.api.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,8 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 //Entity 클래스 . BaseTimeEntity 클래스를 상속 받아 자동 시간 생성.
@@ -40,9 +37,6 @@ public class Brand extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "updated_by_id", columnDefinition = "CHAR(32)")
     private User updatedBy;
-
-    @OneToMany(mappedBy = "brand")
-    private final List<Place> places = new ArrayList<>();
 
     /**
      * Brand 생성자.

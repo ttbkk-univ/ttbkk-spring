@@ -2,10 +2,7 @@ package com.ttbkk.api.place;
 
 import com.ttbkk.api.common.entity.BaseTimeEntity;
 import com.ttbkk.api.brand.Brand;
-import com.ttbkk.api.review.Review;
 import com.ttbkk.api.user.User;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -76,8 +73,13 @@ public class Place extends BaseTimeEntity {
     @JoinColumn(name = "brand_id", columnDefinition = "CHAR(32)")
     private Brand brand;
 
-    @OneToMany(mappedBy = "place")
-    private final List<Review> reviews = new ArrayList<>();
+    /**
+     * createdBy Setter method.
+     * @param createdBy
+     */
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
 
     /**
      * Place 생성자.
