@@ -17,4 +17,5 @@ public class BadRequestException extends BaseException {
      */
     public BadRequestException() {
     }
+
 }

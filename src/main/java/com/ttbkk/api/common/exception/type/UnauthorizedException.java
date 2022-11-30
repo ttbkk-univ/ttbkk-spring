@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
  */
 @Getter
 public class UnauthorizedException extends BaseException {
+
     private final HttpStatus httpStatus = HttpStatus.UNAUTHORIZED;
 
     /**
@@ -16,4 +17,5 @@ public class UnauthorizedException extends BaseException {
      */
     public UnauthorizedException() {
     }
+
 }

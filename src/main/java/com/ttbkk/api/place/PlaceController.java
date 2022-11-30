@@ -1,5 +1,7 @@
 package com.ttbkk.api.place;
 
+import com.ttbkk.api.annotations.auth.IsUser;
+import com.ttbkk.api.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -32,6 +34,47 @@ public class PlaceController {
     ) {
 
         PlaceDto.GridResponseDto response = placeService.getPlacesAndCountInGrid(topRight, bottomLeft);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    /**
+     * 장소 생성 API.
+     *
+     * @param requestDto
+     * @param user
+     * @return ResponseEntity<PlaceDto.PlaceResponseMessageDto>.
+     */
+    @PostMapping
+    @IsUser
+    public ResponseEntity<PlaceDto.PlaceResponseMessageDto> createPlaceApi(
+            @RequestBody PlaceDto.PlaceCreateRequestDto requestDto,
+            User user
+    ) {
+        PlaceDto.PlaceResponseMessageDto response = placeService.createPlace(requestDto, user);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+//    @GetMapping
+//    public ResponseEntity<PlaceDto.PlaceResponseDto> getPlaceApi(@PathVariable String placeId) {
+//        PlaceRepository
+//        return ResponseEntity.status(HttpStatus.OK).body(response);
+//    }
+
+    /**
+     * Place Update API.
+     * @param placeId
+     * @param requestDto
+     * @param user
+     * @return ResponseEntity<PlaceDto.PlaceResponseMessageDto>.
+     */
+    @PatchMapping
+    @IsUser
+    public ResponseEntity<PlaceDto.PlaceResponseMessageDto> updatePlaceApi(
+            @PathVariable String placeId,
+            @RequestBody PlaceDto.PlaceUpdateRequestDto requestDto,
+            User user
+    ) {
+        PlaceDto.PlaceResponseMessageDto response = placeService.updatePlace(placeId, requestDto, user);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
